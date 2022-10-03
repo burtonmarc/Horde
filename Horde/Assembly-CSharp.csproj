@@ -52,7 +52,32 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\GameInitializer.cs" />
+     <Compile Include="Assets\Catalogs\Scripts\StateCatalogEntry.cs" />
+     <Compile Include="Assets\Catalogs\Scripts\CatalogEntryId.cs" />
+     <Compile Include="Assets\Catalogs\Scripts\CatalogEntryListBase.cs" />
+     <Compile Include="Assets\Catalogs\Scripts\CatalogsHolder.cs" />
+     <Compile Include="Assets\Catalogs\Scripts\StatesCatalog.cs" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.1f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
@@ -629,8 +654,14 @@
  <Reference Include="Unity.2D.Tilemap.Editor">
  <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEditor.CacheServer">
+ <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/UnityEditor.CacheServer.dll</HintPath>
+ </Reference>
  <Reference Include="PsdPlugin">
  <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/PsdPlugin.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Addressables">
+ <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.Addressables.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
@@ -653,14 +684,17 @@
  <Reference Include="Unity.2D.Path.Editor">
  <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
  </Reference>
- <Reference Include="Unity.InternalAPIEditorBridge.001">
- <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
+ <Reference Include="Unity.ResourceManager">
+ <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.ResourceManager.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
  <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
  <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.InternalAPIEditorBridge.001">
+ <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
@@ -689,8 +723,17 @@
  <Reference Include="Unity.2D.Common.Runtime">
  <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.ScriptableBuildPipeline">
+ <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.2D.SpriteShape.Editor">
  <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Addressables.Editor">
+ <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.Addressables.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.ScriptableBuildPipeline.Editor">
+ <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Common.Editor">
  <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
@@ -698,26 +741,24 @@
  <Reference Include="Unity.2D.SpriteShape.Runtime">
  <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>
  </Reference>
- <Reference Include="Unity.Addressables">
- <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.Addressables.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Addressables.Editor">
- <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.Addressables.Editor.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.CacheServer">
- <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/UnityEditor.CacheServer.dll</HintPath>
- </Reference>
- <Reference Include="Unity.ResourceManager">
- <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.ResourceManager.dll</HintPath>
- </Reference>
- <Reference Include="Unity.ScriptableBuildPipeline">
- <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.dll</HintPath>
- </Reference>
- <Reference Include="Unity.ScriptableBuildPipeline.Editor">
- <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
- </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Data.csproj">
+      <Project>{ca58aaec-7bff-eb2c-c262-4371e3949ae4}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="ScreenMachine.csproj">
+      <Project>{e3591756-dcf1-cb9d-9521-be7f04568c49}</Project>
+      <Name>ScreenMachine</Name>
+    </ProjectReference>
+    <ProjectReference Include="Views.csproj">
+      <Project>{b7b0b2e8-6701-3e23-8d5d-49392742a1ba}</Project>
+      <Name>Views</Name>
+    </ProjectReference>
+    <ProjectReference Include="Controllers.csproj">
+      <Project>{7992ec7b-ea28-856b-5d8e-81bbcdc873b3}</Project>
+      <Name>Controllers</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
