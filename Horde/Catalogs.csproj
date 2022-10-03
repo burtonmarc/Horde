@@ -645,6 +645,10 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="ScreenMachine.csproj">
+      <Project>{e3591756-dcf1-cb9d-9521-be7f04568c49}</Project>
+      <Name>ScreenMachine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

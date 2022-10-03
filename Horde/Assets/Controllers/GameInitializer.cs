@@ -1,9 +1,10 @@
+using Controllers.States.StartupState;
+using Data;
 using Data.Scripts;
-using Game.States.StartupState;
 using ScreenMachine;
 using UnityEngine;
 
-namespace Game.GameInitialization
+namespace Controllers
 {
     public class GameInitializer : MonoBehaviour
     {
@@ -14,10 +15,12 @@ namespace Game.GameInitialization
         void Start()
         {
             var assetLoaderFactory = new AssetLoaderFactory();
-            
+
             screenMachine = new ScreenMachine(catalogs.StatesCatalog, assetLoaderFactory);
             
-            screenMachine.PresentState(new StartupStateController());
+            var context = new Context(catalogs, assetLoaderFactory, screenMachine);
+            
+            screenMachine.PresentState(new StartupStateController(context));
         }
 
         private void Update()

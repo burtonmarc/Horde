@@ -10,18 +10,18 @@ namespace ScreenMachine
         void OnCreate();
         void OnSendToBack();
 
-        void DisableRaycast();
-        
         // State Shared
         
         void LinkViews(UiView uiView, WorldView worldView);
         void OnBringToFront();
-        void EnableRaycast();
         void OnUpdate();
         void OnDestroy();
         void DestroyViews();
+        void EnableRaycasts();
+        void DisableRaycasts();
 
         void CacheStateAssets(List<ScriptableObject> stateAssets);
+        void ReleaseAssets(string stateId);
 
         T GetStateAsset<T>() where T : ScriptableObject;
     }

@@ -1,18 +1,19 @@
 using System;
 using ScreenMachine;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.States.Gameplay
+namespace Views.States.GameplayState
 {
     public class GameplayUiView : UiView
     {
-        public Button MainMenuButton;
+        [SerializeField] private Button MainMenuButton;
         
-        public Action MainMenuButtonClicked;
+        public event Action MainMenuClicked;
 
         public override void Init()
         {
-            MainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
+            MainMenuButton.onClick.AddListener(FireMainMenuButton);
         }
 
         public override void OnUpdate()
@@ -22,12 +23,12 @@ namespace Game.States.Gameplay
 
         private void OnDestroy()
         {
-            MainMenuButton.onClick.RemoveListener(OnMainMenuButtonClicked);
+            MainMenuButton.onClick.RemoveListener(FireMainMenuButton);
         }
 
-        private void OnMainMenuButtonClicked()
+        private void FireMainMenuButton()
         {
-            MainMenuButtonClicked?.Invoke();
+            MainMenuClicked?.Invoke();
         }
     }
 }

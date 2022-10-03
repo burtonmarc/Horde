@@ -1,18 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using ScreenMachine;
 using UnityEngine;
 
-public class IScreenMachine
+public interface IScreenMachine
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    void PresentState(IStateBase state);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void PushState(IStateBase state);
+
+    void PopState();
 }

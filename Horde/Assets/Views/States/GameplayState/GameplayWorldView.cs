@@ -1,6 +1,6 @@
 using ScreenMachine;
 
-namespace Game.States.Gameplay
+namespace Views.States.GameplayState
 {
     public class GameplayWorldView : WorldView
     {

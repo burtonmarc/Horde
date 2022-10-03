@@ -5,7 +5,7 @@ using ScreenMachine;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Game.GameInitialization
+namespace Controllers
 {
     public class ScreenMachine : IScreenMachine
     {
@@ -35,7 +35,7 @@ namespace Game.GameInitialization
                 PopStateLocally();
             }
 
-            PushStateLocally(state);
+            PushStateInternal(state);
         }
 
         public void PushState(IStateBase state) {
@@ -43,9 +43,10 @@ namespace Game.GameInitialization
             if (screenStack.Count != 0) {
                 var previousState = screenStack.Peek();
                 previousState.OnSendToBack();
+                previousState.DisableRaycasts();
             }
 
-            PushStateLocally(state);
+            PushStateInternal(state);
         }
 
         public void OnUpdate() {
@@ -61,7 +62,7 @@ namespace Game.GameInitialization
             currentState.OnUpdate();
         }
 
-        private void PushStateLocally(IStateBase state) {
+        private void PushStateInternal(IStateBase state) {
 
             isLoading = true;
 
@@ -105,7 +106,7 @@ namespace Game.GameInitialization
 
         private void PopStateLocally() {
             var state = screenStack.Peek();
-            //state.ReleaseAssets(state.GetId());
+            state.ReleaseAssets(state.GetStateId());
             state.OnDestroy();
             state.DestroyViews();
             screenStack.Pop();
@@ -113,6 +114,7 @@ namespace Game.GameInitialization
             if(screenStack.Count > 0) {
                 var nextState = screenStack.Peek();
                 nextState.OnBringToFront();
+                nextState.EnableRaycasts();
             }
         }
     }

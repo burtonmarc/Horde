@@ -56,6 +56,8 @@
      <Compile Include="Assets\Controllers\States\StartupState\StartupStateController.cs" />
      <Compile Include="Assets\Controllers\GameInitializer.cs" />
      <Compile Include="Assets\Controllers\ScreenMachine.cs" />
+     <Compile Include="Assets\Controllers\States\BaseStateController.cs" />
+     <Compile Include="Assets\Controllers\States\GameplayState\GameplayStateController.cs" />
      <None Include="Assets\Controllers\Controllers.asmdef" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.1f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -632,6 +634,9 @@
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.1f1/Unity.app/Contents/NetStandard/compat/2.0.0/shims/netfx/mscorlib.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Addressables">
+ <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/Unity.Addressables.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
  <HintPath>/Users/marcvillegas/Horde/Horde/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>

@@ -10,11 +10,11 @@ namespace Game.States.MainMenu
     {
         public Button StartGameButton;
         
-        public Action StartGameButtonClicked;
+        public event Action StartGameClicked;
 
         public override void Init()
         {
-            StartGameButton.onClick.AddListener(OnStartGameButtonClicked);
+            StartGameButton.onClick.AddListener(FireStartGameButton);
         }
 
         public override void OnUpdate()
@@ -24,12 +24,12 @@ namespace Game.States.MainMenu
 
         private void OnDestroy()
         {
-            StartGameButton.onClick.RemoveListener(OnStartGameButtonClicked);
+            StartGameButton.onClick.RemoveListener(FireStartGameButton);
         }
 
-        private void OnStartGameButtonClicked()
+        private void FireStartGameButton()
         {
-            StartGameButtonClicked?.Invoke();
+            StartGameClicked?.Invoke();
         }
     }
 }

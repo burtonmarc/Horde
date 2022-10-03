@@ -1,19 +1,22 @@
+using Controllers.States.MainMenuState;
+using Data;
+using Game.States.StartupState;
 using ScreenMachine;
 
-namespace Game.States.StartupState
+namespace Controllers.States.StartupState
 {
     public class StartupStateController : BaseStateController<StartupStateUiView, StartupStateWorldView>, IStateBase
     {
         protected sealed override string StateId { get; }
-        
-        public StartupStateController()
+
+        public StartupStateController(Context context) : base(context)
         {
             StateId = "StartupState";
         }
 
         public void OnCreate()
         {
-            
+            PushState(new MainMenuStateController(Context));
         }
         
         public void OnBringToFront()

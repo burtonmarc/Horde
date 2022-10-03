@@ -1,19 +1,22 @@
+using Data;
+using DefaultNamespace;
+using Game.States.MainMenu;
 using ScreenMachine;
 
-namespace Game.States.MainMenu
+namespace Controllers.States.MainMenuState
 {
     public class MainMenuStateController : BaseStateController<MainMenuUiView, MainMenuWorldView>, IStateBase
     {
         protected sealed override string StateId { get; }
         
-        public MainMenuStateController()
+        public MainMenuStateController(Context context) : base(context)
         {
             StateId = "StartupState";
         }
         
         public void OnCreate()
         {
-            //UiView.StartGameButtonClicked +=  
+            UiView.StartGameClicked += PresentGameplayState;
         }
 
         public void OnBringToFront()
@@ -29,6 +32,11 @@ namespace Game.States.MainMenu
         public void OnDestroy()
         {
             
+        }
+
+        private void PresentGameplayState()
+        {
+            PresentState(new GameplayStateController(Context));
         }
     }
 }

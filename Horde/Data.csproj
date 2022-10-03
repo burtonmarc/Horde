@@ -645,6 +645,10 @@
       <Project>{e3591756-dcf1-cb9d-9521-be7f04568c49}</Project>
       <Name>ScreenMachine</Name>
     </ProjectReference>
+    <ProjectReference Include="Catalogs.csproj">
+      <Project>{761cfc94-a901-c392-26a6-0953cf58a5ce}</Project>
+      <Name>Catalogs</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
