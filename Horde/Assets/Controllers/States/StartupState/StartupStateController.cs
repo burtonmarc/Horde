@@ -1,22 +1,28 @@
+using System.Collections;
+using System.Threading.Tasks;
 using Controllers.States.MainMenuState;
 using Data;
 using Game.States.StartupState;
 using ScreenMachine;
+using UnityEngine;
 
 namespace Controllers.States.StartupState
 {
     public class StartupStateController : BaseStateController<StartupStateUiView, StartupStateWorldView>, IStateBase
     {
-        protected sealed override string StateId { get; }
+        protected override string StateId { get; }
 
         public StartupStateController(Context context) : base(context)
         {
-            StateId = "StartupState";
+            StateId = "Startup";
         }
 
         public void OnCreate()
         {
-            PushState(new MainMenuStateController(Context));
+            UiView.Init();
+            WorldView.Init();
+            
+            PresentStateAsync();
         }
         
         public void OnBringToFront()
@@ -32,6 +38,12 @@ namespace Controllers.States.StartupState
         public void OnDestroy()
         {
             
+        }
+
+        private async void PresentStateAsync()
+        {
+            await Task.Yield();
+            PresentState(new MainMenuStateController(Context));
         }
     }
 }

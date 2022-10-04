@@ -13,17 +13,27 @@ namespace Views.States.GameplayState
 
         public override void Init()
         {
-            MainMenuButton.onClick.AddListener(FireMainMenuButton);
+            
         }
 
         public override void OnUpdate()
         {
             
         }
+        
+        private void OnEnable()
+        {
+            MainMenuButton.onClick.AddListener(FireMainMenuButton);
+        }
+
+        private void OnDisable()
+        {
+            MainMenuButton.onClick.RemoveListener(FireMainMenuButton);
+        }
 
         private void OnDestroy()
         {
-            MainMenuButton.onClick.RemoveListener(FireMainMenuButton);
+            
         }
 
         private void FireMainMenuButton()

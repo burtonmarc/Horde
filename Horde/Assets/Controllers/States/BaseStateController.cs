@@ -11,7 +11,7 @@ namespace Controllers.States
         where TUiView : UiView 
         where TWorldView : WorldView {
 
-        protected virtual string StateId { get; }
+        protected abstract string StateId { get; }
 
         protected TUiView UiView;
 

@@ -17,7 +17,10 @@ namespace Data.Scripts
 
         public List<AssetReference> GetAllStateReferences()
         {
-            var stateReferences = new List<AssetReference> {UiView, WorldView};
+            var stateReferences = new List<AssetReference>();
+            stateReferences.Add(UiView);
+            stateReferences.Add(WorldView);
+            
             foreach (var stateAsset in StateAssetReferences)
             {
                 stateReferences.Add(stateAsset);

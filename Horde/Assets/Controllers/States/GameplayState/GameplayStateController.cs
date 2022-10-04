@@ -8,13 +8,18 @@ namespace DefaultNamespace
 {
     public class GameplayStateController : BaseStateController<GameplayUiView, GameplayWorldView>, IStateBase
     {
+        protected override string StateId { get; }
+        
         public GameplayStateController(Context context) : base(context)
         {
-            
+            StateId = "Gameplay";
         }
 
         public void OnCreate()
         {
+            UiView.Init();
+            WorldView.Init();
+
             UiView.MainMenuClicked += PresentMainMenuState;
         }
 

@@ -7,15 +7,18 @@ namespace Controllers.States.MainMenuState
 {
     public class MainMenuStateController : BaseStateController<MainMenuUiView, MainMenuWorldView>, IStateBase
     {
-        protected sealed override string StateId { get; }
+        protected override string StateId { get; }
         
         public MainMenuStateController(Context context) : base(context)
         {
-            StateId = "StartupState";
+            StateId = "MainMenu";
         }
         
         public void OnCreate()
         {
+            UiView.Init();
+            WorldView.Init();
+            
             UiView.StartGameClicked += PresentGameplayState;
         }
 

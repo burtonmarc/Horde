@@ -14,17 +14,27 @@ namespace Game.States.MainMenu
 
         public override void Init()
         {
-            StartGameButton.onClick.AddListener(FireStartGameButton);
+            
         }
 
         public override void OnUpdate()
         {
             
         }
+        
+        private void OnEnable()
+        {
+            StartGameButton.onClick.AddListener(FireStartGameButton);
+        }
+
+        private void OnDisable()
+        {
+            StartGameButton.onClick.RemoveListener(FireStartGameButton);
+        }
 
         private void OnDestroy()
         {
-            StartGameButton.onClick.RemoveListener(FireStartGameButton);
+            
         }
 
         private void FireStartGameButton()

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40f17d990fe4ffc8f9f03021677f689, type: 3}
   m_Name: StartupStateCatalogEntry
   m_EditorClassIdentifier: 
-  Id: 
+  Id: Startup
   UiView:
-    m_AssetGUID: 
+    m_AssetGUID: 4441bf9a72c204a2dbe747d799e9064e
     m_SubObjectName: 
     m_SubObjectType: 
   WorldView:
-    m_AssetGUID: 
+    m_AssetGUID: 61ce430caf5ce43798f538009f95a696
     m_SubObjectName: 
     m_SubObjectType: 
-  StateAssets: []
+  StateAssetReferences: []

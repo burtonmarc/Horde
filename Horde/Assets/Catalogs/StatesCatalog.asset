@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5065fea5a34db3acd1ef9138c168bd, type: 3}
   m_Name: StatesCatalog
   m_EditorClassIdentifier: 
-  CatalogEntries: []
+  CatalogEntries:
+  - {fileID: 11400000, guid: dad30150f7f524d1ca6e273a920587d4, type: 2}
+  - {fileID: 11400000, guid: 07258ddd3e06048618417f8b5f1b4407, type: 2}
+  - {fileID: 11400000, guid: 7206696fd3e5d423e9a9b9fd22d0b167, type: 2}
