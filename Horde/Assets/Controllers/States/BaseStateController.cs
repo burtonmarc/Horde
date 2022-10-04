@@ -53,12 +53,12 @@ namespace Controllers.States
 
         public void DisableRaycasts() {
             UiView.DisableRaycast();
-            WorldView.DisableRaycast();
+            //WorldView.DisableRaycast();
         }
 
         public void EnableRaycasts() {
             UiView.EnableRaycast();
-            WorldView.EnableRaycast();
+            //WorldView.EnableRaycast();
         }
 
         public void CacheStateAssets(List<ScriptableObject> stateAssets) {

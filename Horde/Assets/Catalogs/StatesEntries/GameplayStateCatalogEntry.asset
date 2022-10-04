@@ -18,7 +18,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
   WorldView:
-    m_AssetGUID: e92d9cfb6b57949ac940230f58d2bc42
+    m_AssetGUID: c58679bad872c4e70a15733e9a9577d6
     m_SubObjectName: 
     m_SubObjectType: 
-  StateAssets: []
+  StateAssetReferences: []

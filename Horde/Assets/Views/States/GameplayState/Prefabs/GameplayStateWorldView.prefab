@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8944a218ee406f86b18f18211f9c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graphicRaycaster: {fileID: 295074194990086765}
+  graphicRaycaster: {fileID: 0}
 --- !u!1001 &8101096882502608462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24,13 +24,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameplayStateWorldView
       objectReference: {fileID: 0}
+    - target: {fileID: 2870067435677905567, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7361326679693370590, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
       propertyPath: m_Pivot.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7361326679693370590, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
       propertyPath: m_Pivot.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7361326679693370590, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
       propertyPath: m_RootOrder
@@ -54,11 +58,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7361326679693370590, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 7361326679693370590, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 7361326679693370590, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7361326679693370590, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7361326679693370590, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7361326679693370590, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -90,11 +106,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7361326679693370590, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 540
       objectReference: {fileID: 0}
     - target: {fileID: 7361326679693370590, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 960
       objectReference: {fileID: 0}
     - target: {fileID: 7361326679693370590, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -108,21 +124,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6444882000129651014, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
+    - {fileID: 8391526463736847395, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
+    - {fileID: 2870067435677905567, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
 --- !u!1 &9164973055482116269 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1106872715863531235, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
   m_PrefabInstance: {fileID: 8101096882502608462}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &295074194990086765 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8391526463736847395, guid: 97f7202f268044741bf7fe322c03aba8, type: 3}
-  m_PrefabInstance: {fileID: 8101096882502608462}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9164973055482116269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
