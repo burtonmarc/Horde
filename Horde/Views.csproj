@@ -58,6 +58,9 @@
      <Compile Include="Assets\Views\States\StartupState\StartupStateUiView.cs" />
      <Compile Include="Assets\Views\States\GameplayState\GameplayUiView.cs" />
      <Compile Include="Assets\Views\States\GameplayState\GameplayWorldView.cs" />
+     <Compile Include="Assets\Views\States\GameplayState\PlayerView.cs" />
+     <Compile Include="Assets\Views\States\GameplayState\EnemyView.cs" />
+     <Compile Include="Assets\Views\States\GameplayState\IGameplayView.cs" />
      <None Include="Assets\Views\Views.asmdef" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.1f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>

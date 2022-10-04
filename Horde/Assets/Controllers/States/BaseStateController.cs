@@ -46,7 +46,7 @@ namespace Controllers.States
             ScreenMachine.PresentState(state);
         }
 
-        public void OnUpdate() {
+        public virtual void OnUpdate() {
             WorldView.OnUpdate();
             UiView.OnUpdate();
         }

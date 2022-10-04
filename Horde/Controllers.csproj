@@ -58,6 +58,9 @@
      <Compile Include="Assets\Controllers\ScreenMachine.cs" />
      <Compile Include="Assets\Controllers\States\BaseStateController.cs" />
      <Compile Include="Assets\Controllers\States\GameplayState\GameplayStateController.cs" />
+     <Compile Include="Assets\Controllers\States\GameplayState\GameplayControllerBase.cs" />
+     <Compile Include="Assets\Controllers\States\GameplayState\PlayerController.cs" />
+     <Compile Include="Assets\Controllers\States\GameplayState\EnemyController.cs" />
      <None Include="Assets\Controllers\Controllers.asmdef" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.1f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
