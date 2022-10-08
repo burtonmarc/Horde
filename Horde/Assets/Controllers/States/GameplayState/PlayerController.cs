@@ -13,7 +13,7 @@ namespace Controllers.States.GameplayState
             
         }
 
-        public void Init(IGameplayView gameplayView)
+        public override void Init(IGameplayView gameplayView)
         {
             PlayerView = gameplayView as PlayerView;
         }

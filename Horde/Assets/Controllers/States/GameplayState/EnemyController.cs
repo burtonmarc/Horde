@@ -13,9 +13,13 @@ namespace Controllers.States.GameplayState
             
         }
         
-        public void Init(IGameplayView gameplayView)
+        public override void Init(IGameplayView gameplayView)
         {
             EnemyView = gameplayView as EnemyView;
+            if (EnemyView != null)
+            {
+                EnemyView.Init();
+            }
         }
         
         public override void OnUpdate()

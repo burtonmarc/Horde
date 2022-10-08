@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Controllers.States.MainMenuState;
 using Data;
 using ScreenMachine;
-using UnityEngine;
 using Views.States.GameplayState;
 
 namespace Controllers.States.GameplayState
@@ -13,10 +12,13 @@ namespace Controllers.States.GameplayState
 
         private List<GameplayControllerBase> GameplayControllers;
 
+        private PoolController PoolController;
+
         public GameplayStateController(Context context) : base(context)
         {
             StateId = "Gameplay";
             GameplayControllers = new List<GameplayControllerBase>(64);
+            PoolController = new PoolController(context);
         }
 
         public void OnCreate()
@@ -24,17 +26,15 @@ namespace Controllers.States.GameplayState
             UiView.Init();
             WorldView.Init();
 
+            ControllerFactory.OnControllerCreated += OnControllerCreated;
+
             UiView.MainMenuClicked += PresentMainMenuState;
             
             var playerView = WorldView.InstantiatePlayer();
+            
             var playerController = new PlayerController(Context);
             playerController.Init(playerView);
             GameplayControllers.Add(playerController);
-            
-            var enemyView = WorldView.InstantiateEnemy();
-            var enemyController = new EnemyController(Context, playerController);
-            enemyController.Init(enemyView);
-            GameplayControllers.Add(enemyController);
         }
 
         public override void OnUpdate()
@@ -59,7 +59,17 @@ namespace Controllers.States.GameplayState
 
         public void OnDestroy()
         {
+            ControllerFactory.OnControllerCreated -= OnControllerCreated;
             
+            foreach (var gameplayController in GameplayControllers)
+            {
+                gameplayController.OnDestroy();
+            }
+        }
+
+        private void OnControllerCreated(GameplayControllerBase controller)
+        {
+            GameplayControllers.Add(controller);
         }
 
         private void PresentMainMenuState()

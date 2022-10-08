@@ -4,3 +4,5 @@ Horde/Temp
 Horde/.idea/.idea.Horde/.idea/workspace.xml
 Horde/.idea/.idea.Horde/.idea/indexLayout.xml
 Horde/.idea/.idea.Horde/.idea/contentModel.xml
+*.csproj
+*.sln

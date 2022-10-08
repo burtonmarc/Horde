@@ -9,12 +9,23 @@ namespace Views.States.GameplayState
         public Context Context;
 
         public PlayerController PlayerController;
-        
+
         public GameplayControllerBase(Context context, PlayerController playerController)
         {
             Context = context;
             PlayerController = playerController;
         }
+
+        public GameplayControllerBase(Context context)
+        {
+            Context = context;
+        }
+
+        public virtual void Init(IGameplayView gameplayView)
+        {
+            
+        }
+        
         public abstract void OnUpdate();
         
         public abstract void OnDestroy();
