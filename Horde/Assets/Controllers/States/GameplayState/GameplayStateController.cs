@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Controllers.States.GameplayState.GameplayExtensions;
 using Controllers.States.MainMenuState;
 using Data;
 using ScreenMachine;
@@ -93,10 +94,10 @@ namespace Controllers.States.GameplayState
 
         private void InitPlayer()
         {
-            var playerView = WorldView.InstantiatePlayer();
-            playerController = new PlayerController(Context);
-            playerController.Init(playerView);
+            playerController = ControllerFactory.CreateController<PlayerController>(Context, null);
             gameplayControllers.Add(playerController);
+            var layer = Context.GetGameplayLayer(GameplayLayer.Enemies);
+            playerController.PlayerView.Activate(layer, Vector3.zero);
         }
 
         private void PresentMainMenuState()

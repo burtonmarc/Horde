@@ -6,17 +6,18 @@ namespace Views.States.GameplayState
 {
     public abstract class GameplayControllerBase
     {
-        public Context Context;
+        protected Context Context;
 
         public PlayerController PlayerController;
 
-        public GameplayControllerBase(Context context, PlayerController playerController)
+        protected GameplayControllerBase(Context context, PlayerController playerController)
         {
             Context = context;
             PlayerController = playerController;
         }
 
-        public GameplayControllerBase(Context context)
+        // This constructor is only used for controllers that don't have a view, like PoolController
+        protected GameplayControllerBase(Context context)
         {
             Context = context;
         }

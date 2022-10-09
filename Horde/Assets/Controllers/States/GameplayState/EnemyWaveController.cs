@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Controllers.States.GameplayState.GameplayExtensions;
 using Data;
 using UnityEngine;
 using Views.States.GameplayState;
@@ -51,8 +52,7 @@ namespace Controllers.States.GameplayState
             var randomY = Random.Range(-orthographicSize, orthographicSize);
             var randomPosition = new Vector3(randomX, randomY, 0);
 
-            var gameplayState = Context.ScreenMachine.CurrentState as GameplayStateController;
-            var enemyLayer = gameplayState.GetGameplayLayer(GameplayLayer.Enemies);
+            var enemyLayer = Context.GetGameplayLayer(GameplayLayer.Enemies);
             enemyController.EnemyView.Activate(enemyLayer, randomPosition);
         }
 

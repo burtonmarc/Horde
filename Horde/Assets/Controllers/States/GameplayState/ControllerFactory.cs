@@ -40,7 +40,11 @@ namespace Controllers.States.GameplayState
                     var controller = Activator.CreateInstance(typeof(T), args) as T;
                     var currentState = context.ScreenMachine.CurrentState;
                     var stateSpawnables = currentState.GetStateAsset<StateSpawnables>();
-                    var view = stateSpawnables.spawnables.Find(spawnable => typeof(GameplayView).IsAssignableFrom(controllersViewType));
+                    var view = stateSpawnables.spawnables.Find(spawnable => controllersViewType == spawnable.GetType());
+                    if (view == null)
+                    {
+                        throw new Exception($"The type {typeof(T)} does not have a View in the spawnables data");
+                    }
                     var viewInstance = Object.Instantiate(view);
                     controller?.Init(viewInstance);
                     viewInstance.Init();

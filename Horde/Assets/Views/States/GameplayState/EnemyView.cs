@@ -9,7 +9,7 @@ namespace Views.States.GameplayState
             // Reset variables here
         }
 
-        public void Activate(Transform parent, Vector3 spawnPosition)
+        public override void Activate(Transform parent, Vector3 spawnPosition)
         {
             transform.SetParent(parent);
             transform.position = spawnPosition;

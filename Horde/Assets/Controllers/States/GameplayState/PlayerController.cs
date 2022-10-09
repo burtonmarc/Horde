@@ -8,9 +8,9 @@ namespace Controllers.States.GameplayState
     {
         public Vector3 PlayerPosition => PlayerView.transform.position;
         
-        private PlayerView PlayerView;
+        public PlayerView PlayerView;
 
-        public PlayerController(Context context) : base(context, null)
+        public PlayerController(Context context, PlayerController playerController) : base(context, playerController)
         {
             
         }
