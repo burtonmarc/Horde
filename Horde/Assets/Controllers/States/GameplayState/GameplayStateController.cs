@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Controllers.States.MainMenuState;
 using Data;
 using ScreenMachine;
+using UnityEngine;
 using Views.States.GameplayState;
 
 namespace Controllers.States.GameplayState
@@ -10,15 +11,26 @@ namespace Controllers.States.GameplayState
     {
         protected override string StateId { get; }
 
-        private List<GameplayControllerBase> GameplayControllers;
+        private readonly List<GameplayControllerBase> gameplayControllers;
 
-        private PoolController PoolController;
+        private readonly PoolController poolController;
+
+        private readonly EnemyWaveController enemyWaveController;
+
+        private PlayerController playerController;
 
         public GameplayStateController(Context context) : base(context)
         {
             StateId = "Gameplay";
-            GameplayControllers = new List<GameplayControllerBase>(64);
-            PoolController = new PoolController(context);
+            gameplayControllers = new List<GameplayControllerBase>(64);
+            
+            enemyWaveController = new EnemyWaveController(context);
+            gameplayControllers.Add(enemyWaveController);
+            
+            poolController = new PoolController(context);
+            context.ControllersPool = poolController;
+            ControllerFactory.PoolController = poolController;
+            gameplayControllers.Add(poolController);
         }
 
         public void OnCreate()
@@ -26,25 +38,29 @@ namespace Controllers.States.GameplayState
             UiView.Init();
             WorldView.Init();
 
-            ControllerFactory.OnControllerCreated += OnControllerCreated;
-
             UiView.MainMenuClicked += PresentMainMenuState;
             
-            var playerView = WorldView.InstantiatePlayer();
-            
-            var playerController = new PlayerController(Context);
-            playerController.Init(playerView);
-            GameplayControllers.Add(playerController);
+            InitPlayer();
+
+            InjectPlayerController();
+        }
+
+        private void InjectPlayerController()
+        {
+            enemyWaveController.PlayerController = playerController;
+            poolController.PlayerController = playerController;
         }
 
         public override void OnUpdate()
         {
             base.OnUpdate();
 
-            foreach (var gameplayController in GameplayControllers)
+            foreach (var gameplayController in gameplayControllers)
             {
                 gameplayController.OnUpdate();
             }
+
+            Cheats();
         }
 
         public void OnSendToBack()
@@ -59,22 +75,43 @@ namespace Controllers.States.GameplayState
 
         public void OnDestroy()
         {
-            ControllerFactory.OnControllerCreated -= OnControllerCreated;
-            
-            foreach (var gameplayController in GameplayControllers)
+            foreach (var gameplayController in gameplayControllers)
             {
                 gameplayController.OnDestroy();
             }
         }
 
-        private void OnControllerCreated(GameplayControllerBase controller)
+        private void InitPlayer()
         {
-            GameplayControllers.Add(controller);
+            var playerView = WorldView.InstantiatePlayer();
+            playerController = new PlayerController(Context);
+            playerController.Init(playerView);
+            gameplayControllers.Add(playerController);
         }
 
         private void PresentMainMenuState()
         {
             PresentState(new MainMenuStateController(Context));
+        }
+
+        private void Cheats()
+        {
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                for (int i = 0; i < 50; i++)
+                {
+                    enemyWaveController.CreateEnemyAtRandomPosition();
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.X))
+            {
+                enemyWaveController.RemoveRandomEnemy();
+            }
+        }
+
+        public Transform GetGameplayLayer(GameplayLayer gameplayLayer)
+        {
+            return WorldView.GetLayer(gameplayLayer);
         }
     }
 }

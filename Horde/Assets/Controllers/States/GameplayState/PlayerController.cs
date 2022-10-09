@@ -6,14 +6,16 @@ namespace Controllers.States.GameplayState
 {
     public class PlayerController : GameplayControllerBase
     {
-        private PlayerView PlayerView;
+        public Vector3 PlayerPosition => PlayerView.transform.position;
         
+        private PlayerView PlayerView;
+
         public PlayerController(Context context) : base(context, null)
         {
             
         }
 
-        public override void Init(IGameplayView gameplayView)
+        public override void Init(GameplayView gameplayView)
         {
             PlayerView = gameplayView as PlayerView;
         }

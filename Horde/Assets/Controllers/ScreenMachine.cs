@@ -9,6 +9,7 @@ namespace Controllers
 {
     public class ScreenMachine : IScreenMachine
     {
+        public IStateBase CurrentState => screenStack.Peek();
         
         private Stack<IStateBase> screenStack;
 

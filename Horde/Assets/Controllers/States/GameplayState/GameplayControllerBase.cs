@@ -21,10 +21,7 @@ namespace Views.States.GameplayState
             Context = context;
         }
 
-        public virtual void Init(IGameplayView gameplayView)
-        {
-            
-        }
+        public virtual void Init(GameplayView gameplayView) { }
         
         public abstract void OnUpdate();
         

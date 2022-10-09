@@ -6,25 +6,26 @@ namespace Controllers.States.GameplayState
 {
     public class EnemyController : GameplayControllerBase
     {
-        private EnemyView EnemyView;
+        public EnemyView EnemyView;
 
         public EnemyController(Context context, PlayerController playerController) : base(context, playerController)
         {
-            
+
         }
-        
-        public override void Init(IGameplayView gameplayView)
+
+        public override void Init(GameplayView gameplayView)
         {
             EnemyView = gameplayView as EnemyView;
-            if (EnemyView != null)
-            {
-                EnemyView.Init();
-            }
         }
         
+        public void Activate()
+        {
+            
+        }
+
         public override void OnUpdate()
         {
-            EnemyView.OnUpdate();
+            EnemyView.OnUpdate(PlayerController.PlayerPosition);
         }
 
         public override void OnDestroy()

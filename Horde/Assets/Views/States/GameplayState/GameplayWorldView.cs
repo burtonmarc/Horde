@@ -1,8 +1,15 @@
+using System;
 using ScreenMachine;
 using UnityEngine;
 
 namespace Views.States.GameplayState
 {
+    public enum GameplayLayer
+    {
+        Background,
+        Enemies,
+        Effects
+    }
     public class GameplayWorldView : WorldView
     {
         [SerializeField] private PlayerView PlayerView;
@@ -17,9 +24,19 @@ namespace Views.States.GameplayState
             return Instantiate(PlayerView, EnemiesLayer);
         }
         
-        public EnemyView InstantiateEnemy()
+        public Transform GetLayer(GameplayLayer gameplayLayer)
         {
-            return Instantiate(EnemyView, EnemiesLayer);
+            switch (gameplayLayer)
+            {
+                case GameplayLayer.Background:
+                    return BackgroundLayer;
+                case GameplayLayer.Enemies:
+                    return EnemiesLayer;
+                case GameplayLayer.Effects:
+                    return EffectsLayer;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(gameplayLayer), gameplayLayer, null);
+            }
         }
 
 #if UNITY_EDITOR

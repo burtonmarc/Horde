@@ -1,3 +1,4 @@
+using ControllersPool;
 using Data.Scripts;
 using ScreenMachine;
 
@@ -5,12 +6,14 @@ namespace Data
 {
     public class Context
     {
-        public CatalogsHolder CatalogsHolder;
+        public readonly CatalogsHolder CatalogsHolder;
         
-        public AssetLoaderFactory AssetLoaderFactory;
+        public readonly AssetLoaderFactory AssetLoaderFactory;
 
-        public IScreenMachine ScreenMachine;
+        public readonly IScreenMachine ScreenMachine;
 
+        public IControllersPool ControllersPool { get; set; }
+        
         public Context(
             CatalogsHolder catalogsHolder, 
             AssetLoaderFactory assetLoaderFactory,

@@ -1,25 +1,18 @@
 using System;
 using System.Collections.Generic;
+using ControllersPool;
 using Data;
 using Views.States.GameplayState;
 
 namespace Controllers.States.GameplayState
 {
-    public class ControllerViewPair
+    public class PoolController : GameplayControllerBase, IControllersPool
     {
-        public GameplayControllerBase GameplayControllerBase;
-        public IGameplayView GameplayView;
-    }
-    
-    public class PoolController : GameplayControllerBase
-    {
-        
-        
         private Dictionary<Type, Stack<ControllerViewPair>> controllersPool;
         
         public PoolController(Context context) : base(context)
         {
-            
+            controllersPool = new Dictionary<Type, Stack<ControllerViewPair>>();
         }
 
         public ControllerViewPair TryGetPooledControllerViewPair<T>()

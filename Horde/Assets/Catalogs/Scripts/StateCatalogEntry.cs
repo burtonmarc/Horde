@@ -14,7 +14,7 @@ namespace Data.Scripts
         public AssetReference WorldView;
         
         public List<AssetReference> StateAssetReferences;
-
+        
         public List<AssetReference> GetAllStateReferences()
         {
             var stateReferences = new List<AssetReference>();

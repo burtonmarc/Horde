@@ -2,8 +2,13 @@ using UnityEngine;
 
 namespace Views.States.GameplayState
 {
-    public class PlayerView : MonoBehaviour, IGameplayView
+    public class PlayerView : GameplayView
     {
+        public override void Init()
+        {
+            
+        }
+        
         public void OnUpdate()
         {
             
