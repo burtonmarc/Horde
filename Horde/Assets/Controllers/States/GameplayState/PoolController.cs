@@ -24,6 +24,22 @@ namespace Controllers.States.GameplayState
             return controllerViewPairStackOfTypeT.Pop();
         }
 
+        public void StoreControllerViewPair<T>(ControllerViewPair controllerViewPair)
+        {
+            controllerViewPair.GameplayView.gameObject.SetActive(false);
+            
+            if (!controllersPool.TryGetValue(typeof(T), out var controllerViewPairStackOfTypeT))
+            {
+                var stack = new Stack<ControllerViewPair>();
+                stack.Push(controllerViewPair);
+                controllersPool.Add(typeof(T), stack);
+            }
+            else
+            {
+                controllerViewPairStackOfTypeT.Push(controllerViewPair);
+            }
+        }
+
         public override void OnUpdate()
         {
             

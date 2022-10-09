@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using ControllersPool;
 using Data;
 using Views.States.GameplayState;
 using Object = UnityEngine.Object;
@@ -28,6 +27,7 @@ namespace Controllers.States.GameplayState
                 {
                     var controller = controllerViewPair.GameplayControllerBase;
                     var view = controllerViewPair.GameplayView;
+                    view.gameObject.SetActive(true);
                     controller.Init(view);
                     view.Init();
                     OnControllerCreated?.Invoke(controller);

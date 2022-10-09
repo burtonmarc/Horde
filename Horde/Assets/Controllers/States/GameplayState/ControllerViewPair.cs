@@ -6,5 +6,11 @@ namespace Controllers.States.GameplayState
     {
         public GameplayControllerBase GameplayControllerBase;
         public GameplayView GameplayView;
+        
+        public ControllerViewPair(GameplayControllerBase gameplayControllerBase, GameplayView gameplayView)
+        {
+            GameplayControllerBase = gameplayControllerBase;
+            GameplayView = gameplayView;
+        }
     }
 }

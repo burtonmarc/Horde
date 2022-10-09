@@ -30,7 +30,9 @@ namespace Controllers.States.GameplayState
 
         public override void OnDestroy()
         {
-            Object.Destroy(EnemyView.gameObject);
+            var pool = Context.ControllersPool as PoolController;
+            var controllerViewPair = new ControllerViewPair(this, EnemyView);
+            pool.StoreControllerViewPair<EnemyController>(controllerViewPair);
         }
     }
 }
