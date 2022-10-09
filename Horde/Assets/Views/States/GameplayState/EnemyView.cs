@@ -15,7 +15,12 @@ namespace Views.States.GameplayState
             transform.position = spawnPosition;
         }
         
-        public void OnUpdate(Vector3 playerPosition)
+        public void OnUpdate()
+        {
+            
+        }
+        
+        public void OnFixedUpdate(Vector3 playerPosition)
         {
             var direction = playerPosition - transform.position;
             transform.Translate(direction * Time.deltaTime);

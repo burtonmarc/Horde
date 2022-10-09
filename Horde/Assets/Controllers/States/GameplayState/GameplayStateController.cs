@@ -62,6 +62,16 @@ namespace Controllers.States.GameplayState
 
             Cheats();
         }
+        
+        public override void OnFixedUpdate()
+        {
+            base.OnFixedUpdate();
+
+            foreach (var gameplayController in gameplayControllers)
+            {
+                gameplayController.OnFixedUpdate();
+            }
+        }
 
         public void OnSendToBack()
         {

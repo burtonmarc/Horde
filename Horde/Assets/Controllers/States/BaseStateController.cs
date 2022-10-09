@@ -50,6 +50,11 @@ namespace Controllers.States
             WorldView.OnUpdate();
             UiView.OnUpdate();
         }
+        
+        public virtual void OnFixedUpdate() {
+            WorldView.OnFixedUpdate();
+            UiView.OnFixedUpdate();
+        }
 
         public void DisableRaycasts() {
             UiView.DisableRaycast();

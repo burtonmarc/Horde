@@ -23,6 +23,14 @@ namespace Controllers.States.GameplayState
                 waveEntity.OnUpdate();
             }
         }
+        
+        public override void OnFixedUpdate()
+        {
+            foreach (var waveEntity in waveEntities)
+            {
+                waveEntity.OnFixedUpdate();
+            }
+        }
 
         public override void OnDestroy()
         {

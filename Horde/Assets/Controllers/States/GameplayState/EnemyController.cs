@@ -1,5 +1,6 @@
 using Data;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using Views.States.GameplayState;
 
 namespace Controllers.States.GameplayState
@@ -22,10 +23,15 @@ namespace Controllers.States.GameplayState
         {
             
         }
-
+        
         public override void OnUpdate()
         {
-            EnemyView.OnUpdate(PlayerController.PlayerPosition);
+            
+        }
+        
+        public override void OnFixedUpdate()
+        {
+            EnemyView.OnFixedUpdate(PlayerController.PlayerPosition);
         }
 
         public override void OnDestroy()

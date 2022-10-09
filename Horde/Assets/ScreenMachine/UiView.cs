@@ -11,6 +11,8 @@ namespace ScreenMachine
         public virtual void Init() { }
 
         public virtual void OnUpdate() { }
+        
+        public virtual void OnFixedUpdate() { }
 
         public void EnableRaycast()
         {

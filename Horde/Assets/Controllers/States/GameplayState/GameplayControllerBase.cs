@@ -24,7 +24,9 @@ namespace Views.States.GameplayState
         public virtual void Init(GameplayView gameplayView) { }
         
         public abstract void OnUpdate();
-        
+
+        public virtual void OnFixedUpdate() { }
+
         public abstract void OnDestroy();
     }
 }

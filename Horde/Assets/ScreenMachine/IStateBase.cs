@@ -15,6 +15,7 @@ namespace ScreenMachine
         void LinkViews(UiView uiView, WorldView worldView);
         void OnBringToFront();
         void OnUpdate();
+        void OnFixedUpdate();
         void OnDestroy();
         void DestroyViews();
         void EnableRaycasts();

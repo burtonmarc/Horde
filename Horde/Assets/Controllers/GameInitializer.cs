@@ -1,3 +1,4 @@
+using System;
 using Controllers.States.GameplayState;
 using Controllers.States.MainMenuState;
 using Controllers.States.StartupState;
@@ -28,6 +29,11 @@ namespace Controllers
         private void Update()
         {
             screenMachine.OnUpdate();
+        }
+
+        private void FixedUpdate()
+        {
+            screenMachine.OnFixedUpdate();
         }
     }
 }

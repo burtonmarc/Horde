@@ -62,6 +62,19 @@ namespace Controllers
             var currentState = screenStack.Peek();
             currentState.OnUpdate();
         }
+        
+        public void OnFixedUpdate() {
+            if(screenStack.Count == 0) {
+                throw new NotSupportedException("Trying to call OnUpdate on the screenstack but it's empty!");
+            }
+
+            if (isLoading) {
+                return;
+            }
+
+            var currentState = screenStack.Peek();
+            currentState.OnFixedUpdate();
+        }
 
         private void PushStateInternal(IStateBase state) {
 
