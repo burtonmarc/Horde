@@ -4,6 +4,8 @@ namespace Views.States.GameplayState
 {
     public class PlayerView : GameplayView
     {
+        public Transform WeaponAnchor;
+
         public override void Init()
         {
             

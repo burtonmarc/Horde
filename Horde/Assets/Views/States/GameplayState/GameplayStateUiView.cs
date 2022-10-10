@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Views.States.GameplayState
 {
-    public class GameplayUiView : UiView
+    public class GameplayStateUiView : UiView
     {
         [SerializeField] private Button MainMenuButton;
         

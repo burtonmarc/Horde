@@ -10,7 +10,7 @@ namespace Views.States.GameplayState
         Enemies,
         Effects
     }
-    public class GameplayWorldView : WorldView
+    public class GameplayStateWorldView : WorldView
     {
         [SerializeField] private PlayerView PlayerView;
         [SerializeField] private EnemyView EnemyView;

@@ -8,7 +8,7 @@ using Views.States.GameplayState;
 
 namespace Controllers.States.GameplayState
 {
-    public class GameplayStateController : BaseStateController<GameplayUiView, GameplayWorldView>, IStateBase
+    public class GameplayStateController : BaseStateController<GameplayStateUiView, GameplayStateWorldView>, IStateBase
     {
         protected override string StateId { get; }
 
@@ -94,10 +94,14 @@ namespace Controllers.States.GameplayState
 
         private void InitPlayer()
         {
+            // TODO: Initialize player with Data
             playerController = ControllerFactory.CreateController<PlayerController>(Context, null);
             gameplayControllers.Add(playerController);
             var layer = Context.GetGameplayLayer(GameplayLayer.Enemies);
             playerController.PlayerView.Activate(layer, Vector3.zero);
+            
+            // TODO: Initialize weapons with Data
+            
         }
 
         private void PresentMainMenuState()
