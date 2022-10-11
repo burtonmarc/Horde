@@ -8,13 +8,12 @@ namespace Views.States.GameplayState
 
         public override void Init()
         {
-            
+            base.Init();
         }
         
         public override void Activate(Transform parent, Vector3 spawnPosition)
         {
-            transform.SetParent(parent);
-            transform.position = spawnPosition;
+            base.Activate(parent, spawnPosition);
         }
         
         public void OnUpdate()

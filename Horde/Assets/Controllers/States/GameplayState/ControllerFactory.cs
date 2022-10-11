@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Controllers.States.GameplayState.PlayerWeapons;
 using Data;
 using Views.States.GameplayState;
 using Object = UnityEngine.Object;
@@ -16,9 +17,11 @@ namespace Controllers.States.GameplayState
         {
             {typeof(PlayerController), typeof(PlayerView)},
             {typeof(EnemyController), typeof(EnemyView)},
+            {typeof(ShurikenController), typeof(ShurikenView)},
+            {typeof(ShurikenBulletController), typeof(ShurikenBulletView)},
         };
         
-        public static T CreateController<T>(Context context, PlayerController playerController) where T : GameplayControllerBase
+        public static T CreateController<T>(Context context, PlayerController playerController, object args = null) where T : GameplayControllerBase
         {
             if (controllerViewPairs.TryGetValue(typeof(T), out var controllersViewType))
             {
@@ -28,16 +31,16 @@ namespace Controllers.States.GameplayState
                     var controller = controllerViewPair.GameplayControllerBase;
                     var view = controllerViewPair.GameplayView;
                     view.gameObject.SetActive(true);
-                    controller.Init(view);
+                    controller.Init(view, args);
                     view.Init();
                     OnControllerCreated?.Invoke(controller);
                     return controller as T;
                 }
                 else
                 {
-                    object[] args = { context, playerController };
+                    object[] constructorArgs = {context, playerController};
                     // TODO: Check performance of activator with args
-                    var controller = Activator.CreateInstance(typeof(T), args) as T;
+                    var controller = Activator.CreateInstance(typeof(T), constructorArgs) as T;
                     var currentState = context.ScreenMachine.CurrentState;
                     var stateSpawnables = currentState.GetStateAsset<StateSpawnables>();
                     var view = stateSpawnables.spawnables.Find(spawnable => controllersViewType == spawnable.GetType());
@@ -46,7 +49,7 @@ namespace Controllers.States.GameplayState
                         throw new Exception($"The type {typeof(T)} does not have a View in the spawnables data");
                     }
                     var viewInstance = Object.Instantiate(view);
-                    controller?.Init(viewInstance);
+                    controller?.Init(viewInstance, args);
                     viewInstance.Init();
                     OnControllerCreated?.Invoke(controller);
                     return controller;

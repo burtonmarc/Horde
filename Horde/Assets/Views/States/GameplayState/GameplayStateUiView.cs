@@ -1,5 +1,7 @@
 using System;
+using System.Globalization;
 using ScreenMachine;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +10,12 @@ namespace Views.States.GameplayState
     public class GameplayStateUiView : UiView
     {
         [SerializeField] private Button MainMenuButton;
+
+        [SerializeField] private TextMeshProUGUI FrameRate;
         
         public event Action MainMenuClicked;
+
+        private int currentFrame = 0;
 
         public override void Init()
         {
@@ -18,7 +24,12 @@ namespace Views.States.GameplayState
 
         public override void OnUpdate()
         {
-            
+            if (currentFrame <= 0)
+            {
+                FrameRate.text = Mathf.FloorToInt(1f / Time.deltaTime).ToString(CultureInfo.InvariantCulture);
+                currentFrame = 4;
+            }
+            currentFrame--;
         }
         
         private void OnEnable()

@@ -15,3 +15,5 @@ MonoBehaviour:
   spawnables:
   - {fileID: 3683824234059760209, guid: 92f0d32e945e6466eb54b5658988803b, type: 3}
   - {fileID: -3179306793956701341, guid: be2bf2fba5e614c08a67a8ef0aeca285, type: 3}
+  - {fileID: 5571361569459187686, guid: 6c70b16be138a459c963a153dba6746f, type: 3}
+  - {fileID: 365165887423004030, guid: fb0196ab56721440dbb505d0dedf9d24, type: 3}

@@ -35,8 +35,9 @@ namespace Controllers.States.GameplayState
 
         public override void OnDestroy()
         {
-            foreach (var waveEntity in waveEntities)
+            for (var index = waveEntities.Count - 1; index >= 0; index--)
             {
+                var waveEntity = waveEntities[index];
                 waveEntity.OnDestroy();
             }
         }
@@ -44,7 +45,7 @@ namespace Controllers.States.GameplayState
         public void CreateEnemyAtRandomPosition()
         {
             var enemyController = ControllerFactory.CreateController<EnemyController>(Context, PlayerController);
-            waveEntities.Add(enemyController);
+            waveEntities.AddController(enemyController);
 
             var aspectRatio = (float) Screen.height / Screen.width;
             var orthographicSize = Camera.main.orthographicSize;
@@ -60,7 +61,6 @@ namespace Controllers.States.GameplayState
         {
             var index = Random.Range(0, waveEntities.Count - 1);
             waveEntities[index].OnDestroy();
-            waveEntities.RemoveAt(index);
         }
     }
 }

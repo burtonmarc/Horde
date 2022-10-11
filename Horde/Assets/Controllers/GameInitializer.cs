@@ -1,6 +1,3 @@
-using System;
-using Controllers.States.GameplayState;
-using Controllers.States.MainMenuState;
 using Controllers.States.StartupState;
 using Data;
 using Data.Scripts;
@@ -17,6 +14,8 @@ namespace Controllers
 
         void Start()
         {
+            Application.targetFrameRate = 60;
+            
             var assetLoaderFactory = new AssetLoaderFactory();
 
             screenMachine = new ScreenMachine(catalogs.StatesCatalog, assetLoaderFactory);

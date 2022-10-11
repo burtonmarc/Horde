@@ -10,13 +10,16 @@ namespace Controllers.States.GameplayState
         
         public PlayerView PlayerView;
 
+        public Vector3 ViewDirection = Vector3.up;
+
         public PlayerController(Context context, PlayerController playerController) : base(context, playerController)
         {
             
         }
 
-        public override void Init(GameplayView gameplayView)
+        public override void Init(GameplayView gameplayView, object args)
         {
+            base.Init(gameplayView, args);
             PlayerView = gameplayView as PlayerView;
         }
 
@@ -30,31 +33,36 @@ namespace Controllers.States.GameplayState
 
         public override void OnDestroy()
         {
-            Object.Destroy(PlayerView.gameObject);
+            base.OnDestroy();
         }
 
         private void GetInput()
         {
-            var direction = Vector2.zero;
+            var movementDirection = Vector2.zero;
 
             if (Input.GetKey(KeyCode.A))
             {
-                direction += Vector2.left;
+                movementDirection += Vector2.left;
             }
             if (Input.GetKey(KeyCode.D))
             {
-                direction += Vector2.right;
+                movementDirection += Vector2.right;
             }
             if (Input.GetKey(KeyCode.W))
             {
-                direction += Vector2.up;
+                movementDirection += Vector2.up;
             }
             if (Input.GetKey(KeyCode.S))
             {
-                direction += Vector2.down;
+                movementDirection += Vector2.down;
             }
 
-            PlayerView.Move(direction.normalized);
+            if (movementDirection != Vector2.zero)
+            {
+                ViewDirection = movementDirection;
+            }
+
+            PlayerView.Move(movementDirection.normalized);
         }
         
     }
