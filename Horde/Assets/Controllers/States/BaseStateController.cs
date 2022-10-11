@@ -67,7 +67,7 @@ namespace Controllers.States
         }
 
         public void CacheStateAssets(List<ScriptableObject> stateAssets) {
-            this.StateAssets = stateAssets;
+            StateAssets = stateAssets;
         }
         
         public T GetStateAsset<T>() where T : ScriptableObject {

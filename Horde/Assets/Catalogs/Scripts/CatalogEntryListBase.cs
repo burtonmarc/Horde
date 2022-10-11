@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Data.Scripts
+namespace Catalogs.Scripts
 {
     public class CatalogEntryListBase<T> : ScriptableObject where T : CatalogEntryId
     {

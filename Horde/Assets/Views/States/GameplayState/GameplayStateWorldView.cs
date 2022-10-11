@@ -12,17 +12,9 @@ namespace Views.States.GameplayState
     }
     public class GameplayStateWorldView : WorldView
     {
-        [SerializeField] private PlayerView PlayerView;
-        [SerializeField] private EnemyView EnemyView;
-
         [SerializeField] private Transform BackgroundLayer;
         [SerializeField] private Transform EnemiesLayer;
         [SerializeField] private Transform EffectsLayer;
-        
-        public PlayerView InstantiatePlayer()
-        {
-            return Instantiate(PlayerView, EnemiesLayer);
-        }
         
         public Transform GetLayer(GameplayLayer gameplayLayer)
         {

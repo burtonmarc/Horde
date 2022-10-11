@@ -4,12 +4,12 @@ namespace Controllers.States.GameplayState
 {
     public class ControllerViewPair
     {
-        public GameplayControllerBase GameplayControllerBase;
-        public GameplayView GameplayView;
+        public GameplayControllerBase GameplayController;
+        public GameplayViewBase GameplayView;
         
-        public ControllerViewPair(GameplayControllerBase gameplayControllerBase, GameplayView gameplayView)
+        public ControllerViewPair(GameplayControllerBase gameplayController, GameplayViewBase gameplayView)
         {
-            GameplayControllerBase = gameplayControllerBase;
+            GameplayController = gameplayController;
             GameplayView = gameplayView;
         }
     }

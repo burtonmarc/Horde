@@ -2,7 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Views.States.GameplayState;
 
-public class StateSpawnables : ScriptableObject
+namespace Catalogs.Scripts
 {
-    public List<GameplayView> spawnables;
+    public class StateSpawnables : ScriptableObject
+    {
+        public List<GameplayViewBase> spawnables;
+    }
 }

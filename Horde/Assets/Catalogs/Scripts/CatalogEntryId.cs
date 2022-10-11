@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Data.Scripts
+namespace Catalogs.Scripts
 {
     public class CatalogEntryId : ScriptableObject
     {

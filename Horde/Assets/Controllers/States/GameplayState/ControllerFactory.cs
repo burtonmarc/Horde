@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Catalogs.Scripts;
 using Controllers.States.GameplayState.PlayerWeapons;
 using Data;
 using Views.States.GameplayState;
@@ -28,7 +29,7 @@ namespace Controllers.States.GameplayState
                 var controllerViewPair = PoolController.TryGetPooledControllerViewPair<T>();
                 if (controllerViewPair != null)
                 {
-                    var controller = controllerViewPair.GameplayControllerBase;
+                    var controller = controllerViewPair.GameplayController;
                     var view = controllerViewPair.GameplayView;
                     view.gameObject.SetActive(true);
                     controller.Init(view, args);

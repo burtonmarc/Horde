@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Views.States.GameplayState
 {
-    public abstract class GameplayView : MonoBehaviour
+    public abstract class GameplayViewBase : MonoBehaviour
     {
         protected Transform Transform;
         

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Views.States.GameplayState
 {
-    public class ShurikenView : GameplayView
+    public class ShurikenView : GameplayViewBase
     {
         public override void Init()
         {

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Views.States.GameplayState
 {
-    public class EnemyView : GameplayView
+    public class EnemyView : GameplayViewBase
     {
         public override void Init()
         {

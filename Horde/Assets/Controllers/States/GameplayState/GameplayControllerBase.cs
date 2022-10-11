@@ -15,7 +15,7 @@ namespace Controllers.States.GameplayState
         public PlayerController PlayerController;
 
         // Used as reference to pool this controller and its view in the PoolThisControllerView method
-        private GameplayView view;
+        private GameplayViewBase viewBase;
 
         // This is a reference to the list that updates each controller
         // Used to auto-eliminate yourself from it on the OnDestroy method
@@ -33,9 +33,9 @@ namespace Controllers.States.GameplayState
             Context = context;
         }
 
-        public virtual void Init(GameplayView gameplayView, object args)
+        public virtual void Init(GameplayViewBase gameplayView, object args)
         {
-            view = gameplayView;
+            viewBase = gameplayView;
         }
         
         public abstract void OnUpdate();
@@ -44,14 +44,17 @@ namespace Controllers.States.GameplayState
 
         public virtual void OnDestroy()
         {
-            PoolThisControllerView();
+            if (viewBase != null)
+            {
+                PoolThisControllerView();
+            }
             UpdateListReference.Remove(this);
         }
 
         private void PoolThisControllerView()
         {
             var pool = Context.ControllersPool as PoolController;
-            var controllerViewPair = new ControllerViewPair(this, view);
+            var controllerViewPair = new ControllerViewPair(this, viewBase);
             pool?.StoreControllerViewPair<EnemyController>(controllerViewPair);
         }
     }

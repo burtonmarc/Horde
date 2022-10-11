@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8ca74f2e4aa44416a02a2e52762ec0f, type: 3}
-  m_Name: Catalogs
+  m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
+  m_Name: Shared_ContentUpdateGroupSchema
   m_EditorClassIdentifier: 
-  StatesCatalog: {fileID: 11400000, guid: 232a0dae2e02f4fbfbef6db57700f9e1, type: 2}
-  WeaponsCatalog: {fileID: 11400000, guid: 169d8555697c94ac48f6c268f7ff674e, type: 2}
+  m_Group: {fileID: 11400000, guid: 4b03ac11bcf2746feac654c42d448e51, type: 2}
+  m_StaticContent: 0

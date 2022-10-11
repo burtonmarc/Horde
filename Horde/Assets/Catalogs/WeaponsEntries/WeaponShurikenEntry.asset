@@ -9,19 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f40f17d990fe4ffc8f9f03021677f689, type: 3}
-  m_Name: GameplayStateCatalogEntry
+  m_Script: {fileID: 11500000, guid: e0fe069b7fe546539eb5b3656684198c, type: 3}
+  m_Name: WeaponShurikenEntry
   m_EditorClassIdentifier: 
-  Id: Gameplay
-  UiView:
-    m_AssetGUID: 0513561cc1fea42e394131bca10d725b
+  Id: Shuriken
+  Damage: 1
+  AutoAim: 1
+  Range: 4
+  TravelSpeed: 2
+  CharacterWeapon:
+    m_AssetGUID: 6c70b16be138a459c963a153dba6746f
     m_SubObjectName: 
     m_SubObjectType: 
-  WorldView:
-    m_AssetGUID: c58679bad872c4e70a15733e9a9577d6
-    m_SubObjectName: 
-    m_SubObjectType: 
-  StateAssetReferences:
-  - m_AssetGUID: d828babec85b8449bbc9d7dbc66ea739
+  Projectile:
+    m_AssetGUID: fb0196ab56721440dbb505d0dedf9d24
     m_SubObjectName: 
     m_SubObjectType: 

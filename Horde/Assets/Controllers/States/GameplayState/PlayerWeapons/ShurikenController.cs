@@ -20,7 +20,7 @@ namespace Controllers.States.GameplayState.PlayerWeapons
             shurikenBulletControllers = new List<GameplayControllerBase>(8);
         }
 
-        public override void Init(GameplayView gameplayView, object args)
+        public override void Init(GameplayViewBase gameplayView, object args)
         {
             base.Init(gameplayView, args);
             ShurikenView = gameplayView as ShurikenView;

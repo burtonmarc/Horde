@@ -126,6 +126,10 @@ namespace Controllers.States.GameplayState
             {
                 enemyWaveController.RemoveRandomEnemy();
             }
+            else if (Input.GetKeyDown(KeyCode.C))
+            {
+                enemyWaveController.RemoveAllEnemies();
+            }
         }
 
         public Transform GetGameplayLayer(GameplayLayer gameplayLayer)

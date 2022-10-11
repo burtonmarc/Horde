@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4b3eee6d4bc94cb0894f97151ac14ee, type: 3}
-  m_Name: GameplayStateSpawnablesEntry
+  m_Name: GameplayStateSpawnablesCatalogEntry
   m_EditorClassIdentifier: 
   spawnables:
   - {fileID: 3683824234059760209, guid: 92f0d32e945e6466eb54b5658988803b, type: 3}

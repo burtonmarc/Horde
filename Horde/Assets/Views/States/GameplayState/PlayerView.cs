@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Views.States.GameplayState
 {
-    public class PlayerView : GameplayView
+    public class PlayerView : GameplayViewBase
     {
         public Transform WeaponAnchor;
 

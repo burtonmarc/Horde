@@ -1,6 +1,6 @@
+using Catalogs.Scripts;
 using Controllers.States.StartupState;
 using Data;
-using Data.Scripts;
 using ScreenMachine;
 using UnityEngine;
 

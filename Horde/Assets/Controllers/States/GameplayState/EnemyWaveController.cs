@@ -40,6 +40,7 @@ namespace Controllers.States.GameplayState
                 var waveEntity = waveEntities[index];
                 waveEntity.OnDestroy();
             }
+            base.OnDestroy();
         }
 
         public void CreateEnemyAtRandomPosition()
@@ -61,6 +62,15 @@ namespace Controllers.States.GameplayState
         {
             var index = Random.Range(0, waveEntities.Count - 1);
             waveEntities[index].OnDestroy();
+        }
+
+        public void RemoveAllEnemies()
+        {
+            for (var index = waveEntities.Count - 1; index >= 0; index--)
+            {
+                var waveEntity = waveEntities[index];
+                waveEntity.OnDestroy();
+            }
         }
     }
 }

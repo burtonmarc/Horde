@@ -17,7 +17,7 @@ namespace Controllers.States.GameplayState
             
         }
 
-        public override void Init(GameplayView gameplayView, object args)
+        public override void Init(GameplayViewBase gameplayView, object args)
         {
             base.Init(gameplayView, args);
             PlayerView = gameplayView as PlayerView;
@@ -57,12 +57,14 @@ namespace Controllers.States.GameplayState
                 movementDirection += Vector2.down;
             }
 
+            movementDirection.Normalize();
+            
             if (movementDirection != Vector2.zero)
             {
                 ViewDirection = movementDirection;
             }
 
-            PlayerView.Move(movementDirection.normalized);
+            PlayerView.Move(movementDirection);
         }
         
     }

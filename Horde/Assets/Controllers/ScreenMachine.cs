@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Data.Scripts;
+using Catalogs.Scripts;
 using ScreenMachine;
 using UnityEngine;
 using Object = UnityEngine.Object;
