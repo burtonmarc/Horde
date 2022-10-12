@@ -17,7 +17,7 @@ namespace Views.States.GameplayState
 
         private int currentFrame = 0;
 
-        public override void Init()
+        public override void ResetUiView()
         {
             
         }

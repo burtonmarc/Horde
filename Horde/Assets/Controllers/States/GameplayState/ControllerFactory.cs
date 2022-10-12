@@ -34,7 +34,6 @@ namespace Controllers.States.GameplayState
                     view.gameObject.SetActive(true);
                     controller.Init(view, args);
                     view.Init();
-                    OnControllerCreated?.Invoke(controller);
                     return controller as T;
                 }
                 else
@@ -44,7 +43,9 @@ namespace Controllers.States.GameplayState
                     var controller = Activator.CreateInstance(typeof(T), constructorArgs) as T;
                     var currentState = context.ScreenMachine.CurrentState;
                     var stateSpawnables = currentState.GetStateAsset<StateSpawnables>();
-                    var view = stateSpawnables.spawnables.Find(spawnable => controllersViewType == spawnable.GetType());
+                    var spawnableData = stateSpawnables.spawnables.Find(spawnable => controllersViewType == spawnable.view.GetType());
+                    var view = spawnableData.view;
+                    var config = spawnableData.config;
                     if (view == null)
                     {
                         throw new Exception($"The type {typeof(T)} does not have a View in the spawnables data");
@@ -52,7 +53,6 @@ namespace Controllers.States.GameplayState
                     var viewInstance = Object.Instantiate(view);
                     controller?.Init(viewInstance, args);
                     viewInstance.Init();
-                    OnControllerCreated?.Invoke(controller);
                     return controller;
                 }
             }

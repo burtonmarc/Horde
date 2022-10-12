@@ -8,7 +8,7 @@ namespace Controllers.States.GameplayState
     public class EnemyController : GameplayControllerBase
     {
         public EnemyView EnemyView;
-
+        
         public EnemyController(Context context, PlayerController playerController) : base(context, playerController)
         {
             

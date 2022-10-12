@@ -22,6 +22,7 @@ namespace Views.States.GameplayState
         public void OnFixedUpdate(Vector3 playerPosition)
         {
             var direction = playerPosition - transform.position;
+            direction.Normalize();
             transform.Translate(direction * Time.fixedDeltaTime);
         }
     }

@@ -8,7 +8,7 @@ namespace Controllers.States.GameplayState
 {
     public abstract class GameplayControllerBase
     {
-        protected Context Context;
+        protected readonly Context Context;
 
         // Most of the controllers will need to do something on the player or calculate
         // something in relation to the player, so I add it in the base directly

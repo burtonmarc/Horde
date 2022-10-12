@@ -7,6 +7,7 @@ namespace ScreenMachine
     {
         //[SerializeField] private GraphicRaycaster graphicRaycaster;
 
+        // TODO: Rename Init to ResetWorldView?
         public virtual void Init() { }
 
         public virtual void OnUpdate() { }

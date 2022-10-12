@@ -20,7 +20,11 @@ namespace Controllers
 
             screenMachine = new ScreenMachine(catalogs.StatesCatalog, assetLoaderFactory);
             
-            var context = new Context(catalogs, assetLoaderFactory, screenMachine);
+            var saveSystem = new SaveSystem();
+
+            var userModel = new UserModel(saveSystem.LoadUserData());
+            
+            var context = new Context(catalogs, assetLoaderFactory, screenMachine, saveSystem, userModel);
             
             screenMachine.PresentState(new StartupStateController(context));
         }

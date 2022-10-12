@@ -37,7 +37,7 @@ namespace Controllers.States.GameplayState
 
         public void OnCreate()
         {
-            UiView.Init();
+            UiView.ResetUiView();
             WorldView.Init();
 
             UiView.MainMenuClicked += PresentMainMenuState;

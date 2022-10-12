@@ -16,19 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 92226e257f92b4e18b0a3ea3c26aebc8
-  m_SerializeEntries:
-  - m_GUID: 6c70b16be138a459c963a153dba6746f
-    m_Address: ShrurikenView
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 772246476243732266, guid: 6c70b16be138a459c963a153dba6746f, type: 3}
-    m_TargetAsset: {fileID: 772246476243732266, guid: 6c70b16be138a459c963a153dba6746f, type: 3}
-  - m_GUID: fb0196ab56721440dbb505d0dedf9d24
-    m_Address: ShurikenBulletView
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 4193435977612064571, guid: fb0196ab56721440dbb505d0dedf9d24, type: 3}
-    m_TargetAsset: {fileID: 4193435977612064571, guid: fb0196ab56721440dbb505d0dedf9d24, type: 3}
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d801e9cbbcbae41bcb1709d83232f782, type: 2}
   m_SchemaSet:

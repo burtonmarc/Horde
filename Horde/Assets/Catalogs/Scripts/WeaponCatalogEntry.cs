@@ -14,8 +14,8 @@ namespace Catalogs.Scripts
 
         public float TravelSpeed = 1;
 
-        public AssetReference CharacterWeapon;
+        public GameObject CharacterWeapon;
 
-        public AssetReference Projectile;
+        public GameObject Projectile;
     }
 }

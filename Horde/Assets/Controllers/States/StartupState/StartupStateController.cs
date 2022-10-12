@@ -19,12 +19,24 @@ namespace Controllers.States.StartupState
 
         public void OnCreate()
         {
-            UiView.Init();
+            UiView.ResetUiView();
             WorldView.Init();
-            
-            PresentStateAsync();
+
+            LoadSharedAddressablesAsync();
         }
-        
+
+        private async void LoadSharedAddressablesAsync()
+        {
+            await Task.Yield();
+            PresentState(new MainMenuStateController(Context));
+
+        }
+
+        private void LoadWeapons()
+        {
+            
+        }
+
         public void OnBringToFront()
         {
             
@@ -38,12 +50,6 @@ namespace Controllers.States.StartupState
         public void OnDestroy()
         {
             
-        }
-
-        private async void PresentStateAsync()
-        {
-            await Task.Yield();
-            PresentState(new MainMenuStateController(Context));
         }
     }
 }
