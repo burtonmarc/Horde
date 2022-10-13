@@ -46,10 +46,5 @@ namespace Controllers.States.StartupState
         {
             
         }
-        
-        public void OnDestroy()
-        {
-            
-        }
     }
 }

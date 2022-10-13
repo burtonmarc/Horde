@@ -45,8 +45,10 @@ namespace Controllers.States.GameplayState
 
         public void CreateEnemyAtRandomPosition()
         {
-            var enemyController = ControllerFactory.CreateController<EnemyController>(Context, PlayerController);
-            waveEntities.AddController(enemyController);
+            add enemies catalog and test
+            //var enemyView = Context.Preloader.GetAsset<EnemyView>(Context.CatalogsHolder.EnemiesCatalog)
+            //var enemyController = ControllerFactory.CreateController<EnemyController>();
+            //waveEntities.AddController(enemyController);
 
             var aspectRatio = (float) Screen.height / Screen.width;
             var orthographicSize = Camera.main.orthographicSize;
@@ -55,7 +57,7 @@ namespace Controllers.States.GameplayState
             var randomPosition = new Vector3(randomX, randomY, 0);
 
             var enemyLayer = Context.GetGameplayLayer(GameplayLayer.Enemies);
-            enemyController.EnemyView.Activate(enemyLayer, randomPosition);
+            //enemyController.EnemyView.Activate(enemyLayer, randomPosition);
         }
 
         public void RemoveRandomEnemy()

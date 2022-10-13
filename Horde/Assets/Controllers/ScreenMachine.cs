@@ -113,6 +113,11 @@ namespace Controllers
 
             state.LinkViews(uiView, worldView);
 
+            if (state is IPreloadable preloadable)
+            {
+                await preloadable.Preload();
+            }
+
             state.OnCreate();
 
             isLoading = false;

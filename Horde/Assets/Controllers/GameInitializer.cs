@@ -22,7 +22,7 @@ namespace Controllers
             
             var saveSystem = new SaveSystem();
 
-            var userModel = new UserModel(saveSystem.LoadUserData());
+            var userModel = saveSystem.LoadModel<UserModel>();
             
             var context = new Context(catalogs, assetLoaderFactory, screenMachine, saveSystem, userModel);
             

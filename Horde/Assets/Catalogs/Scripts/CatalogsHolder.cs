@@ -7,8 +7,8 @@ namespace Catalogs.Scripts
     {
         public StatesCatalog StatesCatalog;
 
+        public PlayerCatalog PlayerCatalog;
+
         public WeaponsCatalog WeaponsCatalog;
     }
-    
-    
 }

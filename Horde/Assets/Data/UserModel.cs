@@ -1,12 +1,12 @@
 namespace Data
 {
-    public class UserModel
+    public class UserModel : IModel
     {
         public int level;
         
-        public UserModel(UserData userData)
+        public UserModel()
         {
-            level = userData.level;
+            level = 0;
         }
     }
 }

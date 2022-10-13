@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Controllers.States.GameplayState.GameplayExtensions;
 using Controllers.States.GameplayState.PlayerWeapons;
 using Controllers.States.MainMenuState;
@@ -9,7 +10,7 @@ using Views.States.GameplayState;
 
 namespace Controllers.States.GameplayState
 {
-    public class GameplayStateController : BaseStateController<GameplayStateUiView, GameplayStateWorldView>, IStateBase
+    public class GameplayStateController : BaseStateController<GameplayStateUiView, GameplayStateWorldView>, IStateBase, IPreloadable
     {
         protected override string StateId { get; }
 
@@ -85,8 +86,10 @@ namespace Controllers.States.GameplayState
             
         }
 
-        public void OnDestroy()
+        public override void OnDestroy()
         {
+            base.OnDestroy();
+            
             for (var index = gameplayControllers.Count - 1; index >= 0; index--)
             {
                 var gameplayController = gameplayControllers[index];
@@ -96,14 +99,17 @@ namespace Controllers.States.GameplayState
 
         private void InitPlayer()
         {
-            // TODO: Initialize player with Data
-            playerController = ControllerFactory.CreateController<PlayerController>(Context, null);
+            var playerView = Preloader.GetAsset<PlayerView>(Context.CatalogsHolder.PlayerCatalog.GameplayView);
+            var playerModel = Context.SaveSystem.LoadModel<PlayerModel>();
+            playerController = ControllerFactory.CreateController<PlayerController>(playerView, playerModel);
             gameplayControllers.AddController(playerController);
             var enemiesLayer = Context.GetGameplayLayer(GameplayLayer.Enemies);
             playerController.PlayerView.Activate(enemiesLayer, Vector3.zero);
-            
-            // TODO: Initialize weapons with Data
-            var shurikenController = ControllerFactory.CreateController<ShurikenController>(Context, playerController);
+
+            var shurikenEntry = Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken");
+            var shurikenView = Preloader.GetAsset<ShurikenView>(shurikenEntry.WeaponGameplayView);
+            var shurikenModel = new ShurikenModel(shurikenEntry.WeaponConfig);
+            var shurikenController = ControllerFactory.CreateController<ShurikenController>(shurikenView, shurikenModel);
             gameplayControllers.AddController(shurikenController);
             shurikenController.ShurikenView.Activate(playerController.PlayerView.WeaponAnchor, Vector3.zero);
         }
@@ -135,6 +141,11 @@ namespace Controllers.States.GameplayState
         public Transform GetGameplayLayer(GameplayLayer gameplayLayer)
         {
             return WorldView.GetLayer(gameplayLayer);
+        }
+
+        public Task Preload()
+        {
+            return null;
         }
     }
 }

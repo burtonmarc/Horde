@@ -1,3 +1,4 @@
+using Catalogs.Scripts;
 using Data;
 using UnityEngine;
 using Views.States.GameplayState;
@@ -12,15 +13,23 @@ namespace Controllers.States.GameplayState
 
         public Vector3 ViewDirection = Vector3.up;
 
+        private PlayerModel playerModel;
+
         public PlayerController(Context context, PlayerController playerController) : base(context, playerController)
         {
             
         }
 
-        public override void Init(GameplayViewBase gameplayView, object args)
+        public override void Init(GameplayViewBase gameplayView, IModel model, object args)
         {
-            base.Init(gameplayView, args);
+            base.Init(gameplayView, model, args);
             PlayerView = gameplayView as PlayerView;
+            playerModel = model as PlayerModel;
+        }
+
+        public override void Pool(object args)
+        {
+            base.Pool(args);
         }
 
         public override void OnUpdate()
@@ -64,7 +73,7 @@ namespace Controllers.States.GameplayState
                 ViewDirection = movementDirection;
             }
 
-            PlayerView.Move(movementDirection);
+            PlayerView.Move(movementDirection * playerModel.MovementSpeed);
         }
         
     }

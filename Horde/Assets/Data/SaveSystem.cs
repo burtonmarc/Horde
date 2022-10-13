@@ -6,36 +6,32 @@ namespace Data
 {
     public class SaveSystem
     {
-        private const string UserDataPath = "/UserData.txt";
-        
-        public void SaveUserData(UserModel userModel)
+        public void SaveModel<T>(T userModel)
         {
             var formatter = new BinaryFormatter();
 
-            var path = Application.persistentDataPath + UserDataPath;
+            var path = Application.persistentDataPath + typeof(T);
             var stream = new FileStream(path, FileMode.Create);
             
-            var userData = new UserData(userModel);
-            
-            formatter.Serialize(stream, userData);
+            formatter.Serialize(stream, userModel);
             stream.Close();
         }
 
-        public UserData LoadUserData()
+        public T LoadModel<T>() where T : class, new()
         {
-            var path = Application.persistentDataPath + UserDataPath;
+            var path = Application.persistentDataPath + typeof(T);
             if (File.Exists(path))
             {
                 var formatter = new BinaryFormatter();
                 var stream = new FileStream(path, FileMode.Open);
 
-                var userData = formatter.Deserialize(stream) as UserData;
+                var userModel = formatter.Deserialize(stream) as T;
                 stream.Close();
 
-                return userData;
+                return userModel;
             }
             
-            return new UserData();
+            return new T();
         }
     }
 }

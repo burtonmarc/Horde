@@ -25,8 +25,11 @@ namespace Controllers.States
 
         private IScreenMachine ScreenMachine => Context.ScreenMachine;
 
+        protected AssetLoader Preloader;
+
         protected BaseStateController(Context context) {
             Context = context;
+            Context.Preloader = Preloader;
         }
 
         public string GetStateId()
@@ -64,6 +67,11 @@ namespace Controllers.States
         public void EnableRaycasts() {
             UiView.EnableRaycast();
             //WorldView.EnableRaycast();
+        }
+
+        public virtual void OnDestroy()
+        {
+            Preloader?.ReleaseAssets();
         }
 
         public void CacheStateAssets(List<ScriptableObject> stateAssets) {

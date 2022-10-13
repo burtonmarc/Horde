@@ -33,9 +33,16 @@ namespace Controllers.States.GameplayState
             Context = context;
         }
 
-        public virtual void Init(GameplayViewBase gameplayView, object args)
+        // Used for the first time the controller is created
+        public virtual void Init(GameplayViewBase gameplayView, IModel model, object args)
         {
             viewBase = gameplayView;
+        }
+
+        // Used for every time the controller is pooled, so no need to add the view and the config
+        public virtual void Pool(object args)
+        {
+            
         }
         
         public abstract void OnUpdate();

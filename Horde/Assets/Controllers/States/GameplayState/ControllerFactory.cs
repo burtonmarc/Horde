@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Catalogs.Scripts;
 using Controllers.States.GameplayState.PlayerWeapons;
 using Data;
+using UnityEngine;
 using Views.States.GameplayState;
 using Object = UnityEngine.Object;
 
@@ -10,7 +11,9 @@ namespace Controllers.States.GameplayState
 {
     public static class ControllerFactory
     {
-        public static Action<GameplayControllerBase> OnControllerCreated;
+        public static Context Context;
+
+        public static PlayerController PlayerController;
 
         public static PoolController PoolController;
 
@@ -22,7 +25,7 @@ namespace Controllers.States.GameplayState
             {typeof(ShurikenBulletController), typeof(ShurikenBulletView)},
         };
         
-        public static T CreateController<T>(Context context, PlayerController playerController, object args = null) where T : GameplayControllerBase
+        public static T CreateController<T>(GameplayViewBase gameplayViewBase, IModel model, object args = null) where T : GameplayControllerBase
         {
             if (controllerViewPairs.TryGetValue(typeof(T), out var controllersViewType))
             {
@@ -32,26 +35,17 @@ namespace Controllers.States.GameplayState
                     var controller = controllerViewPair.GameplayController;
                     var view = controllerViewPair.GameplayView;
                     view.gameObject.SetActive(true);
-                    controller.Init(view, args);
+                    controller.Pool(args);
                     view.Init();
                     return controller as T;
                 }
                 else
                 {
-                    object[] constructorArgs = {context, playerController};
+                    object[] constructorArgs = {Context, PlayerController};
                     // TODO: Check performance of activator with args
                     var controller = Activator.CreateInstance(typeof(T), constructorArgs) as T;
-                    var currentState = context.ScreenMachine.CurrentState;
-                    var stateSpawnables = currentState.GetStateAsset<StateSpawnables>();
-                    var spawnableData = stateSpawnables.spawnables.Find(spawnable => controllersViewType == spawnable.view.GetType());
-                    var view = spawnableData.view;
-                    var config = spawnableData.config;
-                    if (view == null)
-                    {
-                        throw new Exception($"The type {typeof(T)} does not have a View in the spawnables data");
-                    }
-                    var viewInstance = Object.Instantiate(view);
-                    controller?.Init(viewInstance, args);
+                    var viewInstance = Object.Instantiate(gameplayViewBase);
+                    controller?.Init(viewInstance, model, args);
                     viewInstance.Init();
                     return controller;
                 }

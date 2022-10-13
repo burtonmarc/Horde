@@ -6,6 +6,8 @@ namespace Data
 {
     public class Context
     {
+        public AssetLoader Preloader;
+
         public readonly CatalogsHolder CatalogsHolder;
         
         public readonly AssetLoaderFactory AssetLoaderFactory;

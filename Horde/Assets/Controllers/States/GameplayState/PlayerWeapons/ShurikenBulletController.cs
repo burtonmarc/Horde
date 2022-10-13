@@ -4,7 +4,7 @@ using Views.States.GameplayState;
 
 namespace Controllers.States.GameplayState.PlayerWeapons
 {
-    public struct ShurikenBulletData
+    public struct ShurikenBulletArgs
     {
         public Vector3 movementDirection;
         public float speed;
@@ -23,15 +23,16 @@ namespace Controllers.States.GameplayState.PlayerWeapons
             
         }
 
-        public override void Init(GameplayViewBase gameplayView, object args)
+        public override void Init(GameplayViewBase gameplayView, IModel model, object args)
         {
-            base.Init(gameplayView, args);
+            base.Init(gameplayView, model, args);
+            
             ShurikenBulletView = gameplayView as ShurikenBulletView;
             
-            if (args is ShurikenBulletData shurikenBulletData)
+            if (args is ShurikenBulletArgs shurikenBulletArgs)
             {
-                movementDirection = shurikenBulletData.movementDirection;
-                speed = shurikenBulletData.speed;
+                movementDirection = shurikenBulletArgs.movementDirection;
+                speed = shurikenBulletArgs.speed;
             }
         }
 

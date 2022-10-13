@@ -3,19 +3,15 @@ using UnityEngine.AddressableAssets;
 
 namespace Catalogs.Scripts
 {
-    [CreateAssetMenu(fileName = "Weapon Entry", menuName = "ScriptableObjects/Entries/Create Weapon Entry", order = 1)]
+    [CreateAssetMenu(fileName = "WeaponEntry", menuName = "ScriptableObjects/Entries/Create Weapon Entry", order = 1)]
     public class WeaponCatalogEntry : CatalogEntryId
     {
-        public float Damage = 1;
+        public AssetReference WeaponGameplayView;
+        
+        public AssetReference ProjectileGameplayView;
 
-        public bool AutoAim = true;
+        public AssetReferenceAtlasedSprite WeaponIcon;
 
-        public float Range = 1;
-
-        public float TravelSpeed = 1;
-
-        public GameObject CharacterWeapon;
-
-        public GameObject Projectile;
+        public WeaponConfig WeaponConfig;
     }
 }

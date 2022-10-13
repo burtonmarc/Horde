@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Controllers.States.GameplayState;
 using Data;
 using Game.States.MainMenu;
@@ -7,7 +8,7 @@ using Views.States.MainMenuState;
 
 namespace Controllers.States.MainMenuState
 {
-    public class MainMenuStateController : BaseStateController<MainMenuUiView, MainMenuWorldView>, IStateBase
+    public class MainMenuStateController : BaseStateController<MainMenuUiView, MainMenuWorldView>, IStateBase, IPreloadable
     {
         protected override string StateId { get; }
 
@@ -40,21 +41,32 @@ namespace Controllers.States.MainMenuState
             
         }
 
-        public void OnDestroy()
+        public override void OnDestroy()
         {
-            
+            base.OnDestroy();
         }
         
         private void LevelUp()
         {
             userModel.level++;
             UiView.SetUserLevel(userModel.level);
-            Context.SaveSystem.SaveUserData(userModel);
+            Context.SaveSystem.SaveModel(userModel);
         }
 
         private void PresentGameplayState()
         {
             PresentState(new GameplayStateController(Context));
+        }
+
+        public Task Preload()
+        {
+            Preloader = Context.AssetLoaderFactory.CreateLoader(StateId);
+            
+            Preloader.AddReference(Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken").WeaponIcon);
+
+            var task = Preloader.LoadAsync();
+
+            return task;
         }
     }
 }
