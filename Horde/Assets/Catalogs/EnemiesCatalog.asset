@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f627725498b248698b9db7e2e1dcb5d9, type: 3}
-  m_Name: PlayerConfigEntry
+  m_Script: {fileID: 11500000, guid: cc8bc09ce56249849acd8b74361f34f3, type: 3}
+  m_Name: EnemiesCatalog
   m_EditorClassIdentifier: 
-  helthPoints: 5
-  movementSpeed: 1
+  CatalogEntries:
+  - {fileID: 11400000, guid: 95ebd4d21c3154b0b9653da52451854d, type: 2}

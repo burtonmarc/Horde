@@ -62,7 +62,7 @@ namespace Controllers.States.MainMenuState
         {
             Preloader = Context.AssetLoaderFactory.CreateLoader(StateId);
             
-            Preloader.AddReference(Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken").WeaponIcon);
+            Preloader.AddReference(Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken").WeaponConfig);
 
             var task = Preloader.LoadAsync();
 

@@ -1,4 +1,5 @@
 using Catalogs.Scripts;
+using Controllers.States.GameplayState;
 using Controllers.States.StartupState;
 using Data;
 using ScreenMachine;
@@ -25,6 +26,8 @@ namespace Controllers
             var userModel = saveSystem.LoadModel<UserModel>();
             
             var context = new Context(catalogs, assetLoaderFactory, screenMachine, saveSystem, userModel);
+
+            ControllerFactory.Context = context;
             
             screenMachine.PresentState(new StartupStateController(context));
         }

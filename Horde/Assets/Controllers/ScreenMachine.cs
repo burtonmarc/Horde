@@ -108,15 +108,15 @@ namespace Controllers
 
             state.CacheStateAssets(stateAssetsList);
 
-            var worldView = Object.Instantiate(worldViewAsset);
-            var uiView = Object.Instantiate(uiViewAsset);
-
-            state.LinkViews(uiView, worldView);
-
             if (state is IPreloadable preloadable)
             {
                 await preloadable.Preload();
             }
+            
+            var worldView = Object.Instantiate(worldViewAsset);
+            var uiView = Object.Instantiate(uiViewAsset);
+
+            state.LinkViews(uiView, worldView);
 
             state.OnCreate();
 

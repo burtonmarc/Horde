@@ -9,19 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 902802a1bfbf4cc197c85bab874c1afe, type: 3}
-  m_Name: ShurikenEntry
+  m_Script: {fileID: 11500000, guid: 9f91d04c8c7f4e4e97ab18ef3144a427, type: 3}
+  m_Name: EnemyTestEntry
   m_EditorClassIdentifier: 
-  Id: Shuriken
-  WeaponGameplayView:
-    m_AssetGUID: 6c70b16be138a459c963a153dba6746f
+  Id: EnemyTest
+  EnemyGameplayView:
+    m_AssetGUID: be2bf2fba5e614c08a67a8ef0aeca285
     m_SubObjectName: 
     m_SubObjectType: 
-  ProjectileGameplayView:
-    m_AssetGUID: fb0196ab56721440dbb505d0dedf9d24
-    m_SubObjectName: 
-    m_SubObjectType: 
-  WeaponConfig:
-    m_AssetGUID: e4e50700b25304b6e8d66e9818807d47
+  EnemyConfig:
+    m_AssetGUID: 7af5fe3bed4114442aea01c8f2a99022
     m_SubObjectName: 
     m_SubObjectType: 

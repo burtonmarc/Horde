@@ -67,9 +67,9 @@ namespace Controllers.States.GameplayState.PlayerWeapons
 
         private void ShootShuriken()
         {
-            var shurikenView = Context.Preloader.GetAsset<ShurikenView>(Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken").ProjectileGameplayView);
-            var shurikenBulletDate = new ShurikenBulletArgs {movementDirection = PlayerController.ViewDirection, speed = 2.5f};
-            var shurikenBulletController = ControllerFactory.CreateController<ShurikenBulletController>(shurikenView, null, shurikenBulletDate);
+            var shurikenView = Context.Preloader.GetAsset<ShurikenBulletView>(Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken").ProjectileGameplayView);
+            var shurikenBulletArgs = new ShurikenBulletArgs {movementDirection = PlayerController.ViewDirection, speed = 2.5f};
+            var shurikenBulletController = ControllerFactory.CreateController<ShurikenBulletController>(shurikenView, null, shurikenBulletArgs);
             shurikenBulletControllers.AddController(shurikenBulletController);
             var effectsLayer = Context.GetGameplayLayer(GameplayLayer.Effects);
             shurikenBulletController.ShurikenBulletView.Activate(effectsLayer, PlayerController.PlayerPosition);

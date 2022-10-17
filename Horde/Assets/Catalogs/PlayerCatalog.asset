@@ -21,4 +21,4 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
   Health: 50
-  MovementSpeed: 1
+  MovementSpeed: 2

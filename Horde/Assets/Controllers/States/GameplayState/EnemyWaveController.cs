@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Catalogs.Scripts;
 using Controllers.States.GameplayState.GameplayExtensions;
 using Data;
 using UnityEngine;
@@ -45,10 +46,12 @@ namespace Controllers.States.GameplayState
 
         public void CreateEnemyAtRandomPosition()
         {
-            add enemies catalog and test
-            //var enemyView = Context.Preloader.GetAsset<EnemyView>(Context.CatalogsHolder.EnemiesCatalog)
-            //var enemyController = ControllerFactory.CreateController<EnemyController>();
-            //waveEntities.AddController(enemyController);
+            var enemyEntry = Context.CatalogsHolder.EnemiesCatalog.GetCatalogEntry("EnemyTest");
+            var enemyView = Context.Preloader.GetAsset<EnemyView>(enemyEntry.EnemyGameplayView);
+            var enemyConfig = Context.Preloader.GetAsset<EnemyConfig>(enemyEntry.EnemyConfig);
+            var enemyModel = new EnemyModel(enemyConfig);
+            var enemyController = ControllerFactory.CreateController<EnemyController>(enemyView, enemyModel);
+            waveEntities.AddController(enemyController);
 
             var aspectRatio = (float) Screen.height / Screen.width;
             var orthographicSize = Camera.main.orthographicSize;
@@ -57,7 +60,7 @@ namespace Controllers.States.GameplayState
             var randomPosition = new Vector3(randomX, randomY, 0);
 
             var enemyLayer = Context.GetGameplayLayer(GameplayLayer.Enemies);
-            //enemyController.EnemyView.Activate(enemyLayer, randomPosition);
+            enemyController.EnemyView.Activate(enemyLayer, randomPosition);
         }
 
         public void RemoveRandomEnemy()

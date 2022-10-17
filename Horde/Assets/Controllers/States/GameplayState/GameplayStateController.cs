@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Catalogs.Scripts;
 using Controllers.States.GameplayState.GameplayExtensions;
 using Controllers.States.GameplayState.PlayerWeapons;
 using Controllers.States.MainMenuState;
 using Data;
 using ScreenMachine;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Views.States.GameplayState;
 
 namespace Controllers.States.GameplayState
@@ -106,9 +108,11 @@ namespace Controllers.States.GameplayState
             var enemiesLayer = Context.GetGameplayLayer(GameplayLayer.Enemies);
             playerController.PlayerView.Activate(enemiesLayer, Vector3.zero);
 
+            ControllerFactory.PlayerController = playerController;
+
             var shurikenEntry = Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken");
             var shurikenView = Preloader.GetAsset<ShurikenView>(shurikenEntry.WeaponGameplayView);
-            var shurikenModel = new ShurikenModel(shurikenEntry.WeaponConfig);
+            var shurikenModel = new ShurikenModel(Preloader.GetAsset<WeaponConfig>(shurikenEntry.WeaponConfig));
             var shurikenController = ControllerFactory.CreateController<ShurikenController>(shurikenView, shurikenModel);
             gameplayControllers.AddController(shurikenController);
             shurikenController.ShurikenView.Activate(playerController.PlayerView.WeaponAnchor, Vector3.zero);
@@ -145,7 +149,27 @@ namespace Controllers.States.GameplayState
 
         public Task Preload()
         {
-            return null;
+            Preloader = Context.AssetLoaderFactory.CreateLoader(StateId);
+            Context.Preloader = Preloader;
+
+            Preloader.AddReferences(new List<AssetReference>
+            {
+                // Player
+                Context.CatalogsHolder.PlayerCatalog.GameplayView,
+                
+                // Weapons
+                Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken").WeaponGameplayView,
+                Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken").ProjectileGameplayView,
+                Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken").WeaponConfig,
+                
+                // Enemies
+                Context.CatalogsHolder.EnemiesCatalog.GetCatalogEntry("EnemyTest").EnemyGameplayView,
+                Context.CatalogsHolder.EnemiesCatalog.GetCatalogEntry("EnemyTest").EnemyConfig,
+            });
+
+            var task = Preloader.LoadAsync();
+
+            return task;
         }
     }
 }

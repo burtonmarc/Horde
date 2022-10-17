@@ -10,7 +10,7 @@ namespace Data
         {
             var formatter = new BinaryFormatter();
 
-            var path = Application.persistentDataPath + typeof(T);
+            var path = Application.persistentDataPath + "/" + typeof(T).Name;
             var stream = new FileStream(path, FileMode.Create);
             
             formatter.Serialize(stream, userModel);
@@ -19,16 +19,16 @@ namespace Data
 
         public T LoadModel<T>() where T : class, new()
         {
-            var path = Application.persistentDataPath + typeof(T);
+            var path = Application.persistentDataPath + "/" + typeof(T).Name;
             if (File.Exists(path))
             {
                 var formatter = new BinaryFormatter();
                 var stream = new FileStream(path, FileMode.Open);
 
-                var userModel = formatter.Deserialize(stream) as T;
+                var model = formatter.Deserialize(stream) as T;
                 stream.Close();
 
-                return userModel;
+                return model;
             }
             
             return new T();

@@ -1,7 +1,9 @@
+using System;
 using Catalogs.Scripts;
 
 namespace Data
 {
+    [Serializable]
     public class ShurikenModel : IModel
     {
         public float BaseDamage;

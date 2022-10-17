@@ -17,20 +17,14 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: faf626d222eb7435a92d57381c3b796d
   m_SerializeEntries:
-  - m_GUID: 6c70b16be138a459c963a153dba6746f
-    m_Address: Assets/Views/States/GameplayState/Prefabs/ShrurikenView.prefab
+  - m_GUID: e4e50700b25304b6e8d66e9818807d47
+    m_Address: Assets/Catalogs/WeaponsEntries/ShurikenConfig.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
-  - m_GUID: fb0196ab56721440dbb505d0dedf9d24
-    m_Address: Assets/Views/States/GameplayState/Prefabs/ShurikenProjectileView.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
-  - m_GUID: 92f0d32e945e6466eb54b5658988803b
-    m_Address: Assets/Views/States/GameplayState/Prefabs/PlayerView.prefab
+  - m_GUID: 7af5fe3bed4114442aea01c8f2a99022
+    m_Address: Assets/Catalogs/EnemiesEntries/EnemyTestConfig.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}

@@ -10,8 +10,6 @@ namespace Catalogs.Scripts
         
         public AssetReference ProjectileGameplayView;
 
-        public AssetReferenceAtlasedSprite WeaponIcon;
-
-        public WeaponConfig WeaponConfig;
+        public AssetReference WeaponConfig;
     }
 }

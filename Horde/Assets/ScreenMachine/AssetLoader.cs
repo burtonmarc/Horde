@@ -24,6 +24,19 @@ namespace ScreenMachine
             assetsToLoad.Add(reference);
         }
 
+        public void AddReferences(IEnumerable<AssetReference> references)
+        {
+            foreach (var reference in references)
+            {
+                if (assetsToLoad.Contains(reference) || assetsLoaded.ContainsKey(reference))
+                {
+                    return;
+                }
+
+                assetsToLoad.Add(reference);
+            }
+        }
+
         public T GetAsset<T>(AssetReference reference) where  T : Object
         {
             var asset = assetsLoaded[reference].Result;
@@ -35,6 +48,11 @@ namespace ScreenMachine
 
             if (asset is GameObject go)
             {
+                go.TryGetComponent(typeof(T), out var component);
+                if (component == null)
+                {
+                    throw new NullReferenceException($"Couldn't find type of {typeof(T).FullName} in {reference}");
+                }
                 return go.GetComponent<T>();
             }
             
