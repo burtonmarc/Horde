@@ -9,7 +9,7 @@ namespace Controllers.States.GameplayState
     {
         private readonly Dictionary<Type, Stack<ControllerViewPair>> controllersPool;
         
-        public PoolController(Context context) : base(context)
+        public PoolController() : base(null)
         {
             controllersPool = new Dictionary<Type, Stack<ControllerViewPair>>();
         }
@@ -23,15 +23,15 @@ namespace Controllers.States.GameplayState
             return controllerViewPairStackOfTypeT.Pop();
         }
 
-        public void StoreControllerViewPair<T>(ControllerViewPair controllerViewPair)
+        public void StoreControllerViewPair(Type controllerType, ControllerViewPair controllerViewPair)
         {
             controllerViewPair.GameplayView.gameObject.SetActive(false);
             
-            if (!controllersPool.TryGetValue(typeof(T), out var controllerViewPairStackOfTypeT))
+            if (!controllersPool.TryGetValue(controllerType, out var controllerViewPairStackOfTypeT))
             {
                 var stack = new Stack<ControllerViewPair>();
                 stack.Push(controllerViewPair);
-                controllersPool.Add(typeof(T), stack);
+                controllersPool.Add(controllerType, stack);
             }
             else
             {

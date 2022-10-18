@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Catalogs.Scripts;
-using Controllers.States.GameplayState.GameplayExtensions;
 using Controllers.States.GameplayState.PlayerWeapons;
 using Controllers.States.MainMenuState;
 using Data;
@@ -16,42 +15,63 @@ namespace Controllers.States.GameplayState
     {
         protected override string StateId { get; }
 
-        private readonly List<GameplayControllerBase> gameplayControllers;
-
         private readonly PoolController poolController;
 
         private readonly EnemyWaveController enemyWaveController;
 
         private PlayerController playerController;
 
+        private List<GameplayControllerBase> generalBehaviourControllers;
+
+        private EntitiesCollisionController entitiesCollisionController;
+
         public GameplayStateController(Context context) : base(context)
         {
             StateId = "Gameplay";
-            gameplayControllers = new List<GameplayControllerBase>(64);
+            
+            generalBehaviourControllers = new List<GameplayControllerBase>(8);
+            
+            entitiesCollisionController = new EntitiesCollisionController(context);
             
             enemyWaveController = new EnemyWaveController(context);
-            gameplayControllers.AddController(enemyWaveController);
             
-            poolController = new PoolController(context);
-            context.ControllersPool = poolController;
+            poolController = new PoolController();
+
+            context.PoolController = poolController;
+
             ControllerFactory.PoolController = poolController;
-            gameplayControllers.AddController(poolController);
         }
 
         public void OnCreate()
         {
             UiView.ResetUiView();
             WorldView.Init();
+            
+            generalBehaviourControllers.Add(poolController);
 
             UiView.MainMenuClicked += PresentMainMenuState;
-            
+
             InitPlayer();
 
             InjectPlayerController();
+            
+            playerController.AddPlayerWeapon();
+        }
+        
+        private void InitPlayer()
+        {
+            var playerView = Preloader.GetAsset<PlayerView>(Context.CatalogsHolder.PlayerCatalog.GameplayView);
+            var playerModel = Context.SaveSystem.LoadModel<PlayerModel>();
+            playerController = ControllerFactory.CreateController<PlayerController>(playerView, playerModel);
+            var enemiesLayer = Context.GetGameplayLayer(GameplayLayer.Enemies);
+            playerController.PlayerView.Activate(enemiesLayer, Vector3.zero);
         }
 
         private void InjectPlayerController()
-        {
+        {    
+            ControllerFactory.PlayerController = playerController;
+            
+            entitiesCollisionController.PlayerController = playerController;
             enemyWaveController.PlayerController = playerController;
             poolController.PlayerController = playerController;
         }
@@ -60,10 +80,14 @@ namespace Controllers.States.GameplayState
         {
             base.OnUpdate();
 
-            foreach (var gameplayController in gameplayControllers)
+            foreach (var generalBehaviourController in generalBehaviourControllers)
             {
-                gameplayController.OnUpdate();
+                generalBehaviourController.OnUpdate();
             }
+
+            playerController.OnUpdate();
+
+            entitiesCollisionController.OnUpdate();
 
             Cheats();
         }
@@ -71,11 +95,25 @@ namespace Controllers.States.GameplayState
         public override void OnFixedUpdate()
         {
             base.OnFixedUpdate();
-
-            foreach (var gameplayController in gameplayControllers)
+            
+            foreach (var generalBehaviourController in generalBehaviourControllers)
             {
-                gameplayController.OnFixedUpdate();
+                generalBehaviourController.OnFixedUpdate();
             }
+            
+            entitiesCollisionController.OnFixedUpdate();
+        }
+
+        public override void OnLateUpdate()
+        {
+            base.OnLateUpdate();
+            
+            foreach (var generalBehaviourController in generalBehaviourControllers)
+            {
+                generalBehaviourController.OnLateUpdate();
+            }
+            
+            entitiesCollisionController.OnLateUpdate();
         }
 
         public void OnSendToBack()
@@ -92,30 +130,12 @@ namespace Controllers.States.GameplayState
         {
             base.OnDestroy();
             
-            for (var index = gameplayControllers.Count - 1; index >= 0; index--)
+            foreach (var generalBehaviourController in generalBehaviourControllers)
             {
-                var gameplayController = gameplayControllers[index];
-                gameplayController.OnDestroy();
+                generalBehaviourController.OnDestroy();
             }
-        }
-
-        private void InitPlayer()
-        {
-            var playerView = Preloader.GetAsset<PlayerView>(Context.CatalogsHolder.PlayerCatalog.GameplayView);
-            var playerModel = Context.SaveSystem.LoadModel<PlayerModel>();
-            playerController = ControllerFactory.CreateController<PlayerController>(playerView, playerModel);
-            gameplayControllers.AddController(playerController);
-            var enemiesLayer = Context.GetGameplayLayer(GameplayLayer.Enemies);
-            playerController.PlayerView.Activate(enemiesLayer, Vector3.zero);
-
-            ControllerFactory.PlayerController = playerController;
-
-            var shurikenEntry = Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken");
-            var shurikenView = Preloader.GetAsset<ShurikenView>(shurikenEntry.WeaponGameplayView);
-            var shurikenModel = new ShurikenModel(Preloader.GetAsset<WeaponConfig>(shurikenEntry.WeaponConfig));
-            var shurikenController = ControllerFactory.CreateController<ShurikenController>(shurikenView, shurikenModel);
-            gameplayControllers.AddController(shurikenController);
-            shurikenController.ShurikenView.Activate(playerController.PlayerView.WeaponAnchor, Vector3.zero);
+            
+            entitiesCollisionController.OnDestroy();
         }
 
         private void PresentMainMenuState()
@@ -134,11 +154,11 @@ namespace Controllers.States.GameplayState
             }
             else if (Input.GetKeyDown(KeyCode.X))
             {
-                enemyWaveController.RemoveRandomEnemy();
+                entitiesCollisionController.RemoveRandomEnemy();
             }
             else if (Input.GetKeyDown(KeyCode.C))
             {
-                enemyWaveController.RemoveAllEnemies();
+                entitiesCollisionController.RemoveAllEnemies();
             }
         }
 

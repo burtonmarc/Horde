@@ -16,6 +16,7 @@ namespace ScreenMachine
         void OnBringToFront();
         void OnUpdate();
         void OnFixedUpdate();
+        void OnLateUpdate();
         void OnDestroy();
         void DestroyViews();
         void EnableRaycasts();

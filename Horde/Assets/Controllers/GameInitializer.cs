@@ -1,3 +1,4 @@
+using System;
 using Catalogs.Scripts;
 using Controllers.States.GameplayState;
 using Controllers.States.StartupState;
@@ -24,7 +25,7 @@ namespace Controllers
             var saveSystem = new SaveSystem();
 
             var userModel = saveSystem.LoadModel<UserModel>();
-            
+
             var context = new Context(catalogs, assetLoaderFactory, screenMachine, saveSystem, userModel);
 
             ControllerFactory.Context = context;
@@ -40,6 +41,11 @@ namespace Controllers
         private void FixedUpdate()
         {
             screenMachine.OnFixedUpdate();
+        }
+
+        private void LateUpdate()
+        {
+            screenMachine.OnLateUpdate();
         }
     }
 }

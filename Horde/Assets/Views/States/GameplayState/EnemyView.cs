@@ -14,16 +14,16 @@ namespace Views.States.GameplayState
             base.Activate(parent, spawnPosition);
         }
         
-        public void OnUpdate()
+        public void OnUpdate(Vector3 playerPosition, float movementSpeed)
         {
             
         }
         
-        public void OnFixedUpdate(Vector3 playerPosition)
+        public void OnFixedUpdate(Vector3 playerPosition, float movementSpeed)
         {
             var direction = playerPosition - transform.position;
             direction.Normalize();
-            transform.Translate(direction * Time.fixedDeltaTime);
+            transform.Translate(movementSpeed * Time.fixedDeltaTime * direction);
         }
     }
 }

@@ -38,9 +38,19 @@ namespace Controllers.States.GameplayState.PlayerWeapons
 
         public override void OnUpdate()
         {
-            ShurikenBulletView.OnUpdate(movementDirection * speed);
+            if (MarkedToDestroy || !Alive) return;
+            
+            if (ShurikenBulletView.transform.position.IsOutsideOfBounds())
+            {
+                OnDestroy();
+            }
         }
 
+        public override void OnFixedUpdate()
+        {
+            ShurikenBulletView.OnUpdate(movementDirection * speed);
+        }
+        
         public override void OnDestroy()
         {
             base.OnDestroy();

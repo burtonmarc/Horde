@@ -18,10 +18,9 @@ namespace Data
 
         public readonly UserModel UserModel;
 
-        public IControllersPool ControllersPool { get; set; }
-        
-        public Context(
-            CatalogsHolder catalogsHolder, 
+        public IControllersPool PoolController;
+
+        public Context(CatalogsHolder catalogsHolder,
             AssetLoaderFactory assetLoaderFactory,
             IScreenMachine screenMachine,
             SaveSystem saveSystem,

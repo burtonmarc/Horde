@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Data;
-using UnityEngine;
 using Views.States.GameplayState;
 
 namespace Controllers.States.GameplayState
@@ -21,6 +20,14 @@ namespace Controllers.States.GameplayState
         // Used to auto-eliminate yourself from it on the OnDestroy method
         public List<GameplayControllerBase> UpdateListReference;
         
+        public static Action<GameplayControllerBase> AddPickable;
+        public static Action<GameplayControllerBase> AddWeapon;
+        public static Action<GameplayControllerBase> AddEnemy;
+
+        public bool MarkedToDestroy;
+        public bool Alive;
+        
+        
         protected GameplayControllerBase(Context context, PlayerController playerController)
         {
             Context = context;
@@ -37,32 +44,51 @@ namespace Controllers.States.GameplayState
         public virtual void Init(GameplayViewBase gameplayView, IModel model, object args)
         {
             viewBase = gameplayView;
+            MarkedToDestroy = false;
+            Alive = true;
         }
 
         // Used for every time the controller is pooled, so no need to add the view and the config
         public virtual void Pool(object args)
         {
-            
+            MarkedToDestroy = false;
+            Alive = true;
         }
         
         public abstract void OnUpdate();
 
         public virtual void OnFixedUpdate() { }
 
+        public virtual void OnLateUpdate()
+        {
+            if (MarkedToDestroy)
+            {
+                MarkedToDestroy = false;
+                Alive = false;
+                InternalDestroy();
+            }
+        }
+
         public virtual void OnDestroy()
+        {
+            MarkedToDestroy = true;
+        }
+
+        private void InternalDestroy()
         {
             if (viewBase != null)
             {
                 PoolThisControllerView();
             }
-            UpdateListReference.Remove(this);
+            UpdateListReference?.Remove(this);
         }
 
         private void PoolThisControllerView()
         {
-            var pool = Context.ControllersPool as PoolController;
             var controllerViewPair = new ControllerViewPair(this, viewBase);
-            pool?.StoreControllerViewPair<EnemyController>(controllerViewPair);
+            var poolController = Context.PoolController as PoolController;
+            var type = GetType().BaseType;
+            poolController?.StoreControllerViewPair(this.GetType(), controllerViewPair);
         }
     }
 }

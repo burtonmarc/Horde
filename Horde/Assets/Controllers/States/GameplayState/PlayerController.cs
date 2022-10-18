@@ -1,4 +1,5 @@
 using Catalogs.Scripts;
+using Controllers.States.GameplayState.PlayerWeapons;
 using Data;
 using UnityEngine;
 using Views.States.GameplayState;
@@ -13,6 +14,10 @@ namespace Controllers.States.GameplayState
 
         public Vector3 ViewDirection = Vector3.up;
 
+        public EnemyController closestEnemy;
+
+        public Vector3 closestEnemyDirection;
+
         private PlayerModel playerModel;
 
         public PlayerController(Context context, PlayerController playerController) : base(context, playerController)
@@ -25,17 +30,29 @@ namespace Controllers.States.GameplayState
             base.Init(gameplayView, model, args);
             PlayerView = gameplayView as PlayerView;
             playerModel = model as PlayerModel;
-        }
 
+            //AddPlayerWeapon();
+        }
+        
         public override void Pool(object args)
         {
             base.Pool(args);
         }
 
+        public void AddPlayerWeapon()
+        {
+            var shurikenEntry = Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken");
+            var shurikenView = Context.Preloader.GetAsset<ShurikenView>(shurikenEntry.WeaponGameplayView);
+            var shurikenModel = new ShurikenModel(Context.Preloader.GetAsset<WeaponConfig>(shurikenEntry.WeaponConfig));
+            var shurikenController = ControllerFactory.CreateController<ShurikenController>(shurikenView, shurikenModel);
+            AddWeapon(shurikenController);
+            shurikenController.ShurikenView.Activate(PlayerView.WeaponAnchor, Vector3.zero);
+        }
+
         public override void OnUpdate()
         {
             // TODO: Move to input class
-            GetInput();
+            MovePlayer();
             
             PlayerView.OnUpdate();
         }
@@ -44,8 +61,26 @@ namespace Controllers.States.GameplayState
         {
             base.OnDestroy();
         }
+        
+        public void SetClosestEnemyIfPossible(EnemyController enemyController, Vector3 enemyDirection)
+        {
+            if (closestEnemy != null &&
+                closestEnemy.isAlive &&
+                closestEnemy.QuadraticDistanceToPlayer < enemyController.QuadraticDistanceToPlayer)
+            {
+                return;
+            }
 
-        private void GetInput()
+            closestEnemy = enemyController;
+            closestEnemyDirection = enemyDirection;
+        }
+
+        public bool HasClosestEnemy()
+        {
+            return closestEnemy != null && closestEnemy.isAlive;
+        }
+
+        private void MovePlayer()
         {
             var movementDirection = Vector2.zero;
 
@@ -75,6 +110,5 @@ namespace Controllers.States.GameplayState
 
             PlayerView.Move(movementDirection * playerModel.MovementSpeed);
         }
-        
     }
 }

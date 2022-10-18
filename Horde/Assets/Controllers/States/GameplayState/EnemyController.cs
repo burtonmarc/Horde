@@ -9,8 +9,12 @@ namespace Controllers.States.GameplayState
     {
         public EnemyView EnemyView;
 
+        public float QuadraticDistanceToPlayer;
+
+        public bool isAlive;
+
         private EnemyModel enemyModel;
-        
+
         public EnemyController(Context context, PlayerController playerController) : base(context, playerController)
         {
             
@@ -25,7 +29,7 @@ namespace Controllers.States.GameplayState
         
         public void Activate()
         {
-            
+            isAlive = true;
         }
         
         public override void OnUpdate()
@@ -35,12 +39,17 @@ namespace Controllers.States.GameplayState
         
         public override void OnFixedUpdate()
         {
-            EnemyView.OnFixedUpdate(PlayerController.PlayerPosition);
+            var enemyDirection = PlayerController.PlayerPosition - EnemyView.transform.position;
+            QuadraticDistanceToPlayer = enemyDirection.sqrMagnitude;
+            EnemyView.OnFixedUpdate(PlayerController.PlayerPosition, enemyModel.MovementSpeed);
+            PlayerController.SetClosestEnemyIfPossible(this, -enemyDirection.normalized);
         }
 
         public override void OnDestroy()
         {
             base.OnDestroy();
+
+            isAlive = false;
         }
     }
 }

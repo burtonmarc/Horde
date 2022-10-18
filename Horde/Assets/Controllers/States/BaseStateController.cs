@@ -59,6 +59,8 @@ namespace Controllers.States
             UiView.OnFixedUpdate();
         }
 
+        public virtual void OnLateUpdate() { }
+
         public void DisableRaycasts() {
             UiView.DisableRaycast();
             //WorldView.DisableRaycast();
@@ -80,8 +82,8 @@ namespace Controllers.States
         
         public T GetStateAsset<T>() where T : ScriptableObject {
             foreach(var stateAsset in StateAssets) {
-                if(stateAsset is T) {
-                    return stateAsset as T;
+                if(stateAsset is T asset) {
+                    return asset;
                 }
             }
 

@@ -65,7 +65,7 @@ namespace Controllers
         
         public void OnFixedUpdate() {
             if(screenStack.Count == 0) {
-                throw new NotSupportedException("Trying to call OnUpdate on the screenstack but it's empty!");
+                throw new NotSupportedException("Trying to call OnFixedUpdate on the screenstack but it's empty!");
             }
 
             if (isLoading) {
@@ -74,6 +74,20 @@ namespace Controllers
 
             var currentState = screenStack.Peek();
             currentState.OnFixedUpdate();
+        }
+
+        public void OnLateUpdate()
+        {
+            if(screenStack.Count == 0) {
+                throw new NotSupportedException("Trying to call OnLateUpdate on the screenstack but it's empty!");
+            }
+
+            if (isLoading) {
+                return;
+            }
+
+            var currentState = screenStack.Peek();
+            currentState.OnLateUpdate();
         }
 
         private void PushStateInternal(IStateBase state) {
