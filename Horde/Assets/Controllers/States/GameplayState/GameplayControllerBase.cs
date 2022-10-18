@@ -48,13 +48,6 @@ namespace Controllers.States.GameplayState
             Alive = true;
         }
 
-        // Used for every time the controller is pooled, so no need to add the view and the config
-        public virtual void Pool(object args)
-        {
-            MarkedToDestroy = false;
-            Alive = true;
-        }
-        
         public abstract void OnUpdate();
 
         public virtual void OnFixedUpdate() { }

@@ -45,7 +45,8 @@ SpriteAtlas:
     packables:
     - {fileID: 102900000, guid: cec05de769474bc42bad20edd3751030, type: 3}
     - {fileID: 2800000, guid: 80232169b6c8a4da88026ccc65558a49, type: 3}
-    totalSpriteSurfaceArea: 167936
+    - {fileID: 102900000, guid: 68c2a1ebaf3434915a8810c33e55f18b, type: 3}
+    totalSpriteSurfaceArea: 561152
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -53,12 +54,15 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: f9a60b90a6c0d6a4f86694a503171704, type: 3}
   - {fileID: 21300000, guid: d280dad0830093142b2013dcfee178a7, type: 3}
+  - {fileID: 21300000, guid: 7fda68511996d46ffbb3db62ca57cff1, type: 3}
   - {fileID: 21300000, guid: 8d12af816276c0e48a55b77131695a7e, type: 3}
   - {fileID: 21300000, guid: a4ec39b1a4fcbee4daa01335aec8ef31, type: 3}
+  - {fileID: 21300000, guid: 5d028f427664e4ed5802ab1760175219, type: 3}
   - {fileID: 21300000, guid: 625661522ee466043a902f71d9fc2f00, type: 3}
   - {fileID: 21300000, guid: 8f79f1523e40c5e4ca39009bd1678bb0, type: 3}
   - {fileID: 21300000, guid: f37ec6b2772b46c4688e5082489f0d4b, type: 3}
   - {fileID: 21300000, guid: 8cfe2b134042722439e98fea88d5e98f, type: 3}
+  - {fileID: 21300000, guid: ed02a1a3f24ce4d4ebd7f2776226a4c0, type: 3}
   - {fileID: 21300000, guid: 0bcc33c31d9fbbe46884d6d2a9af9f3a, type: 3}
   - {fileID: 21300000, guid: 90091714e5c4fbe4f8cec8aa7da7869b, type: 3}
   - {fileID: 21300000, guid: d5353d44d082e9048bf757667d3cecab, type: 3}
@@ -76,6 +80,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: b62415e6f267a5a40a5031a36b39938b, type: 3}
   - {fileID: 21300000, guid: 000a4aa702ce2704f97ce3b87c562868, type: 3}
   - {fileID: 21300000, guid: d4ae1438553220b46926edcb4692f03d, type: 3}
+  - {fileID: 21300000, guid: 56f00f98a0e544b15b915d88fc8bc033, type: 3}
   - {fileID: 21300000, guid: 6ed1e2b8ed21d1f4bb26a2be4662fb84, type: 3}
   - {fileID: 21300000, guid: 80232169b6c8a4da88026ccc65558a49, type: 3}
   - {fileID: 21300000, guid: 463e288965617e74f9ee2bf46d98d1e4, type: 3}
@@ -84,23 +89,28 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d74318faccd3cfd4792a285e705fc5c5, type: 3}
   - {fileID: 21300000, guid: 551cb54b2be67ba479d96244192ce9f2, type: 3}
   - {fileID: 21300000, guid: 1d98195b762487443b91f80c6b3dce0c, type: 3}
+  - {fileID: 21300000, guid: 487381bbe34214364951078a29ee10b8, type: 3}
   - {fileID: 21300000, guid: 55f0cfdbe2befee40beec14a5eb18fbc, type: 3}
   - {fileID: 21300000, guid: 3408ca7ca5a2e4e43ad819170cdff141, type: 3}
   - {fileID: 21300000, guid: 75dcab0e768764b4e8208cbdcd504098, type: 3}
   - {fileID: 21300000, guid: 36301e2e5c34b524fbd0d2c8ac6eb76a, type: 3}
   - {fileID: 21300000, guid: b4bd359efc2ea1e4d8398e83ff36173e, type: 3}
+  - {fileID: 21300000, guid: 8cbf18ee6d24d437a8d2fa5146f57d82, type: 3}
   - {fileID: 21300000, guid: f6f2d4df13f509b448bc75a435836143, type: 3}
   - {fileID: 21300000, guid: 6eee14efc86b92448b928071dded0809, type: 3}
   - {fileID: 21300000, guid: b46b12ff290649c4aa428bce9c66cfbe, type: 3}
   m_PackedSpriteNamesToIndex:
   - ooze-blue
   - ooze-green
+  - Crossbow
   - spider-blue
   - slime-black
+  - Shotgun
   - boneworm-black
   - wolf-white
   - cerberus-black
   - scorpion-blue
+  - shuriken
   - cerberus-green
   - spider-green
   - slime-blue
@@ -118,6 +128,7 @@ SpriteAtlas:
   - wolf-blue
   - rat-white
   - spider-black
+  - Axe
   - boneworm-blue
   - Archangel
   - boneworm-green
@@ -126,11 +137,13 @@ SpriteAtlas:
   - ooze-red
   - worm-black
   - skull-red
+  - Pistol
   - ooze-black
   - scorpion-white
   - scorpion-black
   - worm-white
   - skull-violet
+  - Kunai
   - boneworm-white
   - scorpion-green
   - rat-black

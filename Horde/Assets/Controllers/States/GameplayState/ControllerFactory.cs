@@ -26,7 +26,7 @@ namespace Controllers.States.GameplayState
                 var controller = controllerViewPair.GameplayController;
                 var view = controllerViewPair.GameplayView;
                 view.gameObject.SetActive(true);
-                controller.Pool(args);
+                controller.Init(view, model, args);
                 view.Init();
                 return controller as T;
             }

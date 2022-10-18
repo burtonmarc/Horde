@@ -34,11 +34,6 @@ namespace Controllers.States.GameplayState
             //AddPlayerWeapon();
         }
         
-        public override void Pool(object args)
-        {
-            base.Pool(args);
-        }
-
         public void AddPlayerWeapon()
         {
             var shurikenEntry = Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken");
@@ -64,6 +59,11 @@ namespace Controllers.States.GameplayState
         
         public void SetClosestEnemyIfPossible(EnemyController enemyController, Vector3 enemyDirection)
         {
+            if (closestEnemy == enemyController)
+            {
+                closestEnemyDirection = enemyDirection;
+            }
+            
             if (closestEnemy != null &&
                 closestEnemy.isAlive &&
                 closestEnemy.QuadraticDistanceToPlayer < enemyController.QuadraticDistanceToPlayer)
