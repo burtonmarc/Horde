@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d9d8672f1a4490822ce42af0762ddf, type: 3}
   m_Name: ShurikenConfig
   m_EditorClassIdentifier: 
+  WeaponIcon: {fileID: 21300000, guid: ed02a1a3f24ce4d4ebd7f2776226a4c0, type: 3}
   BaseDamage: 1
-  HitSpeed: 0.5
+  HitSpeed: 0.25
   AutoAim: 1

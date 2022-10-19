@@ -30,8 +30,6 @@ namespace Controllers.States.GameplayState
             base.Init(gameplayView, model, args);
             PlayerView = gameplayView as PlayerView;
             playerModel = model as PlayerModel;
-
-            //AddPlayerWeapon();
         }
         
         public void AddPlayerWeapon()
@@ -40,7 +38,8 @@ namespace Controllers.States.GameplayState
             var shurikenView = Context.Preloader.GetAsset<ShurikenView>(shurikenEntry.WeaponGameplayView);
             var shurikenModel = new ShurikenModel(Context.Preloader.GetAsset<WeaponConfig>(shurikenEntry.WeaponConfig));
             var shurikenController = ControllerFactory.CreateController<ShurikenController>(shurikenView, shurikenModel);
-            AddWeapon(shurikenController);
+            var entityArgs = new EntityArgs {EntityType = EntityType.Weapon, Entity = shurikenController};
+            OnGameplayEvent(GameplayEvent.AddEntity, entityArgs);
             shurikenController.ShurikenView.Activate(PlayerView.WeaponAnchor, Vector3.zero);
         }
 

@@ -23,7 +23,7 @@ namespace Controllers.States.GameplayState
 
         private List<GameplayControllerBase> generalBehaviourControllers;
 
-        private EntitiesCollisionController entitiesCollisionController;
+        private EntitiesContainerController _entitiesContainerController;
 
         public GameplayStateController(Context context) : base(context)
         {
@@ -31,7 +31,7 @@ namespace Controllers.States.GameplayState
             
             generalBehaviourControllers = new List<GameplayControllerBase>(8);
             
-            entitiesCollisionController = new EntitiesCollisionController(context);
+            _entitiesContainerController = new EntitiesContainerController(context);
             
             enemyWaveController = new EnemyWaveController(context);
             
@@ -71,7 +71,7 @@ namespace Controllers.States.GameplayState
         {    
             ControllerFactory.PlayerController = playerController;
             
-            entitiesCollisionController.PlayerController = playerController;
+            _entitiesContainerController.PlayerController = playerController;
             enemyWaveController.PlayerController = playerController;
             poolController.PlayerController = playerController;
         }
@@ -87,7 +87,7 @@ namespace Controllers.States.GameplayState
 
             playerController.OnUpdate();
 
-            entitiesCollisionController.OnUpdate();
+            _entitiesContainerController.OnUpdate();
 
             Cheats();
         }
@@ -101,19 +101,12 @@ namespace Controllers.States.GameplayState
                 generalBehaviourController.OnFixedUpdate();
             }
             
-            entitiesCollisionController.OnFixedUpdate();
+            _entitiesContainerController.OnFixedUpdate();
         }
 
         public override void OnLateUpdate()
         {
-            base.OnLateUpdate();
-            
-            foreach (var generalBehaviourController in generalBehaviourControllers)
-            {
-                generalBehaviourController.OnLateUpdate();
-            }
-            
-            entitiesCollisionController.OnLateUpdate();
+            _entitiesContainerController.OnLateUpdate();
         }
 
         public void OnSendToBack()
@@ -135,7 +128,7 @@ namespace Controllers.States.GameplayState
                 generalBehaviourController.OnDestroy();
             }
             
-            entitiesCollisionController.OnDestroy();
+            _entitiesContainerController.OnDestroy();
         }
 
         private void PresentMainMenuState()
@@ -154,11 +147,11 @@ namespace Controllers.States.GameplayState
             }
             else if (Input.GetKeyDown(KeyCode.X))
             {
-                entitiesCollisionController.RemoveRandomEnemy();
+                _entitiesContainerController.RemoveRandomEnemy();
             }
             else if (Input.GetKeyDown(KeyCode.C))
             {
-                entitiesCollisionController.RemoveAllEnemies();
+                _entitiesContainerController.RemoveAllEnemies();
             }
         }
 

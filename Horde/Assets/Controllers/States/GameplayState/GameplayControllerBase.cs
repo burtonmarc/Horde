@@ -5,6 +5,12 @@ using Views.States.GameplayState;
 
 namespace Controllers.States.GameplayState
 {
+    public enum GameplayEvent
+    {
+        AddEntity,
+        RemoveEntity,
+    }
+    
     public abstract class GameplayControllerBase
     {
         protected readonly Context Context;
@@ -16,17 +22,12 @@ namespace Controllers.States.GameplayState
         // Used as reference to pool this controller and its view in the PoolThisControllerView method
         private GameplayViewBase viewBase;
 
-        // This is a reference to the list that updates each controller
-        // Used to auto-eliminate yourself from it on the OnDestroy method
-        public List<GameplayControllerBase> UpdateListReference;
+        // Used at the destroy, to know which type of entity it is in the EntitiesContainerController
+        public EntityType EntityType;
         
-        public static Action<GameplayControllerBase> AddPickable;
-        public static Action<GameplayControllerBase> AddWeapon;
-        public static Action<GameplayControllerBase> AddEnemy;
+        public static Action<GameplayEvent, object> OnGameplayEvent;
 
         public bool MarkedToDestroy;
-        public bool Alive;
-        
         
         protected GameplayControllerBase(Context context, PlayerController playerController)
         {
@@ -45,43 +46,39 @@ namespace Controllers.States.GameplayState
         {
             viewBase = gameplayView;
             MarkedToDestroy = false;
-            Alive = true;
         }
 
         public abstract void OnUpdate();
 
         public virtual void OnFixedUpdate() { }
 
-        public virtual void OnLateUpdate()
-        {
-            if (MarkedToDestroy)
-            {
-                MarkedToDestroy = false;
-                Alive = false;
-                InternalDestroy();
-            }
-        }
+        // Only used by the EntitiesContainerController to remove entities at end of frame
+        public virtual void OnLateUpdate() { }
 
         public virtual void OnDestroy()
         {
             MarkedToDestroy = true;
+            OnGameplayEvent(GameplayEvent.RemoveEntity, new EntityArgs
+            {
+                EntityType = EntityType,
+                Entity = this
+            });
         }
 
-        private void InternalDestroy()
+        public void DestroyCompletely()
         {
             if (viewBase != null)
             {
+                EntityType = EntityType.GeneralBehaviour;
                 PoolThisControllerView();
             }
-            UpdateListReference?.Remove(this);
         }
 
         private void PoolThisControllerView()
         {
             var controllerViewPair = new ControllerViewPair(this, viewBase);
             var poolController = Context.PoolController as PoolController;
-            var type = GetType().BaseType;
-            poolController?.StoreControllerViewPair(this.GetType(), controllerViewPair);
+            poolController?.StoreControllerViewPair(GetType(), controllerViewPair);
         }
     }
 }

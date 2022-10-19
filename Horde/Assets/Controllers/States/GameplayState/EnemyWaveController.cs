@@ -37,7 +37,8 @@ namespace Controllers.States.GameplayState
             var enemyModel = new EnemyModel(enemyConfig);
             var enemyController = ControllerFactory.CreateController<EnemyController>(enemyView, enemyModel);
             enemyController.Activate();
-            AddEnemy(enemyController);
+            var entityArgs = new EntityArgs {EntityType = EntityType.Enemy, Entity = enemyController};
+            OnGameplayEvent(GameplayEvent.AddEntity, entityArgs);
             
             var orthographicSize = Camera.main.orthographicSize;
             var randomX = Random.Range(-orthographicSize / GameplayExtensions.aspectRatio, orthographicSize / GameplayExtensions.aspectRatio);

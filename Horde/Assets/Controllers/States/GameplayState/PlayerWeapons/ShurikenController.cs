@@ -64,7 +64,9 @@ namespace Controllers.States.GameplayState.PlayerWeapons
             
             var shurikenBulletController = ControllerFactory.CreateController<ShurikenBulletController>(shurikenView, null, shurikenBulletArgs);
             
-            AddWeapon(shurikenBulletController);
+            var entityArgs = new EntityArgs {EntityType = EntityType.Projectile, Entity = shurikenBulletController};
+
+            OnGameplayEvent(GameplayEvent.AddEntity, entityArgs);
             
             var effectsLayer = Context.GetGameplayLayer(GameplayLayer.Effects);
             shurikenBulletController.ShurikenBulletView.Activate(effectsLayer, PlayerController.PlayerPosition);
