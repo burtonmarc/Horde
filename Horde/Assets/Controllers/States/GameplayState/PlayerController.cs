@@ -16,13 +16,15 @@ namespace Controllers.States.GameplayState
 
         public EnemyController closestEnemy;
 
+        public Vector3 MovementDirection;
+
         public Vector3 closestEnemyDirection;
 
         private PlayerModel playerModel;
 
         public PlayerController(Context context, PlayerController playerController) : base(context, playerController)
         {
-            
+            OnGameplayEvent += OnEvent;
         }
 
         public override void Init(GameplayViewBase gameplayView, IModel model, object args)
@@ -45,15 +47,22 @@ namespace Controllers.States.GameplayState
 
         public override void OnUpdate()
         {
-            // TODO: Move to input class
-            MovePlayer();
-            
+            if (MovementDirection != Vector3.zero)
+            {
+                MovePlayer();
+            }
+
             PlayerView.OnUpdate();
         }
 
         public override void OnDestroy()
         {
             base.OnDestroy();
+        }
+        
+        private void OnEvent(GameplayEvent gameplayEvent, object arg)
+        {
+            
         }
         
         public void SetClosestEnemyIfPossible(EnemyController enemyController, Vector3 enemyDirection)
@@ -81,33 +90,7 @@ namespace Controllers.States.GameplayState
 
         private void MovePlayer()
         {
-            var movementDirection = Vector2.zero;
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                movementDirection += Vector2.left;
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                movementDirection += Vector2.right;
-            }
-            if (Input.GetKey(KeyCode.W))
-            {
-                movementDirection += Vector2.up;
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                movementDirection += Vector2.down;
-            }
-
-            movementDirection.Normalize();
-            
-            if (movementDirection != Vector2.zero)
-            {
-                ViewDirection = movementDirection;
-            }
-
-            PlayerView.Move(movementDirection * playerModel.MovementSpeed);
+            PlayerView.Move(MovementDirection * playerModel.MovementSpeed);
         }
     }
 }

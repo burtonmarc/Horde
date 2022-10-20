@@ -10,6 +10,8 @@ namespace Data
 
         public float HitSpeed;
 
+        public float ProjectileSpeed;
+
         public bool AutoAim;
 
         public ShurikenModel(WeaponConfig weaponConfig)
@@ -17,6 +19,8 @@ namespace Data
             BaseDamage = weaponConfig.BaseDamage;
             
             HitSpeed = weaponConfig.HitSpeed;
+
+            ProjectileSpeed = weaponConfig.ProjectileSpeed;
             
             AutoAim = weaponConfig.AutoAim;
         }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Data;
+using UnityEngine;
 using Views.States.GameplayState;
 
 namespace Controllers.States.GameplayState
@@ -19,15 +20,17 @@ namespace Controllers.States.GameplayState
         // something in relation to the player, so I add it in the base directly
         public PlayerController PlayerController;
 
-        // Used as reference to pool this controller and its view in the PoolThisControllerView method
-        private GameplayViewBase viewBase;
-
         // Used at the destroy, to know which type of entity it is in the EntitiesContainerController
         public EntityType EntityType;
         
         public static Action<GameplayEvent, object> OnGameplayEvent;
 
         public bool MarkedToDestroy;
+
+        public Transform Transform => viewBase.transform;
+        
+        // Used as reference to pool this controller and its view in the PoolThisControllerView method
+        private GameplayViewBase viewBase;
         
         protected GameplayControllerBase(Context context, PlayerController playerController)
         {

@@ -19,6 +19,8 @@ namespace Controllers.States.GameplayState
 
         private readonly EnemyWaveController enemyWaveController;
 
+        private readonly InputController inputController;
+
         private PlayerController playerController;
 
         private List<GameplayControllerBase> generalBehaviourControllers;
@@ -36,6 +38,8 @@ namespace Controllers.States.GameplayState
             enemyWaveController = new EnemyWaveController(context);
             
             poolController = new PoolController();
+            
+            inputController = new InputController(context);
 
             context.PoolController = poolController;
 
@@ -47,7 +51,9 @@ namespace Controllers.States.GameplayState
             UiView.ResetUiView();
             WorldView.Init();
             
+            generalBehaviourControllers.Add(enemyWaveController);
             generalBehaviourControllers.Add(poolController);
+            generalBehaviourControllers.Add(inputController);
 
             UiView.MainMenuClicked += PresentMainMenuState;
 
@@ -74,6 +80,7 @@ namespace Controllers.States.GameplayState
             _entitiesContainerController.PlayerController = playerController;
             enemyWaveController.PlayerController = playerController;
             poolController.PlayerController = playerController;
+            inputController.PlayerController = playerController;
         }
 
         public override void OnUpdate()

@@ -11,6 +11,8 @@ namespace Catalogs.Scripts
 
         public float HitSpeed;
 
+        public float ProjectileSpeed;
+
         public bool AutoAim;
     }
 }

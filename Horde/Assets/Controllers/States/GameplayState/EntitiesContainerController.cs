@@ -123,7 +123,20 @@ namespace Controllers.States.GameplayState
         
         private void CheckEnemyProjectilesCollision(GameplayControllerBase enemy)
         {
-            
+            EntitiesContainer.TryGetValue(EntityType.Projectile, out var projectiles);
+
+            if (projectiles == null) return;
+
+            foreach (var projectile in projectiles)
+            {
+                var distanceVector = projectile.Transform.position - enemy.Transform.position;
+                if (distanceVector.sqrMagnitude < 0.01)
+                {
+                    projectile.OnDestroy();
+                    enemy.OnDestroy();
+                    return;
+                }
+            }
         }
 
         public void RemoveRandomEnemy()
