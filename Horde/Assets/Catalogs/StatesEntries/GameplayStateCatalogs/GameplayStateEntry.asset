@@ -21,4 +21,10 @@ MonoBehaviour:
     m_AssetGUID: c58679bad872c4e70a15733e9a9577d6
     m_SubObjectName: 
     m_SubObjectType: 
-  StateAssetReferences: []
+  StateAssetReferences:
+  - m_AssetGUID: fc3f0116ab9844e4f8f5c2aff51b18f4
+    m_SubObjectName: 
+    m_SubObjectType: 
+  - m_AssetGUID: c53616554d1f2441d9814be737fc1d61
+    m_SubObjectName: 
+    m_SubObjectType: 

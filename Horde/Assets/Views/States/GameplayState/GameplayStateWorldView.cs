@@ -34,9 +34,15 @@ namespace Views.States.GameplayState
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            var screenAspectRatio = Screen.height / Screen.width;
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(Camera.main.transform.position, new Vector3(Camera.main.orthographicSize * screenAspectRatio,Camera.main.orthographicSize * 2f, 0.4f));
+            var camera = Camera.main;
+            if (camera != null)
+            {
+                var screenAspectRatio = Screen.height / Screen.width;
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireCube(camera.transform.position,
+                    new Vector3(camera.orthographicSize * screenAspectRatio, camera.orthographicSize * 2f,
+                        0.4f));
+            }
         }
 #endif
     }

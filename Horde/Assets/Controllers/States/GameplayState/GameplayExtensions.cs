@@ -15,15 +15,17 @@ namespace Controllers.States.GameplayState
             return layer;
         }
 
-        public static bool IsOutsideOfBounds(this Vector3 position)
+        public static bool IsOutsideOfBounds(this Vector3 position, Vector3 playerPosition)
         {
+            if (Camera.main == null) return false; 
+            
             var height = Camera.main.orthographicSize;
             var width = height / aspectRatio;
             
-            var leftOutside = position.x < -width;
-            var rightOutside = position.x > width;
-            var topOutside = position.y > height;
-            var bottomOutside = position.y < -height;
+            var leftOutside = position.x < -width + playerPosition.x;
+            var rightOutside = position.x > width + playerPosition.x;
+            var topOutside = position.y > height + playerPosition.y;
+            var bottomOutside = position.y < -height + playerPosition.y;
 
             return leftOutside || rightOutside || topOutside || bottomOutside;
         }

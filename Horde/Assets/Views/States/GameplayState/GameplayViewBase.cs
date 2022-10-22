@@ -4,7 +4,7 @@ namespace Views.States.GameplayState
 {
     public abstract class GameplayViewBase : MonoBehaviour
     {
-        protected Transform Transform;
+        [HideInInspector] public Transform Transform;
         
         public virtual void Init()
         {

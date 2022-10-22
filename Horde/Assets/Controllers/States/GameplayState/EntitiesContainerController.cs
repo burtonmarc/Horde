@@ -130,7 +130,7 @@ namespace Controllers.States.GameplayState
             foreach (var projectile in projectiles)
             {
                 var distanceVector = projectile.Transform.position - enemy.Transform.position;
-                if (distanceVector.sqrMagnitude < 0.01)
+                if (distanceVector.sqrMagnitude < 0.02)
                 {
                     projectile.OnDestroy();
                     enemy.OnDestroy();

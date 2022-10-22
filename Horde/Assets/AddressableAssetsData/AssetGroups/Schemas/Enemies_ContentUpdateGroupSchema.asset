@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15d9d8672f1a4490822ce42af0762ddf, type: 3}
-  m_Name: ShurikenConfig
+  m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
+  m_Name: Enemies_ContentUpdateGroupSchema
   m_EditorClassIdentifier: 
-  WeaponIcon: {fileID: 21300000, guid: ed02a1a3f24ce4d4ebd7f2776226a4c0, type: 3}
-  BaseDamage: 1
-  HitSpeed: 0.25
-  ProjectileSpeed: 6
-  AutoAim: 1
+  m_Group: {fileID: 11400000, guid: 55fd9bbee45704eee87e737e4cfff810, type: 2}
+  m_StaticContent: 0

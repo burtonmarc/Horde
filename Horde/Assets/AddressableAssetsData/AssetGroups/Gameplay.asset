@@ -33,26 +33,44 @@ MonoBehaviour:
     m_Address: ShrurikenView
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 772246476243732266, guid: 6c70b16be138a459c963a153dba6746f, type: 3}
-    m_TargetAsset: {fileID: 772246476243732266, guid: 6c70b16be138a459c963a153dba6746f, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: fb0196ab56721440dbb505d0dedf9d24
     m_Address: ShurikenProjectileView
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 4193435977612064571, guid: fb0196ab56721440dbb505d0dedf9d24, type: 3}
-    m_TargetAsset: {fileID: 4193435977612064571, guid: fb0196ab56721440dbb505d0dedf9d24, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 92f0d32e945e6466eb54b5658988803b
     m_Address: PlayerView
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 4770902998484851511, guid: 92f0d32e945e6466eb54b5658988803b, type: 3}
-    m_TargetAsset: {fileID: 4770902998484851511, guid: 92f0d32e945e6466eb54b5658988803b, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: be2bf2fba5e614c08a67a8ef0aeca285
     m_Address: EnemyView
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 1824612216683968062, guid: be2bf2fba5e614c08a67a8ef0aeca285, type: 3}
-    m_TargetAsset: {fileID: 1824612216683968062, guid: be2bf2fba5e614c08a67a8ef0aeca285, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: fc3f0116ab9844e4f8f5c2aff51b18f4
+    m_Address: JoystickConfig
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 165290efcea9b40fbab1fe8f3114175d
+    m_Address: GameplayCameraView
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 425156023905811232, guid: 165290efcea9b40fbab1fe8f3114175d, type: 3}
+    m_TargetAsset: {fileID: 425156023905811232, guid: 165290efcea9b40fbab1fe8f3114175d, type: 3}
+  - m_GUID: c53616554d1f2441d9814be737fc1d61
+    m_Address: GameplayCameraConfig
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 11400000, guid: c53616554d1f2441d9814be737fc1d61, type: 2}
+    m_TargetAsset: {fileID: 11400000, guid: c53616554d1f2441d9814be737fc1d61, type: 2}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d801e9cbbcbae41bcb1709d83232f782, type: 2}
   m_SchemaSet:

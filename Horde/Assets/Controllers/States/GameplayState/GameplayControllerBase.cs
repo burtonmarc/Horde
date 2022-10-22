@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Data;
 using UnityEngine;
 using Views.States.GameplayState;
@@ -27,7 +26,7 @@ namespace Controllers.States.GameplayState
 
         public bool MarkedToDestroy;
 
-        public Transform Transform => viewBase.transform;
+        public Transform Transform => viewBase.Transform;
         
         // Used as reference to pool this controller and its view in the PoolThisControllerView method
         private GameplayViewBase viewBase;

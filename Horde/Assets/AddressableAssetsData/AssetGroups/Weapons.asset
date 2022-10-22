@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Default Local Group
+  m_Name: Weapons
   m_EditorClassIdentifier: 
-  m_GroupName: Default Local Group
+  m_GroupName: Weapons
   m_Data:
     m_SerializedData: []
-  m_GUID: faf626d222eb7435a92d57381c3b796d
+  m_GUID: 5a0d803972ba74cbe84c558d670b9f82
   m_SerializeEntries:
-  - m_GUID: a534141efc567472f92b2a1bd7db34f0
-    m_Address: MainMenuCameraConfig
+  - m_GUID: e4e50700b25304b6e8d66e9818807d47
+    m_Address: ShurikenConfig
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 11400000, guid: e4e50700b25304b6e8d66e9818807d47, type: 2}
+    m_TargetAsset: {fileID: 11400000, guid: e4e50700b25304b6e8d66e9818807d47, type: 2}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d801e9cbbcbae41bcb1709d83232f782, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 53a9673a241184f628b0b39331ca27db, type: 2}
-    - {fileID: 11400000, guid: de2df1d0cbc134536a68eeef59dde91e, type: 2}
+    - {fileID: 11400000, guid: e09335ccebd5648bd9dca81557465683, type: 2}
+    - {fileID: 11400000, guid: b4b5ba2233c7049b0937ac686fc03642, type: 2}

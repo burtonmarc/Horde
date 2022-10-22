@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using Catalogs.Scripts;
+using Catalogs.Scripts.Configs;
 using Data;
 using UnityEngine;
 using Views.States.GameplayState;

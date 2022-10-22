@@ -1,10 +1,14 @@
 using System;
 using System.Threading.Tasks;
+using Catalogs.Scripts.Configs;
 using Controllers.States.GameplayState;
 using Data;
 using Game.States.MainMenu;
 using ScreenMachine;
+using UnityEngine;
+using Views.States.GameplayState;
 using Views.States.MainMenuState;
+using Object = UnityEngine.Object;
 
 namespace Controllers.States.MainMenuState
 {
@@ -13,6 +17,8 @@ namespace Controllers.States.MainMenuState
         protected override string StateId { get; }
 
         private UserModel userModel;
+
+        private GameObject camera;
         
         public MainMenuStateController(Context context) : base(context)
         {
@@ -29,6 +35,8 @@ namespace Controllers.States.MainMenuState
 
             UiView.LevelUpClicked += LevelUp;
             UiView.StartGameClicked += PresentGameplayState;
+
+            CreateCameraController();
         }
 
         public void OnBringToFront()
@@ -44,6 +52,14 @@ namespace Controllers.States.MainMenuState
         public override void OnDestroy()
         {
             base.OnDestroy();
+            
+            Object.Destroy(camera);
+        }
+        
+        private void CreateCameraController()
+        {
+            var cameraReference = GetStateAsset<CameraConfig>().Camera;
+            camera = Object.Instantiate(cameraReference, WorldView.transform);
         }
         
         private void LevelUp()

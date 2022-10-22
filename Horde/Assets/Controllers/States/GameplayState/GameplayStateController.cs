@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Catalogs.Scripts;
+using Catalogs.Scripts.Configs;
 using Controllers.States.GameplayState.PlayerWeapons;
 using Controllers.States.MainMenuState;
 using Data;
@@ -15,17 +16,19 @@ namespace Controllers.States.GameplayState
     {
         protected override string StateId { get; }
 
+        private readonly List<GameplayControllerBase> generalBehaviourControllers;
+        
         private readonly PoolController poolController;
 
         private readonly EnemyWaveController enemyWaveController;
 
-        private readonly InputController inputController;
+        private JoystickController joystickController;
 
         private PlayerController playerController;
 
-        private List<GameplayControllerBase> generalBehaviourControllers;
+        private readonly EntitiesContainerController entitiesContainerController;
 
-        private EntitiesContainerController _entitiesContainerController;
+        private GameplayCameraController gameplayCameraController;
 
         public GameplayStateController(Context context) : base(context)
         {
@@ -33,13 +36,11 @@ namespace Controllers.States.GameplayState
             
             generalBehaviourControllers = new List<GameplayControllerBase>(8);
             
-            _entitiesContainerController = new EntitiesContainerController(context);
+            entitiesContainerController = new EntitiesContainerController(context);
             
             enemyWaveController = new EnemyWaveController(context);
             
             poolController = new PoolController();
-            
-            inputController = new InputController(context);
 
             context.PoolController = poolController;
 
@@ -50,20 +51,24 @@ namespace Controllers.States.GameplayState
         {
             UiView.ResetUiView();
             WorldView.Init();
-            
-            generalBehaviourControllers.Add(enemyWaveController);
-            generalBehaviourControllers.Add(poolController);
-            generalBehaviourControllers.Add(inputController);
 
             UiView.MainMenuClicked += PresentMainMenuState;
 
             InitPlayer();
-
+            
             InjectPlayerController();
+
+            CreateJoystickController();
+
+            CreateCameraController();
             
             playerController.AddPlayerWeapon();
+            
+            generalBehaviourControllers.Add(enemyWaveController);
+            generalBehaviourControllers.Add(poolController);
+            generalBehaviourControllers.Add(joystickController);
         }
-        
+
         private void InitPlayer()
         {
             var playerView = Preloader.GetAsset<PlayerView>(Context.CatalogsHolder.PlayerCatalog.GameplayView);
@@ -77,10 +82,9 @@ namespace Controllers.States.GameplayState
         {    
             ControllerFactory.PlayerController = playerController;
             
-            _entitiesContainerController.PlayerController = playerController;
+            entitiesContainerController.PlayerController = playerController;
             enemyWaveController.PlayerController = playerController;
             poolController.PlayerController = playerController;
-            inputController.PlayerController = playerController;
         }
 
         public override void OnUpdate()
@@ -94,7 +98,7 @@ namespace Controllers.States.GameplayState
 
             playerController.OnUpdate();
 
-            _entitiesContainerController.OnUpdate();
+            entitiesContainerController.OnUpdate();
 
             Cheats();
         }
@@ -108,12 +112,13 @@ namespace Controllers.States.GameplayState
                 generalBehaviourController.OnFixedUpdate();
             }
             
-            _entitiesContainerController.OnFixedUpdate();
+            entitiesContainerController.OnFixedUpdate();
         }
 
         public override void OnLateUpdate()
         {
-            _entitiesContainerController.OnLateUpdate();
+            entitiesContainerController.OnLateUpdate();
+            gameplayCameraController.OnLateUpdate();
         }
 
         public void OnSendToBack()
@@ -135,7 +140,7 @@ namespace Controllers.States.GameplayState
                 generalBehaviourController.OnDestroy();
             }
             
-            _entitiesContainerController.OnDestroy();
+            entitiesContainerController.OnDestroy();
         }
 
         private void PresentMainMenuState()
@@ -147,24 +152,38 @@ namespace Controllers.States.GameplayState
         {
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                for (int i = 0; i < 10; i++)
+                for (var i = 0; i < 10; i++)
                 {
                     enemyWaveController.CreateEnemyAtRandomPosition();
                 }
             }
             else if (Input.GetKeyDown(KeyCode.X))
             {
-                _entitiesContainerController.RemoveRandomEnemy();
+                entitiesContainerController.RemoveRandomEnemy();
             }
             else if (Input.GetKeyDown(KeyCode.C))
             {
-                _entitiesContainerController.RemoveAllEnemies();
+                entitiesContainerController.RemoveAllEnemies();
             }
         }
 
         public Transform GetGameplayLayer(GameplayLayer gameplayLayer)
         {
             return WorldView.GetLayer(gameplayLayer);
+        }
+        
+        private void CreateJoystickController()
+        {
+            var joystickConfig = GetStateAsset<JoystickConfig>();
+            joystickController = ControllerFactory.CreateController<JoystickController>(joystickConfig.JoystickView, null, joystickConfig);
+            joystickController.JoystickView.Activate(UiView.transform, new Vector3(Screen.width * joystickConfig.xPosition, Screen.height * joystickConfig.yPosition));
+        }
+
+        private void CreateCameraController()
+        {
+            var cameraView = GetStateAsset<CameraConfig>().Camera.GetComponent<GameplayCameraView>();
+            gameplayCameraController = ControllerFactory.CreateController<GameplayCameraController>(cameraView, null);
+            gameplayCameraController.GameplayCameraView.Activate(WorldView.transform, Vector3.zero);
         }
 
         public Task Preload()

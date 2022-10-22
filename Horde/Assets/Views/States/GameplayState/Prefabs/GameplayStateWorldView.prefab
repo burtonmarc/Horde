@@ -77,8 +77,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8944a218ee406f86b18f18211f9c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerView: {fileID: 3683824234059760209, guid: 92f0d32e945e6466eb54b5658988803b, type: 3}
-  EnemyView: {fileID: -3179306793956701341, guid: be2bf2fba5e614c08a67a8ef0aeca285, type: 3}
   BackgroundLayer: {fileID: 1411234809066566270}
   EnemiesLayer: {fileID: 538193692987179920}
   EffectsLayer: {fileID: 6733229810467738744}
@@ -98,7 +96,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &55461838698745191
 Transform:
   m_ObjectHideFlags: 0

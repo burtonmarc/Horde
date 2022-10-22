@@ -4,6 +4,7 @@ using ScreenMachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace Views.States.GameplayState
 {
