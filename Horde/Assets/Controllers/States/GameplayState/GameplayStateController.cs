@@ -20,7 +20,7 @@ namespace Controllers.States.GameplayState
         
         private readonly PoolController poolController;
 
-        private readonly EnemyWaveController enemyWaveController;
+        private readonly WavesController wavesController;
 
         private JoystickController joystickController;
 
@@ -38,13 +38,13 @@ namespace Controllers.States.GameplayState
             
             entitiesContainerController = new EntitiesContainerController(context);
             
-            enemyWaveController = new EnemyWaveController(context);
+            wavesController = new WavesController(context);
             
             poolController = new PoolController();
 
             context.PoolController = poolController;
 
-            ControllerFactory.PoolController = poolController;
+            ControllerViewFactory.PoolController = poolController;
         }
 
         public void OnCreate()
@@ -64,7 +64,10 @@ namespace Controllers.States.GameplayState
             
             playerController.AddPlayerWeapon();
             
-            generalBehaviourControllers.Add(enemyWaveController);
+            var levelModel = new LevelModel(Context.CatalogsHolder.LevelsCatalog.GetCatalogEntry("Level_Base_01").Waves);
+            wavesController.Init(levelModel);
+            
+            generalBehaviourControllers.Add(wavesController);
             generalBehaviourControllers.Add(poolController);
             generalBehaviourControllers.Add(joystickController);
         }
@@ -73,17 +76,17 @@ namespace Controllers.States.GameplayState
         {
             var playerView = Preloader.GetAsset<PlayerView>(Context.CatalogsHolder.PlayerCatalog.GameplayView);
             var playerModel = Context.SaveSystem.LoadModel<PlayerModel>();
-            playerController = ControllerFactory.CreateController<PlayerController>(playerView, playerModel);
+            playerController = ControllerViewFactory.CreateControllerView<PlayerController>(playerView, playerModel);
             var enemiesLayer = Context.GetGameplayLayer(GameplayLayer.Enemies);
             playerController.PlayerView.Activate(enemiesLayer, Vector3.zero);
         }
 
         private void InjectPlayerController()
         {    
-            ControllerFactory.PlayerController = playerController;
+            ControllerViewFactory.PlayerController = playerController;
             
             entitiesContainerController.PlayerController = playerController;
-            enemyWaveController.PlayerController = playerController;
+            wavesController.PlayerController = playerController;
             poolController.PlayerController = playerController;
         }
 
@@ -154,7 +157,7 @@ namespace Controllers.States.GameplayState
             {
                 for (var i = 0; i < 10; i++)
                 {
-                    enemyWaveController.CreateEnemyAtRandomPosition();
+                    wavesController.CreateEnemyAtRandomPosition();
                 }
             }
             else if (Input.GetKeyDown(KeyCode.X))
@@ -175,14 +178,14 @@ namespace Controllers.States.GameplayState
         private void CreateJoystickController()
         {
             var joystickConfig = GetStateAsset<JoystickConfig>();
-            joystickController = ControllerFactory.CreateController<JoystickController>(joystickConfig.JoystickView, null, joystickConfig);
+            joystickController = ControllerViewFactory.CreateControllerView<JoystickController>(joystickConfig.JoystickView, null, joystickConfig);
             joystickController.JoystickView.Activate(UiView.transform, new Vector3(Screen.width * joystickConfig.xPosition, Screen.height * joystickConfig.yPosition));
         }
 
         private void CreateCameraController()
         {
             var cameraView = GetStateAsset<CameraConfig>().Camera.GetComponent<GameplayCameraView>();
-            gameplayCameraController = ControllerFactory.CreateController<GameplayCameraController>(cameraView, null);
+            gameplayCameraController = ControllerViewFactory.CreateControllerView<GameplayCameraController>(cameraView, null);
             gameplayCameraController.GameplayCameraView.Activate(WorldView.transform, new Vector3(0f, 0f, -1f));
         }
 

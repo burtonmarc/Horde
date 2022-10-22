@@ -52,8 +52,6 @@ namespace Controllers.States.MainMenuState
         public override void OnDestroy()
         {
             base.OnDestroy();
-            
-            Object.Destroy(camera);
         }
         
         private void CreateCameraController()

@@ -62,7 +62,7 @@ namespace Controllers.States.GameplayState.PlayerWeapons
             
             var shurikenBulletArgs = new ShurikenBulletArgs {movementDirection = movementDirection, speed = 2.5f};
             
-            var shurikenBulletController = ControllerFactory.CreateController<ShurikenBulletController>(shurikenView, null, shurikenBulletArgs);
+            var shurikenBulletController = ControllerViewFactory.CreateControllerView<ShurikenBulletController>(shurikenView, null, shurikenBulletArgs);
             
             var entityArgs = new EntityArgs {EntityType = EntityType.Projectile, Entity = shurikenBulletController};
 

@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 
 namespace Controllers.States.GameplayState
 {
-    public static class ControllerFactory
+    public static class ControllerViewFactory
     {
         public static Context Context;
 
@@ -17,7 +17,7 @@ namespace Controllers.States.GameplayState
 
         public static PoolController PoolController;
 
-        public static T CreateController<T>(GameplayViewBase gameplayViewBase, IModel model, object args = null) 
+        public static T CreateControllerView<T>(GameplayViewBase gameplayViewBase, IModel model, object args = null) 
             where T : GameplayControllerBase
         {
             var controllerViewPair = PoolController.TryGetPooledControllerViewPair<T>();

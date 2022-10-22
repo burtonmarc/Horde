@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Catalogs.Scripts
+namespace Catalogs.Scripts.Entries
 {
     [CreateAssetMenu(fileName = "Catalogs", menuName = "ScriptableObjects/Entries/Create State Entry", order = 1)]
     public class StateCatalogEntry : CatalogEntryId

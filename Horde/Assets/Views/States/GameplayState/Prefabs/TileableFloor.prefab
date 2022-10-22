@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4692865555874178034}
   - component: {fileID: 1553344825847676703}
   m_Layer: 0
-  m_Name: Floor
+  m_Name: TileableFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: -116070089
   m_SortingLayer: -3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 32e1f804f7b0df04eb563bea2f424c08, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 675cb6411f36989469f42a1a69297d71, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

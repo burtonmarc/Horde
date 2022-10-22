@@ -12,5 +12,7 @@ namespace Catalogs.Scripts
         public WeaponsCatalog WeaponsCatalog;
 
         public EnemiesCatalog EnemiesCatalog;
+
+        public LevelsCatalog LevelsCatalog;
     }
 }

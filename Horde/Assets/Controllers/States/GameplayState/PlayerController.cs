@@ -40,7 +40,7 @@ namespace Controllers.States.GameplayState
             var shurikenEntry = Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken");
             var shurikenView = Context.Preloader.GetAsset<ShurikenView>(shurikenEntry.WeaponGameplayView);
             var shurikenModel = new ShurikenModel(Context.Preloader.GetAsset<WeaponConfig>(shurikenEntry.WeaponConfig));
-            var shurikenController = ControllerFactory.CreateController<ShurikenController>(shurikenView, shurikenModel);
+            var shurikenController = ControllerViewFactory.CreateControllerView<ShurikenController>(shurikenView, shurikenModel);
             var entityArgs = new EntityArgs {EntityType = EntityType.Weapon, Entity = shurikenController};
             OnGameplayEvent(GameplayEvent.AddEntity, entityArgs);
             shurikenController.ShurikenView.Activate(PlayerView.WeaponAnchor, Vector3.zero);

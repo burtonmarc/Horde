@@ -17,7 +17,7 @@ namespace Controllers.States.GameplayState
 
         public EnemyController(Context context, PlayerController playerController) : base(context, playerController)
         {
-            
+
         }
 
         public override void Init(GameplayViewBase gameplayView, IModel model, object args)
@@ -26,17 +26,17 @@ namespace Controllers.States.GameplayState
             EnemyView = gameplayView as EnemyView;
             enemyModel = model as EnemyModel;
         }
-        
+
         public void Activate()
         {
             isAlive = true;
         }
-        
+
         public override void OnUpdate()
         {
-            
+
         }
-        
+
         public override void OnFixedUpdate()
         {
             var enemyDirection = PlayerController.PlayerPosition - EnemyView.transform.position;

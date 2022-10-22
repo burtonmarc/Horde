@@ -44,9 +44,14 @@ namespace Controllers.States.GameplayState
         }
 
         // Used for the first time the controller is created
-        public virtual void Init(GameplayViewBase gameplayView, IModel model, object args)
+        public virtual void Init(GameplayViewBase gameplayView, IModel model, object args = null)
         {
             viewBase = gameplayView;
+            MarkedToDestroy = false;
+        }
+
+        public virtual void Init(IModel model, object args = null)
+        {
             MarkedToDestroy = false;
         }
 

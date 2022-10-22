@@ -28,7 +28,7 @@ namespace Controllers
 
             var context = new Context(catalogs, assetLoaderFactory, screenMachine, saveSystem, userModel);
 
-            ControllerFactory.Context = context;
+            ControllerViewFactory.Context = context;
             
             screenMachine.PresentState(new StartupStateController(context));
         }

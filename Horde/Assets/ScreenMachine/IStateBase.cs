@@ -5,13 +5,9 @@ namespace ScreenMachine
 {
     public interface IStateBase
     {
-        // State Specific
         string GetStateId();
         void OnCreate();
         void OnSendToBack();
-
-        // State Shared
-        
         void LinkViews(UiView uiView, WorldView worldView);
         void OnBringToFront();
         void OnUpdate();

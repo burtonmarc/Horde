@@ -55,7 +55,7 @@ namespace Controllers.States.GameplayState
 
         }
 
-        public override void Init(GameplayViewBase gameplayView, IModel model, object args)
+        public override void Init(GameplayViewBase gameplayView, IModel model, object args = null)
         {
             base.Init(gameplayView, model, args);
 

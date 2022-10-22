@@ -1,3 +1,4 @@
+using Catalogs.Scripts.Entries;
 using UnityEngine;
 
 namespace Catalogs.Scripts
