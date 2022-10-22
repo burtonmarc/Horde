@@ -74,9 +74,6 @@ namespace Controllers.States.GameplayState
 
         public override void OnUpdate()
         {
-            //joystick stops updating when the movable object reaches 0.8 of the screen. only check this to start
-            //if (GetFingerPosition().y > Screen.height * 0.8) return;
-            
             if (TouchBeganThisFrame(0) && GetFingerPosition().y < Screen.height * 0.8)
             {
                 usingJoystick = true;

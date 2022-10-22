@@ -183,7 +183,7 @@ namespace Controllers.States.GameplayState
         {
             var cameraView = GetStateAsset<CameraConfig>().Camera.GetComponent<GameplayCameraView>();
             gameplayCameraController = ControllerFactory.CreateController<GameplayCameraController>(cameraView, null);
-            gameplayCameraController.GameplayCameraView.Activate(WorldView.transform, Vector3.zero);
+            gameplayCameraController.GameplayCameraView.Activate(WorldView.transform, new Vector3(0f, 0f, -1f));
         }
 
         public Task Preload()

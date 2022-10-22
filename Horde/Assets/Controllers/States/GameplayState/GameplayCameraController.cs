@@ -8,7 +8,7 @@ namespace Controllers.States.GameplayState
     {
         public GameplayCameraView GameplayCameraView;
 
-        private Vector3 cachedPosition;
+        private Vector3 cachedVector;
         
         public GameplayCameraController(Context context, PlayerController playerController) : base(context, playerController)
         {
@@ -18,7 +18,11 @@ namespace Controllers.States.GameplayState
         {
             base.Init(gameplayView, model, args);
             
-            GameplayCameraView = gameplayView as GameplayCameraView;
+            if (gameplayView is GameplayCameraView gameplayCameraView)
+            {
+                GameplayCameraView = gameplayCameraView;
+            }
+
         }
 
         public override void OnUpdate()
@@ -28,9 +32,10 @@ namespace Controllers.States.GameplayState
 
         public override void OnLateUpdate()
         {
-            cachedPosition.x = PlayerController.PlayerPosition.x;
-            cachedPosition.y = PlayerController.PlayerPosition.y;
-            GameplayCameraView.MoveCamera(cachedPosition);
+            cachedVector.x = PlayerController.PlayerPosition.x;
+            cachedVector.y = PlayerController.PlayerPosition.y;
+            cachedVector.z = GameplayCameraView.Transform.position.z;
+            GameplayCameraView.MoveCamera(cachedVector);
         }
     }
 }
