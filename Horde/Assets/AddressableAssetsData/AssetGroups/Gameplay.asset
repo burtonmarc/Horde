@@ -17,60 +17,30 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 3b1e9c52d9f93444b82b5553f2a15523
   m_SerializeEntries:
-  - m_GUID: 0513561cc1fea42e394131bca10d725b
-    m_Address: GameplayStateUiView
+  - m_GUID: e642f68cf86b94ee781320b33dec5926
+    m_Address: EnemiesAtlas
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
-  - m_GUID: c58679bad872c4e70a15733e9a9577d6
-    m_Address: GameplayStateWorldView
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
-  - m_GUID: 6c70b16be138a459c963a153dba6746f
-    m_Address: ShrurikenView
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
-  - m_GUID: fb0196ab56721440dbb505d0dedf9d24
-    m_Address: ShurikenProjectileView
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
-  - m_GUID: 92f0d32e945e6466eb54b5658988803b
-    m_Address: PlayerView
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
-  - m_GUID: be2bf2fba5e614c08a67a8ef0aeca285
-    m_Address: EnemyView
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 4343727234628468602, guid: e642f68cf86b94ee781320b33dec5926, type: 2}
+    m_TargetAsset: {fileID: 4343727234628468602, guid: e642f68cf86b94ee781320b33dec5926, type: 2}
   - m_GUID: fc3f0116ab9844e4f8f5c2aff51b18f4
     m_Address: JoystickConfig
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
-  - m_GUID: 165290efcea9b40fbab1fe8f3114175d
-    m_Address: GameplayCameraView
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 425156023905811232, guid: 165290efcea9b40fbab1fe8f3114175d, type: 3}
-    m_TargetAsset: {fileID: 425156023905811232, guid: 165290efcea9b40fbab1fe8f3114175d, type: 3}
+    m_MainAsset: {fileID: 11400000, guid: fc3f0116ab9844e4f8f5c2aff51b18f4, type: 2}
+    m_TargetAsset: {fileID: 11400000, guid: fc3f0116ab9844e4f8f5c2aff51b18f4, type: 2}
   - m_GUID: c53616554d1f2441d9814be737fc1d61
     m_Address: GameplayCameraConfig
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_MainAsset: {fileID: 11400000, guid: c53616554d1f2441d9814be737fc1d61, type: 2}
     m_TargetAsset: {fileID: 11400000, guid: c53616554d1f2441d9814be737fc1d61, type: 2}
+  - m_GUID: be3cc3e698b28402cbec40344d2479c5
+    m_Address: Assets/Views/States/GameplayState/GameplayPrefabs
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 102900000, guid: be3cc3e698b28402cbec40344d2479c5, type: 3}
+    m_TargetAsset: {fileID: 102900000, guid: be3cc3e698b28402cbec40344d2479c5, type: 3}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d801e9cbbcbae41bcb1709d83232f782, type: 2}
   m_SchemaSet:

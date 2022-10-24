@@ -21,20 +21,20 @@ MonoBehaviour:
     m_Address: MainMenuStateUiView
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 9123588433175734492, guid: 23edb9fbae4ab48bf946b102778e3d4a, type: 3}
+    m_TargetAsset: {fileID: 9123588433175734492, guid: 23edb9fbae4ab48bf946b102778e3d4a, type: 3}
   - m_GUID: b57c0bbb9fc6244359a4412421c57d8b
     m_Address: MainMenuStateWorldView
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
-  - m_GUID: e642f68cf86b94ee781320b33dec5926
-    m_Address: EnemiesAtlas
+    m_MainAsset: {fileID: 9123588433175734492, guid: b57c0bbb9fc6244359a4412421c57d8b, type: 3}
+    m_TargetAsset: {fileID: 9123588433175734492, guid: b57c0bbb9fc6244359a4412421c57d8b, type: 3}
+  - m_GUID: a534141efc567472f92b2a1bd7db34f0
+    m_Address: MainMenuCameraConfig
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 4343727234628468602, guid: e642f68cf86b94ee781320b33dec5926, type: 2}
-    m_TargetAsset: {fileID: 4343727234628468602, guid: e642f68cf86b94ee781320b33dec5926, type: 2}
+    m_MainAsset: {fileID: 11400000, guid: a534141efc567472f92b2a1bd7db34f0, type: 2}
+    m_TargetAsset: {fileID: 11400000, guid: a534141efc567472f92b2a1bd7db34f0, type: 2}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d801e9cbbcbae41bcb1709d83232f782, type: 2}
   m_SchemaSet:

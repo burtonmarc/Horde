@@ -74,7 +74,7 @@ namespace Controllers.States.GameplayState
 
         public override void OnUpdate()
         {
-            if (TouchBeganThisFrame(0) && GetFingerPosition().y < Screen.height * 0.8)
+            if (TouchBeganThisFrame(0))// && GetFingerPosition().y < Screen.height * 0.8)
             {
                 usingJoystick = true;
                 SetInitialPosition();
@@ -84,8 +84,8 @@ namespace Controllers.States.GameplayState
             {
                 GetJoystickDirection();
             }
-
-            if (TouchEndedThisFrame(0))
+            
+            if (TouchEndedThisFrame(0) && usingJoystick)
             {
                 usingJoystick = false;
                 ResetJoystick();
@@ -97,7 +97,13 @@ namespace Controllers.States.GameplayState
 #if UNITY_EDITOR
             return Input.GetMouseButtonDown(touchIndex);
 #else
-            return Input.touchCount >= touchIndex && Input.GetTouch(touchIndex).phase == TouchPhase.Began;
+            Debug.Log("touches = " + Input.touchCount);
+            if (Input.touchCount > 0)
+            {
+                Debug.Log("phase = " + Input.GetTouch(touchIndex).phase);
+                return Input.GetTouch(touchIndex).phase == TouchPhase.Began;
+            }
+            return false;
 #endif
         }
 
@@ -112,16 +118,18 @@ namespace Controllers.States.GameplayState
 #if UNITY_EDITOR
             return Input.GetMouseButton(touchIndex);
 #else
-            return Input.touchCount >= touchIndex;
+            return Input.touchCount > touchIndex;
 #endif
         }
 
         private bool TouchEndedThisFrame(int touchIndex)
         {
 #if UNITY_EDITOR
-            return Input.GetMouseButtonUp(touchIndex);
+            var buttonUp = Input.GetMouseButtonUp(touchIndex);
+            Debug.Log("Button up = " + buttonUp);
+            return buttonUp;
 #else
-            return Input.touchCount >= touchIndex;
+            return Input.GetTouch(0).phase == TouchPhase.Ended;
 #endif
         }
 
@@ -146,7 +154,7 @@ namespace Controllers.States.GameplayState
 #if UNITY_EDITOR
             return Input.mousePosition;
 #else
-            return Input.touches[0].position;
+            return Input.GetTouch(0).position;
 #endif
         }
     }

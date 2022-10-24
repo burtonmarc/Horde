@@ -7,3 +7,5 @@ Horde/.idea/.idea.Horde/.idea/contentModel.xml
 *.csproj
 *.sln
 Horde/obj/Debug/Catalogs.csproj.AssemblyReference.cache
+Horde/Builds
+*.cache
