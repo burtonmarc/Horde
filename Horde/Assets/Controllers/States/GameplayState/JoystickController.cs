@@ -74,7 +74,7 @@ namespace Controllers.States.GameplayState
 
         public override void OnUpdate()
         {
-            if (TouchBeganThisFrame(0))// && GetFingerPosition().y < Screen.height * 0.8)
+            if (TouchBeganThisFrame(0) && GetFingerPosition().y < Screen.height * 0.8)
             {
                 usingJoystick = true;
                 SetInitialPosition();
