@@ -21,7 +21,7 @@ namespace Controllers.States.GameplayState
     {
         private Dictionary<EntityType, List<GameplayControllerBase>> EntitiesContainer;
 
-        private List<GameplayControllerBase> EntitiesToDestoryAtEndOfFrame; 
+        private List<GameplayControllerBase> EntitiesToDestroyAtEndOfFrame; 
 
         public EntitiesContainerController(Context context) : base(context)
         {
@@ -33,7 +33,7 @@ namespace Controllers.States.GameplayState
                 {EntityType.Enemy, new List<GameplayControllerBase>(256)},
             };
             
-            EntitiesToDestoryAtEndOfFrame = new List<GameplayControllerBase>(16);
+            EntitiesToDestroyAtEndOfFrame = new List<GameplayControllerBase>(16);
             
             OnGameplayEvent += GameplayEvent;
         }
@@ -72,13 +72,13 @@ namespace Controllers.States.GameplayState
         {
             base.OnLateUpdate();
 
-            for (var index = EntitiesToDestoryAtEndOfFrame.Count - 1; index >= 0; index--)
+            for (var index = EntitiesToDestroyAtEndOfFrame.Count - 1; index >= 0; index--)
             {
-                var entity = EntitiesToDestoryAtEndOfFrame[index];
+                var entity = EntitiesToDestroyAtEndOfFrame[index];
                 EntitiesContainer.TryGetValue(entity.EntityType, out var entityList);
                 entityList?.Remove(entity);
                 entity.DestroyCompletely();
-                EntitiesToDestoryAtEndOfFrame.RemoveAt(index);
+                EntitiesToDestroyAtEndOfFrame.RemoveAt(index);
             }
         }
 
@@ -111,7 +111,7 @@ namespace Controllers.States.GameplayState
             {
                 if (arg is EntityArgs addEntityArgs)
                 {
-                    EntitiesToDestoryAtEndOfFrame.Add(addEntityArgs.Entity);
+                    EntitiesToDestroyAtEndOfFrame.Add(addEntityArgs.Entity);
                 }
             }
         }

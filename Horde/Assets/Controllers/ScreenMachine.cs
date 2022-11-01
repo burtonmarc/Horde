@@ -11,7 +11,7 @@ namespace Controllers
     public class ScreenMachine : IScreenMachine
     {
         public IStateBase CurrentState => screenStack.Peek();
-        
+
         private Stack<IStateBase> screenStack;
 
         private StatesCatalog statesCatalog;
@@ -20,29 +20,35 @@ namespace Controllers
 
         private bool isLoading;
 
-        public ScreenMachine(StatesCatalog statesCatalog, AssetLoaderFactory assetLoaderFactory) {
+        public ScreenMachine(StatesCatalog statesCatalog, AssetLoaderFactory assetLoaderFactory)
+        {
             this.statesCatalog = statesCatalog;
             this.assetLoaderFactory = assetLoaderFactory;
             screenStack = new Stack<IStateBase>();
         }
 
 
-        public void PopState() {
-            PopStateLocally();
+        public void PopState()
+        {
+            PopStateInternal();
+            BringToFrontCurrentState();
         }
 
-        public void PresentState(IStateBase state) {
-
-            while (screenStack.Count != 0) {
-                PopStateLocally();
+        public void PresentState(IStateBase state)
+        {
+            while (screenStack.Count != 0)
+            {
+                PopStateInternal();
             }
 
             PushStateInternal(state);
         }
 
-        public void PushState(IStateBase state) {
+        public void PushState(IStateBase state)
+        {
 
-            if (screenStack.Count != 0) {
+            if (screenStack.Count != 0)
+            {
                 var previousState = screenStack.Peek();
                 previousState.OnSendToBack();
                 previousState.DisableRaycasts();
@@ -51,25 +57,31 @@ namespace Controllers
             PushStateInternal(state);
         }
 
-        public void OnUpdate() {
-            if(screenStack.Count == 0) {
+        public void OnUpdate()
+        {
+            if (screenStack.Count == 0)
+            {
                 throw new NotSupportedException("Trying to call OnUpdate on the screenstack but it's empty!");
             }
 
-            if (isLoading) {
+            if (isLoading)
+            {
                 return;
             }
 
             var currentState = screenStack.Peek();
             currentState.OnUpdate();
         }
-        
-        public void OnFixedUpdate() {
-            if(screenStack.Count == 0) {
+
+        public void OnFixedUpdate()
+        {
+            if (screenStack.Count == 0)
+            {
                 throw new NotSupportedException("Trying to call OnFixedUpdate on the screenstack but it's empty!");
             }
 
-            if (isLoading) {
+            if (isLoading)
+            {
                 return;
             }
 
@@ -79,11 +91,13 @@ namespace Controllers
 
         public void OnLateUpdate()
         {
-            if(screenStack.Count == 0) {
+            if (screenStack.Count == 0)
+            {
                 throw new NotSupportedException("Trying to call OnLateUpdate on the screenstack but it's empty!");
             }
 
-            if (isLoading) {
+            if (isLoading)
+            {
                 return;
             }
 
@@ -91,7 +105,8 @@ namespace Controllers
             currentState.OnLateUpdate();
         }
 
-        private void PushStateInternal(IStateBase state) {
+        private void PushStateInternal(IStateBase state)
+        {
 
             isLoading = true;
 
@@ -102,11 +117,13 @@ namespace Controllers
             InstantiateViews(stateEntry, state);
         }
 
-        private async void InstantiateViews(StateCatalogEntry stateEntry, IStateBase state) {
+        private async void InstantiateViews(StateCatalogEntry stateEntry, IStateBase state)
+        {
 
             var stateAssetLoader = assetLoaderFactory.CreateLoader(stateEntry.Id);
 
-            foreach(var stateAsset in stateEntry.GetAllStateReferences()) {
+            foreach (var stateAsset in stateEntry.GetAllStateReferences())
+            {
                 stateAssetLoader.AddReference(stateAsset);
             }
 
@@ -117,7 +134,8 @@ namespace Controllers
 
             var stateAssetsList = new List<ScriptableObject>();
 
-            foreach(var stateAsset in stateEntry.StateAssetReferences) {
+            foreach (var stateAsset in stateEntry.StateAssetReferences)
+            {
                 stateAssetsList.Add(stateAssetLoader.GetAsset<ScriptableObject>(stateAsset));
             }
 
@@ -127,29 +145,33 @@ namespace Controllers
             {
                 await preloadable.Preload();
             }
-            
+
             var worldView = Object.Instantiate(worldViewAsset);
             var uiView = Object.Instantiate(uiViewAsset);
 
             state.LinkViews(uiView, worldView);
 
             state.OnCreate();
-
+            
             isLoading = false;
         }
 
-        private void PopStateLocally() {
+        private void PopStateInternal()
+        {
             var state = screenStack.Peek();
             state.ReleaseAssets(state.GetStateId());
             state.OnDestroy();
             state.DestroyViews();
             screenStack.Pop();
+        }
 
-            if(screenStack.Count > 0) {
-                var nextState = screenStack.Peek();
-                nextState.OnBringToFront();
-                nextState.EnableRaycasts();
-            }
+        private void BringToFrontCurrentState()
+        {
+            if (screenStack.Count <= 0) return;
+
+            var nextState = screenStack.Peek();
+            nextState.OnBringToFront();
+            nextState.EnableRaycasts();
         }
     }
 }
