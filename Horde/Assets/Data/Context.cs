@@ -1,5 +1,6 @@
 using Catalogs.Scripts;
 using ControllersPool;
+using Data.Models;
 using ScreenMachine;
 
 namespace Data

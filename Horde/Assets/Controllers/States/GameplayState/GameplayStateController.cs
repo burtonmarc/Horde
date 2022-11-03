@@ -5,6 +5,7 @@ using Catalogs.Scripts.Configs;
 using Controllers.States.GameplayState.PlayerWeapons;
 using Controllers.States.MainMenuState;
 using Data;
+using Data.Models;
 using ScreenMachine;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

@@ -7,8 +7,10 @@ namespace Controllers.States.GameplayState
     public class EntityArgs
     {
         public EntityType EntityType;
+        
         public GameplayControllerBase Entity;
     }
+    
     public enum EntityType
     {
         GeneralBehaviour,
@@ -17,11 +19,12 @@ namespace Controllers.States.GameplayState
         Projectile,
         Enemy
     }
+    
     public class EntitiesContainerController : GameplayControllerBase
     {
         private Dictionary<EntityType, List<GameplayControllerBase>> EntitiesContainer;
 
-        private List<GameplayControllerBase> EntitiesToDestroyAtEndOfFrame; 
+        private List<GameplayControllerBase> EntitiesToDestroyAtEndOfFrame;
 
         public EntitiesContainerController(Context context) : base(context)
         {
@@ -32,9 +35,9 @@ namespace Controllers.States.GameplayState
                 {EntityType.Projectile, new List<GameplayControllerBase>(32)},
                 {EntityType.Enemy, new List<GameplayControllerBase>(256)},
             };
-            
+
             EntitiesToDestroyAtEndOfFrame = new List<GameplayControllerBase>(16);
-            
+
             OnGameplayEvent += GameplayEvent;
         }
 

@@ -19,8 +19,6 @@ namespace Controllers.States
 
         protected Context Context;
 
-        //protected IAssetLoaderFactory assetLoaderFactory => context.AssetLoaderFactory;
-
         private List<ScriptableObject> StateAssets = new List<ScriptableObject>();
 
         private IScreenMachine ScreenMachine => Context.ScreenMachine;
@@ -73,7 +71,7 @@ namespace Controllers.States
 
         public virtual void OnDestroy()
         {
-            Preloader?.ReleaseAssets();
+            
         }
 
         public void CacheStateAssets(List<ScriptableObject> stateAssets) {

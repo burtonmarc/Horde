@@ -2,6 +2,7 @@ using Catalogs.Scripts;
 using Catalogs.Scripts.Configs;
 using Controllers.States.GameplayState.PlayerWeapons;
 using Data;
+using Data.Models;
 using UnityEngine;
 using Views.States.GameplayState;
 

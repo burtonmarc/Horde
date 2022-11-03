@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Data;
+using Data.Models;
 using UnityEngine;
 using Views.States.GameplayState;
 

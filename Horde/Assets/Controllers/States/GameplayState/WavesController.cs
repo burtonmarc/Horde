@@ -1,6 +1,7 @@
 using Catalogs.Scripts.Configs;
 using Catalogs.Scripts.Entries;
 using Data;
+using Data.Models;
 using UnityEngine;
 using Views.States.GameplayState;
 

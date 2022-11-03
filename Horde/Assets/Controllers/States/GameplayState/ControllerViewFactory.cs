@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Catalogs.Scripts;
 using Controllers.States.GameplayState.PlayerWeapons;
 using Data;
+using Data.Models;
 using UnityEngine;
 using Views.States.GameplayState;
 using Object = UnityEngine.Object;

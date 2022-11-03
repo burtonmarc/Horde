@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Catalogs.Scripts.Configs;
 using Controllers.States.GameplayState;
 using Data;
+using Data.Models;
 using Game.States.MainMenu;
 using ScreenMachine;
 using UnityEngine;
@@ -31,7 +32,7 @@ namespace Controllers.States.MainMenuState
             UiView.ResetUiView();
             WorldView.Init();
             
-            UiView.PopulateUiView(userModel.level);
+            UiView.PopulateUiView(userModel.Level);
 
             UiView.LevelUpClicked += LevelUp;
             UiView.StartGameClicked += PresentGameplayState;
@@ -62,8 +63,8 @@ namespace Controllers.States.MainMenuState
         
         private void LevelUp()
         {
-            userModel.level++;
-            UiView.SetUserLevel(userModel.level);
+            userModel.Level++;
+            UiView.SetUserLevel(userModel.Level);
             Context.SaveSystem.SaveModel(userModel);
         }
 

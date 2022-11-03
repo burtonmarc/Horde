@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StatesCatalog: {fileID: 11400000, guid: 232a0dae2e02f4fbfbef6db57700f9e1, type: 2}
   PlayerCatalog: {fileID: 11400000, guid: 1f3d00a1739ba49219e02987ebd7218a, type: 2}
+  ItemsCatalog: {fileID: 11400000, guid: 9c37efece155745d0874cd1a783e614d, type: 2}
   WeaponsCatalog: {fileID: 11400000, guid: 1e6206b6fc8f74016a1866f8063c1560, type: 2}
   EnemiesCatalog: {fileID: 11400000, guid: b74cdcad292ba41f480d35258009efd6, type: 2}
   LevelsCatalog: {fileID: 11400000, guid: 8aab7d2bd5c3a4119b43b7b00de38878, type: 2}

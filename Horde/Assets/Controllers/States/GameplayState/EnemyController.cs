@@ -1,4 +1,5 @@
 using Data;
+using Data.Models;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using Views.States.GameplayState;
