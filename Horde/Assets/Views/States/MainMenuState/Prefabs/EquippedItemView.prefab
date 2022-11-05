@@ -423,6 +423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemImage: {fileID: 976884534094290337}
+  itemLevel: {fileID: 6462405623629988460}
   itemRarity: {fileID: 1836710487987723420}
 --- !u!1 &8214951103063715688
 GameObject:
@@ -533,8 +534,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.07040405, y: 14.917}
-  m_SizeDelta: {x: 232.8601, y: 220.3635}
+  m_AnchoredPosition: {x: -0.07040405, y: 19.232}
+  m_SizeDelta: {x: 232.8601, y: 188.3716}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8422062156747917029
 CanvasRenderer:

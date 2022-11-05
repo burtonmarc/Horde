@@ -18,11 +18,6 @@ namespace Views.States.GameplayState
 
         private int currentFrame = 0;
 
-        public override void ResetUiView()
-        {
-            
-        }
-
         public override void OnUpdate()
         {
             if (currentFrame <= 0)

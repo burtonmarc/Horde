@@ -8,7 +8,7 @@ namespace Catalogs.Scripts.Entries
     {
         public AssetReference ItemIcon;
 
-        public ItemType ItemType;
+        public string ItemType;
 
         public int ItemBaseAttack;
 

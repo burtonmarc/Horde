@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b83ead23a93442deac199f0083fedd2f, type: 3}
-  m_Name: ShurikenEntry
+  m_Name: LockEntry
   m_EditorClassIdentifier: 
-  Id: Shuriken
+  Id: Lock
   ItemIcon:
-    m_AssetGUID: ed02a1a3f24ce4d4ebd7f2776226a4c0
-    m_SubObjectName: shuriken
+    m_AssetGUID: 1009afee040224e1a98a1fca6e61c6c2
+    m_SubObjectName: itemicon_lock
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  ItemType: Weapon
-  ItemBaseAttack: 120
-  ItemBaseHealthPoints: 220
+  ItemType: 
+  ItemBaseAttack: 0
+  ItemBaseHealthPoints: 0

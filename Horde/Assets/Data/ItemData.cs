@@ -1,17 +1,24 @@
 using System;
-using Data.Enums;
 
 namespace Data
 {
     [Serializable]
     public class ItemData
     {
-        public ItemType ItemType;
-
         public string ItemId;
 
-        public int ItemRarity;
+        public string ItemType;
+
+        public string ItemRarity;
 
         public int ItemLevel;
+
+        public ItemData()
+        {
+            ItemId = "Lock";
+            ItemType = "nil";
+            ItemRarity = "nil";
+            ItemLevel = 0;
+        }
     }
 }

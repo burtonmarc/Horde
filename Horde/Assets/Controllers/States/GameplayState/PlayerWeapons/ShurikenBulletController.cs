@@ -48,7 +48,7 @@ namespace Controllers.States.GameplayState.PlayerWeapons
             
             ShurikenBulletView.OnUpdate(movementDirection * speed);
             
-            if (ShurikenBulletView.transform.position.IsOutsideOfBounds(PlayerController.PlayerPosition))
+            if (GameplayUtils.IsOutsideOfBounds(ShurikenBulletView.transform.position, PlayerController.PlayerPosition))
             {
                 OnDestroy();
             }

@@ -95,11 +95,11 @@ namespace Controllers.States.GameplayState
             OnGameplayEvent(GameplayEvent.AddEntity, entityArgs);
             
             var orthographicSize = Camera.main.orthographicSize;
-            var randomX = Random.Range(-orthographicSize / GameplayExtensions.aspectRatio + PlayerController.PlayerPosition.x, orthographicSize / GameplayExtensions.aspectRatio + PlayerController.PlayerPosition.x);
+            var randomX = Random.Range(-orthographicSize / GameplayUtils.aspectRatio + PlayerController.PlayerPosition.x, orthographicSize / GameplayUtils.aspectRatio + PlayerController.PlayerPosition.x);
             var randomY = Random.Range(-orthographicSize + PlayerController.PlayerPosition.y, orthographicSize + PlayerController.PlayerPosition.y);
             var randomPosition = new Vector3(randomX, randomY, 0);
 
-            var enemyLayer = Context.GetGameplayLayer(GameplayLayer.Enemies);
+            var enemyLayer = GameplayUtils.GetGameplayLayer(Context, GameplayLayer.Enemies);
             enemyController.EnemyView.Activate(enemyLayer, randomPosition);
         }
     }

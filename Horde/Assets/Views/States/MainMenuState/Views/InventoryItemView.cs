@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Views.States.MainMenuState.Views
 {
-    public class EquippedItemView : MonoBehaviour
+    public class InventoryItemView : MonoBehaviour
     {
         [SerializeField] private Image itemImage;
 

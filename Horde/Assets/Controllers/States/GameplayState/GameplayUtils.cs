@@ -4,18 +4,18 @@ using Views.States.GameplayState;
 
 namespace Controllers.States.GameplayState
 {
-    public static class GameplayExtensions
+    public static class GameplayUtils
     {
         public static readonly float aspectRatio = (float) Screen.height / Screen.width;
         
-        public static Transform GetGameplayLayer(this Context context, GameplayLayer gameplayLayer)
+        public static Transform GetGameplayLayer(Context context, GameplayLayer gameplayLayer)
         {
             var gameplayState = context.ScreenMachine.CurrentState as GameplayStateController;
             var layer = gameplayState?.GetGameplayLayer(gameplayLayer);
             return layer;
         }
 
-        public static bool IsOutsideOfBounds(this Vector3 position, Vector3 playerPosition)
+        public static bool IsOutsideOfBounds(Vector3 position, Vector3 playerPosition)
         {
             if (Camera.main == null) return false; 
             

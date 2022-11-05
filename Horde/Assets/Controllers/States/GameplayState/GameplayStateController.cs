@@ -50,7 +50,7 @@ namespace Controllers.States.GameplayState
 
         public void OnCreate()
         {
-            UiView.ResetUiView();
+            UiView.Init();
             WorldView.Init();
 
             UiView.MainMenuClicked += PresentMainMenuState;
@@ -78,7 +78,7 @@ namespace Controllers.States.GameplayState
             var playerView = Preloader.GetAsset<PlayerView>(Context.CatalogsHolder.PlayerCatalog.GameplayView);
             var playerModel = Context.SaveSystem.LoadModel<PlayerModel>();
             playerController = ControllerViewFactory.CreateControllerView<PlayerController>(playerView, playerModel);
-            var enemiesLayer = Context.GetGameplayLayer(GameplayLayer.Enemies);
+            var enemiesLayer = GameplayUtils.GetGameplayLayer(Context, GameplayLayer.Enemies);
             playerController.PlayerView.Activate(enemiesLayer, Vector3.zero);
         }
 

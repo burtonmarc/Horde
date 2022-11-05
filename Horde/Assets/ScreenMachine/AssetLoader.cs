@@ -55,6 +55,11 @@ namespace ScreenMachine
                 }
                 return go.GetComponent<T>();
             }
+
+            if (asset is Sprite sprite)
+            {
+                return asset as T;
+            }
             
             throw new NotSupportedException($"Couldn't find type of {typeof(T).FullName}");
         }

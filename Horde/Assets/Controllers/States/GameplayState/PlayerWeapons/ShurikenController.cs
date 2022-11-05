@@ -69,7 +69,7 @@ namespace Controllers.States.GameplayState.PlayerWeapons
 
             OnGameplayEvent(GameplayEvent.AddEntity, entityArgs);
             
-            var effectsLayer = Context.GetGameplayLayer(GameplayLayer.Effects);
+            var effectsLayer = GameplayUtils.GetGameplayLayer(Context, GameplayLayer.Effects);
             shurikenBulletController.ShurikenBulletView.Activate(effectsLayer, PlayerController.PlayerPosition);
         }
 

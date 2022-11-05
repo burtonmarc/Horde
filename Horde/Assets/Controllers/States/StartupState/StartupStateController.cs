@@ -19,7 +19,7 @@ namespace Controllers.States.StartupState
 
         public void OnCreate()
         {
-            UiView.ResetUiView();
+            UiView.Init();
             WorldView.Init();
 
             LoadSharedAddressablesAsync();
