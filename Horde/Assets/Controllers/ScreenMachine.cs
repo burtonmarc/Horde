@@ -19,6 +19,8 @@ namespace Controllers
         private readonly AssetLoaderFactory assetLoaderFactory = new AssetLoaderFactory();
 
         private bool isLoading;
+        
+        private readonly Queue<IStateBase> statesToCleanUp = new Queue<IStateBase>();
 
         public ScreenMachine(StatesCatalog statesCatalog, AssetLoaderFactory assetLoaderFactory)
         {
@@ -153,6 +155,8 @@ namespace Controllers
 
             state.OnCreate();
             
+            CleanStatesViews();
+            
             isLoading = false;
         }
 
@@ -161,7 +165,7 @@ namespace Controllers
             var state = screenStack.Peek();
             state.ReleaseAssets(state.GetStateId());
             state.OnDestroy();
-            state.DestroyViews();
+            statesToCleanUp.Enqueue(state);
             screenStack.Pop();
         }
 
@@ -172,6 +176,13 @@ namespace Controllers
             var nextState = screenStack.Peek();
             nextState.OnBringToFront();
             nextState.EnableRaycasts();
+        }
+        
+        private void CleanStatesViews() {
+            while(statesToCleanUp.Count > 0) {
+                var state = statesToCleanUp.Dequeue();
+                state.DestroyViews();
+            }
         }
     }
 }
