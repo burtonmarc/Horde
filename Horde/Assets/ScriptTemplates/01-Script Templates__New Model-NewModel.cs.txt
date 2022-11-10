@@ -1,0 +1,34 @@
+namespace Data.Models
+{
+    public class #SCRIPTNAME#Data : IModelData
+    {
+        public int CurrentWaveCount;
+    }
+    
+    public class #SCRIPTNAME# : SaveableBaseModel, IModel
+    {
+        private #SCRIPTNAME#Data renameThisData;
+        
+        // References
+        // End References
+        
+        // Unsaved Data
+        // End Unsaved Data
+        
+        // Saved Data
+        // End Saved Data
+
+        public #SCRIPTNAME#()
+        {
+        }
+
+        public override void AddModelData(IModelData modelData)
+        {
+            renameThisData = modelData as #SCRIPTNAME#Data;
+        }
+
+        public void InjectDependencies()
+        {
+        }
+    }
+}

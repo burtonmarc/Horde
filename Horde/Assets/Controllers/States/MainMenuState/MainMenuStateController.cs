@@ -96,7 +96,6 @@ namespace Controllers.States.MainMenuState
         {
             userModel.Level++;
             UiView.SetUserLevel(userModel.Level);
-            Context.SaveSystem.SaveModel(userModel);
         }
 
         private void PresentGameplayState()

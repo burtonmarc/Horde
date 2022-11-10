@@ -2,18 +2,42 @@ using System;
 
 namespace Data.Models
 {
-    [Serializable]
-    public class PlayerModel : IModel
-
+    public class PlayerModelData : IModelData
     {
-    public int Health;
-
-    public float MovementSpeed;
-
-    public PlayerModel()
-    {
-        Health = 100;
-        MovementSpeed = 2;
+        public int HealthPoints;
     }
+    
+    [Serializable]
+    public class PlayerModel : SaveableBaseModel, IModel
+    {
+        private PlayerModelData playerModelData;
+        
+        // References
+        
+        // Unsaved Data
+        public float MovementSpeed;
+        
+        // Saved Data
+        public int HealthPoints
+        {
+            get => playerModelData.HealthPoints;
+            set
+            {
+                playerModelData.HealthPoints = value;
+                SaveSystem.SaveModelData(playerModelData);
+            }
+        }
+
+        public PlayerModel()
+        {
+            // For Testing
+            HealthPoints = 100;
+            MovementSpeed = 2;
+        }
+
+        public override void AddModelData(IModelData modelData)
+        {
+            playerModelData = modelData as PlayerModelData;
+        }
     }
 }

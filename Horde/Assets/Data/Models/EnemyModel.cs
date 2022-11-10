@@ -12,7 +12,7 @@ namespace Data.Models
 
         public int HitDamage;
 
-        public EnemyModel(EnemyConfig enemyConfig)
+        public void InjectDependencies(EnemyConfig enemyConfig)
         {
             HitPoints = enemyConfig.HitPoints;
 

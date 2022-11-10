@@ -1,37 +1,32 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Data.Models;
 using UnityEngine;
 
 namespace Data
 {
     public class SaveSystem
     {
-        public void SaveModel<T>(T userModel)
+        public void SaveModelData<T>(T model)
         {
             var formatter = new BinaryFormatter();
 
             var path = Application.persistentDataPath + "/" + typeof(T).Name;
             var stream = new FileStream(path, FileMode.Create);
             
-            formatter.Serialize(stream, userModel);
+            formatter.Serialize(stream, model);
             stream.Close();
         }
 
-        public T LoadModel<T>() where T : class, new()
+        public T LoadModelData<T>(string path) where T : class
         {
-            var path = Application.persistentDataPath + "/" + typeof(T).Name;
-            if (File.Exists(path))
-            {
-                var formatter = new BinaryFormatter();
-                var stream = new FileStream(path, FileMode.Open);
+            var formatter = new BinaryFormatter();
+            var stream = new FileStream(path, FileMode.Open);
 
-                var model = formatter.Deserialize(stream) as T;
-                stream.Close();
+            var model = formatter.Deserialize(stream) as T;
+            stream.Close();
 
-                return model;
-            }
-            
-            return new T();
+            return model;
         }
     }
 }

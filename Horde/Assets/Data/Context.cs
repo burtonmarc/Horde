@@ -15,7 +15,7 @@ namespace Data
 
         public readonly IScreenMachine ScreenMachine;
 
-        public readonly SaveSystem SaveSystem;
+        public readonly ModelsFactory ModelsFactory;
 
         public readonly UserModel UserModel;
 
@@ -24,14 +24,14 @@ namespace Data
         public Context(CatalogsHolder catalogsHolder,
             AssetLoaderFactory assetLoaderFactory,
             IScreenMachine screenMachine,
-            SaveSystem saveSystem,
+            ModelsFactory modelsFactory,
             UserModel userModel
         )
         {
             CatalogsHolder = catalogsHolder;
             AssetLoaderFactory = assetLoaderFactory;
             ScreenMachine = screenMachine;
-            SaveSystem = saveSystem;
+            ModelsFactory = modelsFactory;
             UserModel = userModel;
         }
     }

@@ -51,7 +51,7 @@ namespace Controllers.States.GameplayState
             MarkedToDestroy = false;
         }
 
-        public virtual void Init(IModel model, object args = null)
+        public virtual void Init(SaveableBaseModel model, object args = null)
         {
             MarkedToDestroy = false;
         }

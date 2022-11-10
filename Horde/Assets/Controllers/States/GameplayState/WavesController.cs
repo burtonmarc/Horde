@@ -26,7 +26,7 @@ namespace Controllers.States.GameplayState
             
         }
 
-        public override void Init(IModel model, object args = null)
+        public override void Init(SaveableBaseModel model, object args = null)
         {
             base.Init(model, args);
 
@@ -86,11 +86,17 @@ namespace Controllers.States.GameplayState
         public void CreateEnemyAtRandomPosition()
         {
             var enemyEntry = Context.CatalogsHolder.EnemiesCatalog.GetCatalogEntry("EnemyTest");
+            
             var enemyView = Context.Preloader.GetAsset<EnemyView>(enemyEntry.EnemyGameplayView);
+            
             var enemyConfig = Context.Preloader.GetAsset<EnemyConfig>(enemyEntry.EnemyConfig);
-            var enemyModel = new EnemyModel(enemyConfig);
+            
+            var enemyModel = Context.ModelsFactory.GetEnemyModel();
+            enemyModel.InjectDependencies(enemyConfig);
+            
             var enemyController = ControllerViewFactory.CreateControllerView<EnemyController>(enemyView, enemyModel);
             enemyController.Activate();
+            
             var entityArgs = new EntityArgs {EntityType = EntityType.Enemy, Entity = enemyController};
             OnGameplayEvent(GameplayEvent.AddEntity, entityArgs);
             

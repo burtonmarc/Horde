@@ -25,9 +25,11 @@ namespace Controllers
             
             var saveSystem = new SaveSystem();
 
-            var userModel = saveSystem.LoadModel<UserModel>();
+            var modelsGateway = new ModelsFactory(saveSystem);
 
-            var context = new Context(catalogs, assetLoaderFactory, screenMachine, saveSystem, userModel);
+            var userModel = CreateUserModel(modelsGateway);
+
+            var context = new Context(catalogs, assetLoaderFactory, screenMachine, modelsGateway, userModel);
 
             ControllerViewFactory.Context = context;
             
@@ -47,6 +49,16 @@ namespace Controllers
         private void LateUpdate()
         {
             screenMachine.OnLateUpdate();
+        }
+
+        private UserModel CreateUserModel(ModelsFactory modelsFactory)
+        {
+            var equipmentModel = modelsFactory.GetEquipmentModel();
+            
+            var userModel = modelsFactory.GetUserModel();
+            userModel.InjectDependencies(equipmentModel);
+
+            return userModel;
         }
     }
 }

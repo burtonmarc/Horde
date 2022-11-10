@@ -3,17 +3,40 @@ using System;
 namespace Data.Models
 {
     [Serializable]
-    public class UserModel : IModel
+    public class UserModelData : IModelData
     {
         public int Level;
-
+    }
+    
+    public class UserModel : SaveableBaseModel, IModel
+    {
+        private UserModelData userModelData;
+        
+        // References
         public EquipmentModel EquipmentModel;
         
-        public UserModel()
+        // Unsaved Data
+        
+        // Saved Data
+
+        public int Level
         {
-            Level = 0;
-            
-            EquipmentModel = new EquipmentModel();
+            get => userModelData.Level;
+            set
+            {
+                userModelData.Level = value;
+                SaveSystem.SaveModelData(userModelData);
+            }
+        }
+        
+        public override void AddModelData(IModelData modelData)
+        {
+            userModelData = modelData as UserModelData;
+        }
+
+        public void InjectDependencies(EquipmentModel equipmentModel)
+        {
+            EquipmentModel = equipmentModel;
         }
     }
 }
