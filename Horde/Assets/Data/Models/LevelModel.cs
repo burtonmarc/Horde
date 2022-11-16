@@ -24,7 +24,7 @@ namespace Data.Models
             set
             {
                 levelModelData.CurrentWaveCount = value;
-                SaveSystem.SaveModelData(this);
+                BinarySaveSystem.SaveModelData(this);
             }
         }
 

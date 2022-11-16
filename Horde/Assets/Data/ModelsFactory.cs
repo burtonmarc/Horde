@@ -8,57 +8,36 @@ namespace Data
 {
     public class ModelsFactory
     {
-        private SaveSystem saveSystem;
+        private readonly BinarySaveSystem binarySaveSystem;
 
-        public ModelsFactory(SaveSystem saveSystem)
+        private readonly ModelCreator<UserModel, UserModelData> userModelCreator;
+        private readonly ModelCreator<EquipmentModel, EquipmentModelData> equipmentModelCreator;
+        private readonly ModelCreator<PlayerModel, PlayerModelData> playerModelCreator;
+        private readonly ModelCreator<LevelModel, LevelModelData> levelModelCreator;
+
+        public ModelsFactory(BinarySaveSystem binarySaveSystem)
         {
-            this.saveSystem = saveSystem;
-        }
-        
-        private T LoadOrCreateModelData<T>() where T : class, new()
-        {
-            var path = Application.persistentDataPath + "/" + typeof(T).Name;
+            this.binarySaveSystem = binarySaveSystem;
             
-            if (File.Exists(path))
-            {
-                return saveSystem.LoadModelData<T>(path);
-            }
-
-            return new T();
-        }
-
-        private T CreateModel<T>(IModelData modelData) where T : class, IModel, new()
-        {
-            if (typeof(SaveableBaseModel).IsAssignableFrom(typeof(T)))
-            {
-                var model = new T() as SaveableBaseModel;
-                model?.AddSaveSystem(saveSystem);
-                model?.AddModelData(modelData);
-                return model as T;
-            }
-            
-            return new T();
+            userModelCreator = new ModelCreator<UserModel, UserModelData>(binarySaveSystem);
+            equipmentModelCreator = new ModelCreator<EquipmentModel, EquipmentModelData>(binarySaveSystem);
+            playerModelCreator = new ModelCreator<PlayerModel, PlayerModelData>(binarySaveSystem);
+            levelModelCreator = new ModelCreator<LevelModel, LevelModelData>(binarySaveSystem);
         }
 
         public UserModel GetUserModel()
         {
-            var modelData = LoadOrCreateModelData<UserModelData>();
-            var model = CreateModel<UserModel>(modelData);
-            return model;
+            return userModelCreator.GetModel();
         }
 
         public EquipmentModel GetEquipmentModel()
         {
-            var modelData = LoadOrCreateModelData<EquipmentModelData>();
-            var model = CreateModel<EquipmentModel>(modelData);
-            return model;
+            return equipmentModelCreator.GetModel();
         }
 
         public PlayerModel GetPlayerModel()
         {
-            var modelData = LoadOrCreateModelData<PlayerModelData>();
-            var model = CreateModel<PlayerModel>(modelData);
-            return model;
+            return playerModelCreator.GetModel();
         }
 
         public EnemyModel GetEnemyModel()
@@ -68,9 +47,7 @@ namespace Data
 
         public LevelModel GetLevelModel()
         {
-            var modelData = LoadOrCreateModelData<LevelModelData>();
-            var model = CreateModel<LevelModel>(modelData);
-            return model;
+            return levelModelCreator.GetModel();
         }
     }
 }

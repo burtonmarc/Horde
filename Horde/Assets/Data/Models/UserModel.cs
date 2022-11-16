@@ -6,6 +6,8 @@ namespace Data.Models
     public class UserModelData : IModelData
     {
         public int Level;
+        public int Gold;
+        public int Gems;
     }
     
     public class UserModel : SaveableBaseModel, IModel
@@ -25,7 +27,27 @@ namespace Data.Models
             set
             {
                 userModelData.Level = value;
-                SaveSystem.SaveModelData(userModelData);
+                BinarySaveSystem.SaveModelData(userModelData);
+            }
+        }
+        
+        public int Gold
+        {
+            get => userModelData.Gold;
+            set
+            {
+                userModelData.Gold = value;
+                BinarySaveSystem.SaveModelData(userModelData);
+            }
+        }
+        
+        public int Gems
+        {
+            get => userModelData.Gems;
+            set
+            {
+                userModelData.Gems = value;
+                BinarySaveSystem.SaveModelData(userModelData);
             }
         }
         

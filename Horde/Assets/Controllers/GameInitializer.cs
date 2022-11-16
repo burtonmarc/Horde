@@ -1,9 +1,9 @@
-using System;
 using Catalogs.Scripts;
 using Controllers.States.GameplayState;
 using Controllers.States.StartupState;
 using Data;
 using Data.Models;
+using PlayFabCore;
 using ScreenMachine;
 using UnityEngine;
 
@@ -17,13 +17,22 @@ namespace Controllers
 
         void Start()
         {
+            var playFabLogin = new PlayFabLogin();
+            
+            playFabLogin.OnLoginComplete += OnLoginComplete;
+            
+            playFabLogin.StartLogin();
+        }
+
+        private void OnLoginComplete(DataGateway dataGateway)
+        {
             Application.targetFrameRate = 60;
             
             var assetLoaderFactory = new AssetLoaderFactory();
 
             screenMachine = new ScreenMachine(catalogs.StatesCatalog, assetLoaderFactory);
             
-            var saveSystem = new SaveSystem();
+            var saveSystem = new BinarySaveSystem();
 
             var modelsGateway = new ModelsFactory(saveSystem);
 
@@ -38,17 +47,17 @@ namespace Controllers
 
         private void Update()
         {
-            screenMachine.OnUpdate();
+            screenMachine?.OnUpdate();
         }
 
         private void FixedUpdate()
         {
-            screenMachine.OnFixedUpdate();
+            screenMachine?.OnFixedUpdate();
         }
 
         private void LateUpdate()
         {
-            screenMachine.OnLateUpdate();
+            screenMachine?.OnLateUpdate();
         }
 
         private UserModel CreateUserModel(ModelsFactory modelsFactory)

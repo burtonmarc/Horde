@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Data
 {
-    public class SaveSystem
+    public class BinarySaveSystem
     {
         public void SaveModelData<T>(T model)
         {

@@ -73,7 +73,7 @@ namespace ScreenMachine
             return Task.WhenAll(taskList);
         }
 
-        private void LoadAssets(List<Task> taskList)
+        private void LoadAssets(ICollection<Task> taskList)
         {
             foreach (var assetToLoad in assetsToLoad)
             {

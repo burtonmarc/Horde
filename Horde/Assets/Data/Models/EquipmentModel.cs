@@ -35,7 +35,7 @@ namespace Data.Models
             set
             {
                 equipmentModelData.EquippedWeapon = value;
-                SaveSystem.SaveModelData(equipmentModelData);
+                BinarySaveSystem.SaveModelData(equipmentModelData);
             }
         }
         
@@ -45,7 +45,7 @@ namespace Data.Models
             set
             {
                 equipmentModelData.EquippedNecklace = value;
-                SaveSystem.SaveModelData(equipmentModelData);
+                BinarySaveSystem.SaveModelData(equipmentModelData);
             }
         }
         
@@ -55,7 +55,7 @@ namespace Data.Models
             set
             {
                 equipmentModelData.EquippedGloves = value;
-                SaveSystem.SaveModelData(equipmentModelData);
+                BinarySaveSystem.SaveModelData(equipmentModelData);
             }
         }
         
@@ -65,7 +65,7 @@ namespace Data.Models
             set
             {
                 equipmentModelData.EquippedArmor = value;
-                SaveSystem.SaveModelData(equipmentModelData);
+                BinarySaveSystem.SaveModelData(equipmentModelData);
             }
         }
         
@@ -75,7 +75,7 @@ namespace Data.Models
             set
             {
                 equipmentModelData.EquippedBelt = value;
-                SaveSystem.SaveModelData(equipmentModelData);
+                BinarySaveSystem.SaveModelData(equipmentModelData);
             }
         }
         
@@ -85,7 +85,7 @@ namespace Data.Models
             set
             {
                 equipmentModelData.EquippedShoes = value;
-                SaveSystem.SaveModelData(equipmentModelData);
+                BinarySaveSystem.SaveModelData(equipmentModelData);
             }
         }
 
@@ -94,100 +94,11 @@ namespace Data.Models
             get => equipmentModelData.InventoryItems;
         }
 
-        public EquipmentModel()
-        {
-        }
-        
         public override void AddModelData(IModelData modelData)
         {
             equipmentModelData = modelData as EquipmentModelData;
-            
-            AddTestingData();
         }
-        
-        public void AddTestingData()
-        {
-            EquippedWeapon = new ItemData
-            {
-                ItemId = "Shuriken",
-                ItemLevel = 5,
-                ItemRarity = "Common",
-                ItemType = "Weapon"
-            };
-            
-            EquippedNecklace = new ItemData
-            {
-                ItemId = "Lock",
-                ItemLevel = 0,
-                ItemRarity = "Common",
-                ItemType = "Necklace"
-            };
-            
-            EquippedGloves = new ItemData
-            {
-                ItemId = "Lock",
-                ItemLevel = 0,
-                ItemRarity = "Common",
-                ItemType = "Gloves"
-            };
 
-            EquippedArmor = new ItemData
-            {
-                ItemId = "Armor",
-                ItemLevel = 8,
-                ItemRarity = "Uncommon",
-                ItemType = "Armor"
-            };
-            
-            EquippedBelt = new ItemData
-            {
-                ItemId = "Lock",
-                ItemLevel = 0,
-                ItemRarity = "Common",
-                ItemType = "Belt"
-            };
-            
-            EquippedShoes = new ItemData
-            {
-                ItemId = "Lock",
-                ItemLevel = 0,
-                ItemRarity = "Common",
-                ItemType = "Shoes"
-            };
-
-            AddInventoryItem(new ItemData
-            {
-                ItemId = "Armor",
-                ItemLevel = 1,
-                ItemRarity = "Uncommon",
-                ItemType = "Armor"
-            });
-            
-            AddInventoryItem(new ItemData
-            {
-                ItemId = "Shuriken",
-                ItemLevel = 1,
-                ItemRarity = "Legendary",
-                ItemType = "Weapon"
-            });
-            
-            AddInventoryItem(new ItemData
-            {
-                ItemId = "Armor",
-                ItemLevel = 1,
-                ItemRarity = "Uncommon",
-                ItemType = "Armor"
-            });
-            
-            AddInventoryItem(new ItemData
-            {
-                ItemId = "Armor",
-                ItemLevel = 1,
-                ItemRarity = "Uncommon",
-                ItemType = "Armor"
-            });
-        }
-        
         public void AddInventoryItem(ItemData itemData)
         {
             equipmentModelData.InventoryItems.Add(itemData);

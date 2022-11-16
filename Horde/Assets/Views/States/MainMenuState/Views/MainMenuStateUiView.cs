@@ -10,6 +10,8 @@ namespace Views.States.MainMenuState.Views
     public class MainMenuStateUiView : UiView
     {
         public TextMeshProUGUI UserLevel;
+        public TextMeshProUGUI Gold;
+        public TextMeshProUGUI Gems;
         
         public Button LevelUpButton;
         
@@ -55,6 +57,16 @@ namespace Views.States.MainMenuState.Views
         public void SetUserLevel(int userLevel)
         {
             UserLevel.text = userLevel.ToString();
+        }
+        
+        public void SetGold(int gold)
+        {
+            Gold.text = gold.ToString();
+        }
+
+        public void SetGems(int gems)
+        {
+            Gems.text = gems.ToString();
         }
         
         public void AddEquippedItem(Sprite itemIcon, int itemLevel, string itemRarity, string itemType)
