@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Data.Models;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
 
-namespace PlayFabCore
+namespace Persistance
 {
     public class UserDataUpdater
     {
@@ -17,11 +18,11 @@ namespace PlayFabCore
             dirtyFields = new Dictionary<string, string>();
         }
 
-        public void AddFieldAsDirty<T>(T dirtyField) where T : class
+        public void AddFieldAsDirty<T>(T dirtyField) where T : IModelData
         {
             var fieldName = typeof(T).Name;
-            var json = JsonUtility.ToJson(dirtyField);
-            dirtyFields.Add(fieldName, json);
+            var json = JsonUtility.ToJson(dirtyField);    
+            dirtyFields.Add(fieldName, json);       
         }
 
         public bool CanUpdate()

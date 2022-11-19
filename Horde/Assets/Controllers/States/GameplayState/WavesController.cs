@@ -91,7 +91,7 @@ namespace Controllers.States.GameplayState
             
             var enemyConfig = Context.Preloader.GetAsset<EnemyConfig>(enemyEntry.EnemyConfig);
             
-            var enemyModel = Context.ModelsFactory.GetEnemyModel();
+            var enemyModel = Context.AModelFactory.GetEnemyModel();
             enemyModel.InjectDependencies(enemyConfig);
             
             var enemyController = ControllerViewFactory.CreateControllerView<EnemyController>(enemyView, enemyModel);

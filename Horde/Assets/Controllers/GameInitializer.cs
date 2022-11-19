@@ -1,9 +1,11 @@
 using Catalogs.Scripts;
+using Controllers.ModelsFactory;
 using Controllers.States.GameplayState;
 using Controllers.States.StartupState;
 using Data;
 using Data.Models;
-using PlayFabCore;
+using Persistance;
+using Persistance.Gateway;
 using ScreenMachine;
 using UnityEngine;
 
@@ -32,13 +34,11 @@ namespace Controllers
 
             screenMachine = new ScreenMachine(catalogs.StatesCatalog, assetLoaderFactory);
             
-            var saveSystem = new BinarySaveSystem();
+            var modelFactory = new ModelFactory(dataGateway);
 
-            var modelsGateway = new ModelsFactory(saveSystem);
+            var userModel = CreateUserModel(modelFactory);
 
-            var userModel = CreateUserModel(modelsGateway);
-
-            var context = new Context(catalogs, assetLoaderFactory, screenMachine, modelsGateway, userModel);
+            var context = new Context(catalogs, assetLoaderFactory, screenMachine, modelFactory, userModel);
 
             ControllerViewFactory.Context = context;
             
@@ -60,11 +60,11 @@ namespace Controllers
             screenMachine?.OnLateUpdate();
         }
 
-        private UserModel CreateUserModel(ModelsFactory modelsFactory)
+        private UserModel CreateUserModel(ModelFactory modelFactory)
         {
-            var equipmentModel = modelsFactory.GetEquipmentModel();
+            var equipmentModel = modelFactory.GetEquipmentModel();
             
-            var userModel = modelsFactory.GetUserModel();
+            var userModel = modelFactory.GetUserModel();
             userModel.InjectDependencies(equipmentModel);
 
             return userModel;

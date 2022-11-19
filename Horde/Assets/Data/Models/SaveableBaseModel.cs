@@ -2,11 +2,11 @@ namespace Data.Models
 {
     public abstract class SaveableBaseModel
     {
-        protected BinarySaveSystem BinarySaveSystem;
+        protected IDataGateway DataGateway;
 
-        public void AddSaveSystem(BinarySaveSystem binarySaveSystem)
+        public void AddSaveSystem(IDataGateway dataGateway)
         {
-            BinarySaveSystem = binarySaveSystem;
+            DataGateway = dataGateway;
         }
 
         public abstract void AddModelData(IModelData modelData);

@@ -35,7 +35,7 @@ namespace Data.Models
             set
             {
                 equipmentModelData.EquippedWeapon = value;
-                BinarySaveSystem.SaveModelData(equipmentModelData);
+                DataGateway.UpdateUserData(equipmentModelData);
             }
         }
         
@@ -45,7 +45,7 @@ namespace Data.Models
             set
             {
                 equipmentModelData.EquippedNecklace = value;
-                BinarySaveSystem.SaveModelData(equipmentModelData);
+                DataGateway.UpdateUserData(equipmentModelData);
             }
         }
         
@@ -55,7 +55,7 @@ namespace Data.Models
             set
             {
                 equipmentModelData.EquippedGloves = value;
-                BinarySaveSystem.SaveModelData(equipmentModelData);
+                DataGateway.UpdateUserData(equipmentModelData);
             }
         }
         
@@ -65,7 +65,7 @@ namespace Data.Models
             set
             {
                 equipmentModelData.EquippedArmor = value;
-                BinarySaveSystem.SaveModelData(equipmentModelData);
+                DataGateway.UpdateUserData(equipmentModelData);
             }
         }
         
@@ -75,7 +75,7 @@ namespace Data.Models
             set
             {
                 equipmentModelData.EquippedBelt = value;
-                BinarySaveSystem.SaveModelData(equipmentModelData);
+                DataGateway.UpdateUserData(equipmentModelData);
             }
         }
         
@@ -85,7 +85,7 @@ namespace Data.Models
             set
             {
                 equipmentModelData.EquippedShoes = value;
-                BinarySaveSystem.SaveModelData(equipmentModelData);
+                DataGateway.UpdateUserData(equipmentModelData);
             }
         }
 

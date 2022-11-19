@@ -5,7 +5,7 @@ using PlayFab;
 using PlayFab.SharedModels;
 using UnityEngine;
 
-namespace PlayFabCore
+namespace Persistance
 {
     public interface IRequester<TResult>
         where TResult: PlayFabResultCommon
@@ -70,12 +70,14 @@ namespace PlayFabCore
         private void OnSuccess(TResult result)
         {
             requestError.HideLoading();
-            Debug.Log("Request Received with data : " + result);
+            Debug.Log("Request Received with data : " + result.ToJson());
             tcs.SetResult(result);
         }
 
         private async void OnError(PlayFabError error)
         {
+            Debug.Log($"PlayFab Error: {error}");
+            
             var isConnectionError = GetIsConnectionError(error);
             if (isConnectionError)
             {

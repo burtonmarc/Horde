@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using PlayFab;
+using Data.Models;
 using PlayFab.ClientModels;
 using UnityEngine;
 
-namespace PlayFabCore
+namespace Persistance.Gateway
 {
     public class TitleDataGateway
     {
@@ -16,10 +15,16 @@ namespace PlayFabCore
             titleData = titleDataResult.Data;
         }
         
-        public T Get<T>()
+        public T Get<T>() where T : class, IModelData
         {
             titleData.TryGetValue(typeof(T).Name, out var json);
-            return JsonUtility.FromJson<T>(json);
+
+            if (json != null)
+            {
+                return JsonUtility.FromJson<T>(json);
+            }
+
+            return null;
         }
     }
 }

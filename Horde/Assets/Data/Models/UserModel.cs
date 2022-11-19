@@ -27,7 +27,7 @@ namespace Data.Models
             set
             {
                 userModelData.Level = value;
-                BinarySaveSystem.SaveModelData(userModelData);
+                DataGateway.UpdateUserData(userModelData);
             }
         }
         
@@ -37,7 +37,7 @@ namespace Data.Models
             set
             {
                 userModelData.Gold = value;
-                BinarySaveSystem.SaveModelData(userModelData);
+                DataGateway.UpdateUserData(userModelData);
             }
         }
         
@@ -47,7 +47,7 @@ namespace Data.Models
             set
             {
                 userModelData.Gems = value;
-                BinarySaveSystem.SaveModelData(userModelData);
+                DataGateway.UpdateUserData(userModelData);
             }
         }
         

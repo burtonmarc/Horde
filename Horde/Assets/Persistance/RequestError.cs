@@ -1,4 +1,4 @@
-namespace PlayFabCore
+namespace Persistance
 {
     public class RequestError
     {

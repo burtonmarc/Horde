@@ -1,14 +1,15 @@
 using System.IO;
 using Data.Models;
+using Persistance.Gateway;
 using UnityEngine;
 
-namespace Data
+namespace Controllers.ModelsFactory
 {
     public class ModelCreator<TModel, TModelData>
         where TModel : class, IModel, new()
         where TModelData : class, IModelData, new()
     {
-        private BinarySaveSystem binarySaveSystem;
+        private DataGateway dataGateway;
 
         public TModel GetModel()
         {
@@ -17,21 +18,15 @@ namespace Data
             return model;
         }
 
-        public ModelCreator(BinarySaveSystem binarySaveSystem)
+        public ModelCreator(DataGateway dataGateway)
         {
-            this.binarySaveSystem = binarySaveSystem;
+            this.dataGateway = dataGateway;
         }
-        
+
         private TModelData LoadOrCreateModelData()
         {
-            var path = Application.persistentDataPath + "/" + typeof(TModelData).Name;
-            
-            if (File.Exists(path))
-            {
-                return binarySaveSystem.LoadModelData<TModelData>(path);
-            }
-
-            return new TModelData();
+            var modelData = dataGateway.GetUserData<TModelData>();
+            return modelData;
         }
 
         private TModel CreateModel(IModelData modelData)
@@ -39,7 +34,7 @@ namespace Data
             if (typeof(SaveableBaseModel).IsAssignableFrom(typeof(TModel)))
             {
                 var model = new TModel() as SaveableBaseModel;
-                model?.AddSaveSystem(binarySaveSystem);
+                model?.AddSaveSystem(dataGateway);
                 model?.AddModelData(modelData);
                 return model as TModel;
             }

@@ -24,7 +24,7 @@ namespace Data.Models
             set
             {
                 levelModelData.CurrentWaveCount = value;
-                BinarySaveSystem.SaveModelData(this);
+                DataGateway.UpdateUserData(levelModelData);
             }
         }
 

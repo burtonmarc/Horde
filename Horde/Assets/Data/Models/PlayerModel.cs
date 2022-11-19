@@ -24,7 +24,7 @@ namespace Data.Models
             set
             {
                 playerModelData.HealthPoints = value;
-                BinarySaveSystem.SaveModelData(playerModelData);
+                DataGateway.UpdateUserData(playerModelData);
             }
         }
 

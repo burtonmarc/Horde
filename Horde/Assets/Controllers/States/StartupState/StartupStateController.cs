@@ -2,9 +2,9 @@ using System.Collections;
 using System.Threading.Tasks;
 using Controllers.States.MainMenuState;
 using Data;
-using Game.States.StartupState;
 using ScreenMachine;
 using UnityEngine;
+using Views.States.StartupState;
 
 namespace Controllers.States.StartupState
 {

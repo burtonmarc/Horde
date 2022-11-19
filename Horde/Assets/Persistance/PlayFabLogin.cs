@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Controllers;
 using Data.Models;
+using Persistance.Gateway;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-namespace PlayFabCore
+namespace Persistance
 {
     public class PlayFabLogin
     {
@@ -16,7 +18,8 @@ namespace PlayFabCore
 
         public void StartLogin()
         {
-            var request = new LoginWithCustomIDRequest { CustomId = SystemInfo.deviceUniqueIdentifier, CreateAccount = true};
+            //var request = new LoginWithCustomIDRequest { CustomId = SystemInfo.deviceUniqueIdentifier, CreateAccount = true};
+            var request = new LoginWithCustomIDRequest { CustomId = Random.Range(1000, 10000).ToString(), CreateAccount = true};
             PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
         
             //var androidLoginRequest = new LoginWithAndroidDeviceIDRequest
@@ -46,11 +49,13 @@ namespace PlayFabCore
             
             Debug.Log("User Data Retrieved");
 
-            var userDataGateway = new UserDataGateway(userDataResult, userDataUpdater);
+            var binarySaveSystem = new BinaryGateway();
+
+            var userDataGateway = new UserDataGateway(binarySaveSystem, userDataResult, userDataUpdater);
 
             dataGateway.AddUserDataGateway(userDataGateway);
             
-            OnUserDataResult(userDataResult, userDataGateway);
+            OnUserDataResult(userDataResult);
         }
 
         private void OnLoginFailure(PlayFabError error)
@@ -58,7 +63,7 @@ namespace PlayFabCore
             Debug.LogError(error.GenerateErrorReport());
         }
     
-        private void OnUserDataResult(GetUserDataResult userDataResult, UserDataGateway userDataGateway)
+        private void OnUserDataResult(GetUserDataResult userDataResult)
         {
             if (!userDataResult.Data.ContainsKey(typeof(UserInitializedModelData).Name))
             {
@@ -75,17 +80,25 @@ namespace PlayFabCore
         private async void InitializeUser()
         {
             Debug.Log("Adding initial User Data");
-            
-            var updateTasks = new List<Task>();
 
-            await dataGateway.UpdateUserData(dataGateway.GetTitleData<EquipmentModelData>());
-            
-            //updateTasks.Add(dataGateway.UpdateUserData(dataGateway.GetTitleData<UserModelData>()));
-            //updateTasks.Add(dataGateway.UpdateUserData(dataGateway.GetTitleData<EquipmentModelData>()));
-            
-            //await Task.WhenAll(updateTasks);
+            var updateTasks = new List<Task>
+            {
+                dataGateway.UpdateUserData(new UserInitializedModelData()),
+                dataGateway.UpdateUserData(dataGateway.GetTitleData<UserModelData>()),
+                dataGateway.UpdateUserData(dataGateway.GetTitleData<EquipmentModelData>())
+            };
+
+            await Task.WhenAll(updateTasks);
             
             Debug.Log("Initial User Data added successfully");
+            
+            Debug.Log("Get User Data after adding initial User Data");
+            
+            var userDataResult = await GetUserData();
+            
+            dataGateway.UpdateUserDataResult(userDataResult);
+            
+            Debug.Log("User Data after initialization successfully retrieved");
             
             OnLoginComplete?.Invoke(dataGateway);
         }
@@ -96,6 +109,7 @@ namespace PlayFabCore
             {
                 Keys = new List<string>
                 {
+                    nameof(UserInitializedModelData),
                     nameof(UserModelData),
                     nameof(EquipmentModelData),
                 }
