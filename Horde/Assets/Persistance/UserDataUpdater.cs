@@ -13,16 +13,30 @@ namespace Persistance
     
         private readonly Dictionary<string, string> dirtyFields;
 
+        private readonly List<string> fieldsUpdated;
+        
+        private readonly List<Task<UpdateUserDataResult>> requesters;
+
         public UserDataUpdater()
         {
             dirtyFields = new Dictionary<string, string>();
+            fieldsUpdated = new List<string>(DirtyFieldsNecessaryToUpdate);
+            requesters = new List<Task<UpdateUserDataResult>>();
         }
 
-        public void AddFieldAsDirty<T>(T dirtyField) where T : IModelData
+        public void AddFieldAsDirty<T>(T dirtyField) where T : ISerializableData
         {
             var fieldName = typeof(T).Name;
-            var json = JsonUtility.ToJson(dirtyField);    
-            dirtyFields.Add(fieldName, json);       
+            var json = JsonUtility.ToJson(dirtyField);
+
+            if (dirtyFields.ContainsKey(fieldName))
+            {
+                dirtyFields[fieldName] = json;
+            }
+            else
+            {
+                dirtyFields.Add(fieldName, json);
+            }
         }
 
         public bool CanUpdate()
@@ -32,7 +46,7 @@ namespace Persistance
 
         public async Task Update()
         {
-            var requesters = new List<Task<UpdateUserDataResult>>();
+            // TODO: Test this to send all dirty fields in the same Data. 10?
             foreach (var dirtyField in dirtyFields)
             {
                 var request = new UpdateUserDataRequest{
@@ -44,12 +58,20 @@ namespace Persistance
                 var requester = new Requester<UpdateUserDataRequest, UpdateUserDataResult>(
                     PlayFabClientAPI.UpdateUserData,
                     request,
-                    new RequestError());
+                    RequestError.Instance);
                 var requestTask = requester.RequestAsync();
                 requesters.Add(requestTask);
+                fieldsUpdated.Add(dirtyField.Key);
             }
 
             await Task.WhenAll(requesters);
+            
+            requesters.Clear();
+
+            foreach (var fieldUpdated in fieldsUpdated)
+            {
+                dirtyFields.Remove(fieldUpdated);
+            }
         }
     }
 }

@@ -1,13 +1,11 @@
-using System.IO;
 using Data.Models;
 using Persistance.Gateway;
-using UnityEngine;
 
 namespace Controllers.ModelsFactory
 {
     public class ModelCreator<TModel, TModelData>
         where TModel : class, IModel, new()
-        where TModelData : class, IModelData, new()
+        where TModelData : class, ISerializableData
     {
         private DataGateway dataGateway;
 
@@ -29,13 +27,13 @@ namespace Controllers.ModelsFactory
             return modelData;
         }
 
-        private TModel CreateModel(IModelData modelData)
+        private TModel CreateModel(ISerializableData userData)
         {
             if (typeof(SaveableBaseModel).IsAssignableFrom(typeof(TModel)))
             {
                 var model = new TModel() as SaveableBaseModel;
                 model?.AddSaveSystem(dataGateway);
-                model?.AddModelData(modelData);
+                model?.AddModelData(userData);
                 return model as TModel;
             }
             

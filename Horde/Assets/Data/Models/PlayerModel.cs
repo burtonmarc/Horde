@@ -2,7 +2,14 @@ using System;
 
 namespace Data.Models
 {
-    public class PlayerModelData : IModelData
+    [Serializable]
+    public class PlayerTitleData : ISerializableData
+    {
+        
+    }
+    
+    [Serializable]
+    public class PlayerUserData : ISerializableData
     {
         public int HealthPoints;
     }
@@ -10,7 +17,7 @@ namespace Data.Models
     [Serializable]
     public class PlayerModel : SaveableBaseModel, IModel
     {
-        private PlayerModelData playerModelData;
+        private PlayerUserData playerUserData;
         
         // References
         
@@ -20,11 +27,11 @@ namespace Data.Models
         // Saved Data
         public int HealthPoints
         {
-            get => playerModelData.HealthPoints;
+            get => playerUserData.HealthPoints;
             set
             {
-                playerModelData.HealthPoints = value;
-                DataGateway.UpdateUserData(playerModelData);
+                playerUserData.HealthPoints = value;
+                UserDataUpdater.UpdateUserData(playerUserData);
             }
         }
 
@@ -35,9 +42,9 @@ namespace Data.Models
             MovementSpeed = 2;
         }
 
-        public override void AddModelData(IModelData modelData)
+        public override void AddModelData(ISerializableData userData)
         {
-            playerModelData = modelData as PlayerModelData;
+            playerUserData = userData as PlayerUserData;
         }
     }
 }

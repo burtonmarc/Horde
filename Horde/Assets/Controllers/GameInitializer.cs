@@ -38,7 +38,7 @@ namespace Controllers
 
             var userModel = CreateUserModel(modelFactory);
 
-            var context = new Context(catalogs, assetLoaderFactory, screenMachine, modelFactory, userModel);
+            var context = new Context(catalogs, assetLoaderFactory, screenMachine, modelFactory, dataGateway, userModel);
 
             ControllerViewFactory.Context = context;
             

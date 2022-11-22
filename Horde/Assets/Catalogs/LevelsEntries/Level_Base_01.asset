@@ -14,43 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Level_Base_01
   Waves:
-  - EnemyId: EnemyTest
-    EnemiesInWave: 10
-    TimeUntilNextWave: 10
-    TimeBetweenEnemySpawn: 1
-  - EnemyId: EnemyTest
-    EnemiesInWave: 10
-    TimeUntilNextWave: 10
-    TimeBetweenEnemySpawn: 1
-  - EnemyId: EnemyTest
-    EnemiesInWave: 15
-    TimeUntilNextWave: 10
-    TimeBetweenEnemySpawn: 0.5
-  - EnemyId: EnemyTest
-    EnemiesInWave: 15
-    TimeUntilNextWave: 10
-    TimeBetweenEnemySpawn: 0.5
-  - EnemyId: EnemyTest
-    EnemiesInWave: 15
-    TimeUntilNextWave: 10
-    TimeBetweenEnemySpawn: 0.5
-  - EnemyId: EnemyTest
-    EnemiesInWave: 20
-    TimeUntilNextWave: 10
-    TimeBetweenEnemySpawn: 0.1
-  - EnemyId: EnemyTest
-    EnemiesInWave: 20
-    TimeUntilNextWave: 10
-    TimeBetweenEnemySpawn: 0.1
-  - EnemyId: EnemyTest
-    EnemiesInWave: 20
-    TimeUntilNextWave: 10
-    TimeBetweenEnemySpawn: 0.1
-  - EnemyId: EnemyTest
-    EnemiesInWave: 20
-    TimeUntilNextWave: 10
-    TimeBetweenEnemySpawn: 0.1
-  - EnemyId: EnemyTest
-    EnemiesInWave: 20
-    TimeUntilNextWave: 10
-    TimeBetweenEnemySpawn: 0.1
+  - SpawnableEnemies:
+    - EnemyEntry: {fileID: 11400000, guid: 95ebd4d21c3154b0b9653da52451854d, type: 2}
+      SpawnProbability: 100
+    EnemiesSpawnedPerSecond: 5
+    WaveTimeInSeconds: 30
+  - SpawnableEnemies:
+    - EnemyEntry: {fileID: 11400000, guid: 95ebd4d21c3154b0b9653da52451854d, type: 2}
+      SpawnProbability: 100
+    EnemiesSpawnedPerSecond: 10
+    WaveTimeInSeconds: 30
+  - SpawnableEnemies:
+    - EnemyEntry: {fileID: 11400000, guid: 95ebd4d21c3154b0b9653da52451854d, type: 2}
+      SpawnProbability: 100
+    EnemiesSpawnedPerSecond: 15
+    WaveTimeInSeconds: 30
+  - SpawnableEnemies:
+    - EnemyEntry: {fileID: 11400000, guid: 95ebd4d21c3154b0b9653da52451854d, type: 2}
+      SpawnProbability: 100
+    EnemiesSpawnedPerSecond: 20
+    WaveTimeInSeconds: 30
+  - SpawnableEnemies:
+    - EnemyEntry: {fileID: 11400000, guid: 95ebd4d21c3154b0b9653da52451854d, type: 2}
+      SpawnProbability: 100
+    EnemiesSpawnedPerSecond: 30
+    WaveTimeInSeconds: 30

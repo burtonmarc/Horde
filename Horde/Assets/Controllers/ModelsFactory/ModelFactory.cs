@@ -8,19 +8,19 @@ namespace Controllers.ModelsFactory
     {
         private readonly DataGateway dataGateway;
 
-        private readonly ModelCreator<UserModel, UserModelData> userModelCreator;
-        private readonly ModelCreator<EquipmentModel, EquipmentModelData> equipmentModelCreator;
-        private readonly ModelCreator<PlayerModel, PlayerModelData> playerModelCreator;
-        private readonly ModelCreator<LevelModel, LevelModelData> levelModelCreator;
+        private readonly ModelCreator<UserModel, UserUserData> userModelCreator;
+        private readonly ModelCreator<EquipmentModel, EquipmentUserData> equipmentModelCreator;
+        private readonly ModelCreator<PlayerModel, PlayerUserData> playerModelCreator;
+        private readonly ModelCreator<LevelModel, LevelUserData> levelModelCreator;
 
         public ModelFactory(DataGateway dataGateway)
         {
             this.dataGateway = dataGateway;
 
-            userModelCreator = new ModelCreator<UserModel, UserModelData>(dataGateway);
-            equipmentModelCreator = new ModelCreator<EquipmentModel, EquipmentModelData>(dataGateway);
-            playerModelCreator = new ModelCreator<PlayerModel, PlayerModelData>(dataGateway);
-            levelModelCreator = new ModelCreator<LevelModel, LevelModelData>(dataGateway);
+            userModelCreator = new ModelCreator<UserModel, UserUserData>(dataGateway);
+            equipmentModelCreator = new ModelCreator<EquipmentModel, EquipmentUserData>(dataGateway);
+            playerModelCreator = new ModelCreator<PlayerModel, PlayerUserData>(dataGateway);
+            levelModelCreator = new ModelCreator<LevelModel, LevelUserData>(dataGateway);
         }
 
         public override UserModel GetUserModel()

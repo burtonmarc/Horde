@@ -7,7 +7,7 @@ namespace Data.Models
         
     }
 
-    public interface IModelData
+    public interface ISerializableData
     {
         
     }

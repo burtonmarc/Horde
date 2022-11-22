@@ -34,11 +34,12 @@ namespace Controllers.States.MainMenuState
             UiView.Init();
             WorldView.Init();
             
-            //UiView.SetUserLevel(userModel.Level);
-            //UiView.SetGold(userModel.Gold);
-            //UiView.SetGems(userModel.Gems);
-            //AddEquippedItemsToView();
-            //AddInventoryItemsToView();
+            UiView.SetUserLevel(userModel.Level);
+            UiView.SetGold(userModel.Gold);
+            UiView.SetGems(userModel.Gems);
+            UiView.SetChapterLevel(userModel.MainChapterLevel);
+            AddEquippedItemsToView();
+            AddInventoryItemsToView();
 
             UiView.LevelUpClicked += LevelUp;
             UiView.StartGameClicked += PresentGameplayState;
@@ -111,12 +112,12 @@ namespace Controllers.States.MainMenuState
             
             Preloader.AddReference(Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken").WeaponConfig);
 
-            //Preloader.AddReference(Context.CatalogsHolder.ItemsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedWeapon.ItemId).ItemIcon);
-            //Preloader.AddReference(Context.CatalogsHolder.ItemsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedNecklace.ItemId).ItemIcon);
-            //Preloader.AddReference(Context.CatalogsHolder.ItemsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedGloves.ItemId).ItemIcon);
-            //Preloader.AddReference(Context.CatalogsHolder.ItemsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedArmor.ItemId).ItemIcon);
-            //Preloader.AddReference(Context.CatalogsHolder.ItemsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedBelt.ItemId).ItemIcon);
-            //Preloader.AddReference(Context.CatalogsHolder.ItemsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedShoes.ItemId).ItemIcon);
+            Preloader.AddReference(Context.CatalogsHolder.ItemsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedWeapon.ItemId).ItemIcon);
+            Preloader.AddReference(Context.CatalogsHolder.ItemsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedNecklace.ItemId).ItemIcon);
+            Preloader.AddReference(Context.CatalogsHolder.ItemsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedGloves.ItemId).ItemIcon);
+            Preloader.AddReference(Context.CatalogsHolder.ItemsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedArmor.ItemId).ItemIcon);
+            Preloader.AddReference(Context.CatalogsHolder.ItemsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedBelt.ItemId).ItemIcon);
+            Preloader.AddReference(Context.CatalogsHolder.ItemsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedShoes.ItemId).ItemIcon);
 
             var task = Preloader.LoadAsync();
 

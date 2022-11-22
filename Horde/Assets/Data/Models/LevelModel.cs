@@ -1,46 +1,48 @@
+using System;
 using System.Collections.Generic;
 using Catalogs.Scripts.Entries;
 
 namespace Data.Models
 {
-    public class LevelModelData : IModelData
+    [Serializable]
+    public class LevelTitleData : ISerializableData
     {
-        public int CurrentWaveCount;
+        public List<Wave> Waves;
+    }
+    
+    [Serializable]
+    public class LevelUserData : ISerializableData
+    {
+        public int CurrentWave;
     }
     
     public class LevelModel : SaveableBaseModel, IModel
     {
-        private LevelModelData levelModelData;
+        private LevelUserData levelUserData;
         
         // References
         
         // Unsaved Data
-        public List<Wave> Waves;
         
         // Saved Data
-        public int CurrentWaveCount
+        public int CurrentWave
         {
-            get => levelModelData.CurrentWaveCount;
+            get => levelUserData.CurrentWave;
             set
             {
-                levelModelData.CurrentWaveCount = value;
-                DataGateway.UpdateUserData(levelModelData);
+                levelUserData.CurrentWave = value;
+                UserDataUpdater.UpdateUserData(levelUserData);
             }
         }
 
         public LevelModel()
         {
-            CurrentWaveCount = 0;
+            CurrentWave = 0;
         }
 
-        public override void AddModelData(IModelData modelData)
+        public override void AddModelData(ISerializableData userData)
         {
-            levelModelData = modelData as LevelModelData;
-        }
-
-        public void InjectDependencies(List<Wave> waves)
-        {
-            Waves = waves;
+            levelUserData = userData as LevelUserData;
         }
     }
 }

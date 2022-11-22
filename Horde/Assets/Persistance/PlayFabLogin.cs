@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Controllers;
+using Data;
 using Data.Models;
 using Persistance.Gateway;
+using Persistance.Login;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Persistance
 {
@@ -18,15 +18,8 @@ namespace Persistance
 
         public void StartLogin()
         {
-            //var request = new LoginWithCustomIDRequest { CustomId = SystemInfo.deviceUniqueIdentifier, CreateAccount = true};
-            var request = new LoginWithCustomIDRequest { CustomId = Random.Range(1000, 10000).ToString(), CreateAccount = true};
-            PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
-        
-            //var androidLoginRequest = new LoginWithAndroidDeviceIDRequest
-            //{
-            //    AndroidDeviceId = SystemInfo.deviceUniqueIdentifier, CreateAccount = true
-            //};
-            //PlayFabClientAPI.LoginWithAndroidDeviceID(androidLoginRequest, OnLoginSuccess, OnLoginFailure);
+            var login = LoginFactory.Create(RequestError.Instance);
+            login.Login(OnLoginSuccess);
         }
 
         private async void OnLoginSuccess(LoginResult result)
@@ -58,14 +51,9 @@ namespace Persistance
             OnUserDataResult(userDataResult);
         }
 
-        private void OnLoginFailure(PlayFabError error)
-        {
-            Debug.LogError(error.GenerateErrorReport());
-        }
-    
         private void OnUserDataResult(GetUserDataResult userDataResult)
         {
-            if (!userDataResult.Data.ContainsKey(typeof(UserInitializedModelData).Name))
+            if (!userDataResult.Data.ContainsKey(typeof(UserInitializedUserData).Name))
             {
                 Debug.Log("User is NOT initialized, initializing");
                 InitializeUser();
@@ -81,14 +69,18 @@ namespace Persistance
         {
             Debug.Log("Adding initial User Data");
 
-            var updateTasks = new List<Task>
-            {
-                dataGateway.UpdateUserData(new UserInitializedModelData()),
-                dataGateway.UpdateUserData(dataGateway.GetTitleData<UserModelData>()),
-                dataGateway.UpdateUserData(dataGateway.GetTitleData<EquipmentModelData>())
-            };
+            //var updateTasks = new List<Task>
+            //{
+            //    dataGateway.UpdateUserData(new UserInitializedModelData()),
+            //    dataGateway.UpdateUserData(dataGateway.GetTitleData<UserModelData>()),
+            //    dataGateway.UpdateUserData(dataGateway.GetTitleData<EquipmentModelData>())
+            //};
 
-            await Task.WhenAll(updateTasks);
+            //await Task.WhenAll(updateTasks);
+
+            await dataGateway.UpdateUserData(new UserInitializedUserData());
+            await dataGateway.UpdateUserData(new UserUserData(dataGateway.GetTitleData<UserTitleData>()));
+            await dataGateway.UpdateUserData(new EquipmentUserData(dataGateway.GetTitleData<EquipmentTitleData>()));
             
             Debug.Log("Initial User Data added successfully");
             
@@ -109,16 +101,16 @@ namespace Persistance
             {
                 Keys = new List<string>
                 {
-                    nameof(UserInitializedModelData),
-                    nameof(UserModelData),
-                    nameof(EquipmentModelData),
+                    nameof(UserInitializedUserData),
+                    nameof(UserUserData),
+                    nameof(EquipmentUserData),
                 }
             };
 
             var userDataRequester = new Requester<GetUserDataRequest, GetUserDataResult>(
                 PlayFabClientAPI.GetUserData,
                 userDataRequest,
-                new RequestError());
+                RequestError.Instance);
 
             var userDataResult = await userDataRequester.RequestAsync();
             return userDataResult;
@@ -130,7 +122,7 @@ namespace Persistance
             var requester = new Requester<GetTitleDataRequest, GetTitleDataResult>(
                 PlayFabClientAPI.GetTitleData,
                 request,
-                new RequestError());
+                RequestError.Instance);
             
             var titleDataResult = await requester.RequestAsync();
             return titleDataResult;

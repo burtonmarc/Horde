@@ -2,14 +2,14 @@ namespace Data.Models
 {
     public abstract class SaveableBaseModel
     {
-        protected IDataGateway DataGateway;
+        protected IUserDataUpdater UserDataUpdater;
 
-        public void AddSaveSystem(IDataGateway dataGateway)
+        public void AddSaveSystem(IUserDataUpdater userDataUpdater)
         {
-            DataGateway = dataGateway;
+            UserDataUpdater = userDataUpdater;
         }
 
-        public abstract void AddModelData(IModelData modelData);
+        public abstract void AddModelData(ISerializableData userData);
 
     }
 }

@@ -10,16 +10,16 @@ namespace Controllers.States.GameplayState
     public class WavesController : GameplayControllerBase
     {
         private LevelModel levelModel;
+        
+        private bool levelFinished;
 
         private Wave currentWave;
 
-        private bool wavesFinished;
+        private float currentWaveTime;
 
-        private float currentTimeUntilNextWave;
+        private float timeObjectiveForNextWave;
 
-        private float currentAmountOfEnemiesSpawnedOfCurrentWave;
-
-        private float currentTimeBetweenEnemySpawns;
+        private float spawnTimeBetweenEnemies;
         
         public WavesController(Context context) : base(context)
         {
@@ -33,15 +33,23 @@ namespace Controllers.States.GameplayState
             if (model is LevelModel lm)
             {
                 levelModel = lm;
-                currentWave = levelModel.Waves[levelModel.CurrentWaveCount];
+                //currentWave = levelModel.Waves[levelModel.CurrentWave];
             }
+
+            StartNewWave();
+        }
+
+        private void StartNewWave()
+        {
+            //currentWave = 
+            //timeObjectiveForNextWave = currentWaveTime + 
         }
 
         public override void OnUpdate()
         {
-            if (wavesFinished) return;
+            if (levelFinished) return;
             
-            currentTimeUntilNextWave += Time.deltaTime;
+            //currentTimeUntilNextWave += Time.deltaTime;
 
             CheckForNextWave();
 
@@ -55,32 +63,32 @@ namespace Controllers.States.GameplayState
         
         private void CheckForNextWave()
         {
-            if (currentTimeUntilNextWave >= currentWave.TimeUntilNextWave)
-            {
-                currentTimeUntilNextWave = 0;
-                currentAmountOfEnemiesSpawnedOfCurrentWave = 0;
-                if (levelModel.CurrentWaveCount + 1 < levelModel.Waves.Count)
-                {
-                    levelModel.CurrentWaveCount++;
-                    currentWave = levelModel.Waves[levelModel.CurrentWaveCount];
-                }
-                else
-                {
-                    wavesFinished = true;
-                }
-            }
+            //if (currentTimeUntilNextWave >= currentWave.TimeUntilNextWave)
+            //{
+            //    currentTimeUntilNextWave = 0;
+            //    currentAmountOfEnemiesSpawnedOfCurrentWave = 0;
+            //    if (levelModel.CurrentWaveCount + 1 < levelModel.Waves.Count)
+            //    {
+            //        levelModel.CurrentWaveCount++;
+            //        currentWave = levelModel.Waves[levelModel.CurrentWaveCount];
+            //    }
+            //    else
+            //    {
+            //        wavesFinished = true;
+            //    }
+            //}
         }
 
         private void CheckToSpawnNextEnemy()
         {
-            currentTimeBetweenEnemySpawns += Time.deltaTime;
-
-            if (currentTimeBetweenEnemySpawns >= currentWave.TimeBetweenEnemySpawn && currentAmountOfEnemiesSpawnedOfCurrentWave < currentWave.EnemiesInWave - 1)
-            {
-                currentTimeBetweenEnemySpawns = 0;
-                currentAmountOfEnemiesSpawnedOfCurrentWave++;
-                CreateEnemyAtRandomPosition();
-            }
+            //currentTimeBetweenEnemySpawns += Time.deltaTime;
+//
+            //if (currentTimeBetweenEnemySpawns >= currentWave.TimeBetweenEnemySpawn && currentAmountOfEnemiesSpawnedOfCurrentWave < currentWave.EnemiesInWave - 1)
+            //{
+            //    currentTimeBetweenEnemySpawns = 0;
+            //    currentAmountOfEnemiesSpawnedOfCurrentWave++;
+            //    CreateEnemyAtRandomPosition();
+            //}
         }
 
         public void CreateEnemyAtRandomPosition()
@@ -91,7 +99,7 @@ namespace Controllers.States.GameplayState
             
             var enemyConfig = Context.Preloader.GetAsset<EnemyConfig>(enemyEntry.EnemyConfig);
             
-            var enemyModel = Context.AModelFactory.GetEnemyModel();
+            var enemyModel = Context.ModelFactory.GetEnemyModel();
             enemyModel.InjectDependencies(enemyConfig);
             
             var enemyController = ControllerViewFactory.CreateControllerView<EnemyController>(enemyView, enemyModel);

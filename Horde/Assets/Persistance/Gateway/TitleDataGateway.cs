@@ -15,7 +15,7 @@ namespace Persistance.Gateway
             titleData = titleDataResult.Data;
         }
         
-        public T Get<T>() where T : class, IModelData
+        public T Get<T>() where T : class, ISerializableData
         {
             titleData.TryGetValue(typeof(T).Name, out var json);
 

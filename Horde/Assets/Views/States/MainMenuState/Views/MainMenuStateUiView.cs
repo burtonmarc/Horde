@@ -13,6 +13,8 @@ namespace Views.States.MainMenuState.Views
         public TextMeshProUGUI Gold;
         public TextMeshProUGUI Gems;
         
+        public TextMeshProUGUI StartLevel;
+        
         public Button LevelUpButton;
         
         public Button StartGameButton;
@@ -67,6 +69,11 @@ namespace Views.States.MainMenuState.Views
         public void SetGems(int gems)
         {
             Gems.text = gems.ToString();
+        }
+
+        public void SetChapterLevel(int level)
+        {
+            StartLevel.text = $"Start Level {level}";
         }
         
         public void AddEquippedItem(Sprite itemIcon, int itemLevel, string itemRarity, string itemType)

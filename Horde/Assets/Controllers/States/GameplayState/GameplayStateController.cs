@@ -65,10 +65,10 @@ namespace Controllers.States.GameplayState
             
             playerController.AddPlayerWeapon();
 
-            var levelModel = Context.AModelFactory.GetLevelModel();
-            levelModel.InjectDependencies(Context.CatalogsHolder.LevelsCatalog.GetCatalogEntry("Level_Base_01").Waves);
+            var levelModel = Context.ModelFactory.GetLevelModel();
+            var levelConfig = Context.TitleDataRetriever.GetTitleData<LevelTitleData>();
             
-            wavesController.Init(levelModel);
+            wavesController.Init(levelModel, levelConfig);
             
             generalBehaviourControllers.Add(wavesController);
             generalBehaviourControllers.Add(poolController);
@@ -78,7 +78,7 @@ namespace Controllers.States.GameplayState
         private void InitPlayer()
         {
             var playerView = Preloader.GetAsset<PlayerView>(Context.CatalogsHolder.PlayerCatalog.GameplayView);
-            var playerModel = Context.AModelFactory.GetPlayerModel();
+            var playerModel = Context.ModelFactory.GetPlayerModel();
             playerController = ControllerViewFactory.CreateControllerView<PlayerController>(playerView, playerModel);
             var enemiesLayer = GameplayUtils.GetGameplayLayer(Context, GameplayLayer.Enemies);
             playerController.PlayerView.Activate(enemiesLayer, Vector3.zero);

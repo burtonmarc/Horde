@@ -2,15 +2,15 @@ using System;
 using Data.Models;
 using JetBrains.Annotations;
 
-namespace Controllers
+namespace Data
 {
     [Serializable]
-    public class UserInitializedModelData : IModelData
+    public class UserInitializedUserData : ISerializableData
     {
         [UsedImplicitly]
         public bool UserInitialized;
 
-        public UserInitializedModelData()
+        public UserInitializedUserData()
         {
             UserInitialized = true;
         }

@@ -4,7 +4,19 @@ using System.Collections.Generic;
 namespace Data.Models
 {
     [Serializable]
-    public class EquipmentModelData : IModelData
+    public class EquipmentTitleData : ISerializableData
+    {
+        public ItemData EquippedWeapon;
+        public ItemData EquippedNecklace;
+        public ItemData EquippedGloves;
+        public ItemData EquippedArmor;
+        public ItemData EquippedBelt;
+        public ItemData EquippedShoes;
+        public List<ItemData> InventoryItems;
+    }
+    
+    [Serializable]
+    public class EquipmentUserData : ISerializableData
     {
         public ItemData EquippedWeapon;
         public ItemData EquippedNecklace;
@@ -14,15 +26,21 @@ namespace Data.Models
         public ItemData EquippedShoes;
         public List<ItemData> InventoryItems;
 
-        public EquipmentModelData()
+        public EquipmentUserData(EquipmentTitleData equipmentTitleData)
         {
-            InventoryItems = new List<ItemData>();
+            EquippedWeapon = equipmentTitleData.EquippedWeapon;
+            EquippedNecklace = equipmentTitleData.EquippedNecklace;
+            EquippedGloves = equipmentTitleData.EquippedGloves;
+            EquippedArmor = equipmentTitleData.EquippedArmor;
+            EquippedBelt = equipmentTitleData.EquippedBelt;
+            EquippedShoes = equipmentTitleData.EquippedShoes;
+            InventoryItems = equipmentTitleData.InventoryItems;
         }
     }
     
     public class EquipmentModel : SaveableBaseModel, IModel
     {
-        private EquipmentModelData equipmentModelData;
+        private EquipmentUserData equipmentUserData;
         
         // References
         
@@ -31,77 +49,77 @@ namespace Data.Models
         // Saved Data
         public ItemData EquippedWeapon
         {
-            get => equipmentModelData.EquippedWeapon;
+            get => equipmentUserData.EquippedWeapon;
             set
             {
-                equipmentModelData.EquippedWeapon = value;
-                DataGateway.UpdateUserData(equipmentModelData);
+                equipmentUserData.EquippedWeapon = value;
+                UserDataUpdater.UpdateUserData(equipmentUserData);
             }
         }
         
         public ItemData EquippedNecklace
         {
-            get => equipmentModelData.EquippedNecklace;
+            get => equipmentUserData.EquippedNecklace;
             set
             {
-                equipmentModelData.EquippedNecklace = value;
-                DataGateway.UpdateUserData(equipmentModelData);
+                equipmentUserData.EquippedNecklace = value;
+                UserDataUpdater.UpdateUserData(equipmentUserData);
             }
         }
         
         public ItemData EquippedGloves
         {
-            get => equipmentModelData.EquippedGloves;
+            get => equipmentUserData.EquippedGloves;
             set
             {
-                equipmentModelData.EquippedGloves = value;
-                DataGateway.UpdateUserData(equipmentModelData);
+                equipmentUserData.EquippedGloves = value;
+                UserDataUpdater.UpdateUserData(equipmentUserData);
             }
         }
         
         public ItemData EquippedArmor
         {
-            get => equipmentModelData.EquippedArmor;
+            get => equipmentUserData.EquippedArmor;
             set
             {
-                equipmentModelData.EquippedArmor = value;
-                DataGateway.UpdateUserData(equipmentModelData);
+                equipmentUserData.EquippedArmor = value;
+                UserDataUpdater.UpdateUserData(equipmentUserData);
             }
         }
         
         public ItemData EquippedBelt
         {
-            get => equipmentModelData.EquippedBelt;
+            get => equipmentUserData.EquippedBelt;
             set
             {
-                equipmentModelData.EquippedBelt = value;
-                DataGateway.UpdateUserData(equipmentModelData);
+                equipmentUserData.EquippedBelt = value;
+                UserDataUpdater.UpdateUserData(equipmentUserData);
             }
         }
         
         public ItemData EquippedShoes
         {
-            get => equipmentModelData.EquippedShoes;
+            get => equipmentUserData.EquippedShoes;
             set
             {
-                equipmentModelData.EquippedShoes = value;
-                DataGateway.UpdateUserData(equipmentModelData);
+                equipmentUserData.EquippedShoes = value;
+                UserDataUpdater.UpdateUserData(equipmentUserData);
             }
         }
 
         public List<ItemData> InventoryItems
         {
-            get => equipmentModelData.InventoryItems;
+            get => equipmentUserData.InventoryItems;
         }
 
-        public override void AddModelData(IModelData modelData)
+        public override void AddModelData(ISerializableData userData)
         {
-            equipmentModelData = modelData as EquipmentModelData;
+            equipmentUserData = userData as EquipmentUserData;
         }
 
         public void AddInventoryItem(ItemData itemData)
         {
-            equipmentModelData.InventoryItems.Add(itemData);
+            equipmentUserData.InventoryItems.Add(itemData);
             // TODO: Add sort to the inventory items
             //equipmentModelData.InventoryItems.Sort(item => item.ItemRarity);
         }
