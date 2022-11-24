@@ -13,46 +13,40 @@ namespace Controllers.States.GameplayState
         
         private bool levelFinished;
 
-        private Wave currentWave;
-
         private float currentWaveTime;
 
-        private float timeObjectiveForNextWave;
+        private float nextWaveTimeObjective;
 
-        private float spawnTimeBetweenEnemies;
-        
-        public WavesController(Context context) : base(context)
-        {
-            
-        }
+        private float currentSpawnTime;
 
-        public override void Init(SaveableBaseModel model, object args = null)
+        private float spawnTime;
+
+        public WavesController(Context context) : base(context) { }
+
+        public override void Init(IModel model, object args = null)
         {
             base.Init(model, args);
 
             if (model is LevelModel lm)
             {
                 levelModel = lm;
-                //currentWave = levelModel.Waves[levelModel.CurrentWave];
             }
 
-            StartNewWave();
-        }
-
-        private void StartNewWave()
-        {
-            //currentWave = 
-            //timeObjectiveForNextWave = currentWaveTime + 
+            levelFinished = false;
+            currentWaveTime = 0;
+            nextWaveTimeObjective = levelModel.CurrentWave.WaveTimeInSeconds;
+            currentSpawnTime = 0;
+            spawnTime = 1f / levelModel.CurrentWave.EnemiesSpawnedPerSecond + levelModel.TimeForFirstSpawn;
         }
 
         public override void OnUpdate()
         {
             if (levelFinished) return;
             
-            //currentTimeUntilNextWave += Time.deltaTime;
-
+            currentWaveTime += Time.deltaTime;
             CheckForNextWave();
-
+            
+            currentSpawnTime += Time.deltaTime;
             CheckToSpawnNextEnemy();
         }
 
@@ -63,37 +57,46 @@ namespace Controllers.States.GameplayState
         
         private void CheckForNextWave()
         {
-            //if (currentTimeUntilNextWave >= currentWave.TimeUntilNextWave)
-            //{
-            //    currentTimeUntilNextWave = 0;
-            //    currentAmountOfEnemiesSpawnedOfCurrentWave = 0;
-            //    if (levelModel.CurrentWaveCount + 1 < levelModel.Waves.Count)
-            //    {
-            //        levelModel.CurrentWaveCount++;
-            //        currentWave = levelModel.Waves[levelModel.CurrentWaveCount];
-            //    }
-            //    else
-            //    {
-            //        wavesFinished = true;
-            //    }
-            //}
+            if (currentWaveTime >= nextWaveTimeObjective)
+            {
+                Debug.Log("Switch to next wave");
+                SwitchToNextWave();
+            }
+        }
+
+        private void SwitchToNextWave()
+        {
+            if (levelModel.WasLastWave())
+            {
+                Debug.Log("Was last wave");
+                levelFinished = true;
+                return;
+            }
+            
+            
+            levelModel.UpdateWaveIndex();
+            nextWaveTimeObjective += levelModel.CurrentWave.WaveTimeInSeconds;
+            currentSpawnTime = 0;
+            spawnTime = 1f / levelModel.CurrentWave.EnemiesSpawnedPerSecond;
         }
 
         private void CheckToSpawnNextEnemy()
         {
-            //currentTimeBetweenEnemySpawns += Time.deltaTime;
-//
-            //if (currentTimeBetweenEnemySpawns >= currentWave.TimeBetweenEnemySpawn && currentAmountOfEnemiesSpawnedOfCurrentWave < currentWave.EnemiesInWave - 1)
-            //{
-            //    currentTimeBetweenEnemySpawns = 0;
-            //    currentAmountOfEnemiesSpawnedOfCurrentWave++;
-            //    CreateEnemyAtRandomPosition();
-            //}
+            if (currentSpawnTime >= spawnTime)
+            {
+                currentSpawnTime = 0;
+                spawnTime = 1f / levelModel.CurrentWave.EnemiesSpawnedPerSecond;
+                CreateEnemyAtRandomPosition();
+            }
         }
 
         public void CreateEnemyAtRandomPosition()
         {
-            var enemyEntry = Context.CatalogsHolder.EnemiesCatalog.GetCatalogEntry("EnemyTest");
+            Debug.Log("Spawn Enemy");
+
+            var enemyId = levelModel.GetEnemyIdToSpawn();
+            
+            var enemyEntry = Context.CatalogsHolder.EnemiesCatalog.GetCatalogEntry(enemyId);
             
             var enemyView = Context.Preloader.GetAsset<EnemyView>(enemyEntry.EnemyGameplayView);
             

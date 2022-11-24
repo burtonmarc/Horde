@@ -61,7 +61,7 @@ namespace Persistance.Gateway
             return localData.Data;
         }
 
-        public async Task Update<T>(T value) where T : ISerializableData
+        public async Task Update<T>(T value) where T : IUserData
         {
             binaryGateway.UpdateUserData(value);
             

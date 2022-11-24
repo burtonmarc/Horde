@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Persistance.Gateway
 {
-    public class DataGateway : IUserDataUpdater, ITitleDataRetriever
+    public class DataGateway : IUserDataUpdater
 
     {
         private TitleDataGateway titleDataGateway;
@@ -29,14 +29,14 @@ namespace Persistance.Gateway
 
         #region UserData
 
-        public async Task UpdateUserData<T>(T data) where T : ISerializableData
+        public async Task UpdateUserData<T>(T data) where T : IUserData
         {
             Debug.Log($"Started updating {typeof(T)}");
             await userDataGateway.Update(data);
             Debug.Log($"Finished updating {typeof(T)}");
         }
 
-        public T GetUserData<T>() where T : class, ISerializableData
+        public T GetUserData<T>() where T : class, IUserData
         {
             var userData = userDataGateway.Get<T>();
 
@@ -50,7 +50,7 @@ namespace Persistance.Gateway
 
         #region TitleData
 
-        public T GetTitleData<T>() where T : class, ISerializableData
+        public T GetTitleData<T>() where T : class, ITitleData
         {
             return titleDataGateway.Get<T>();
         }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using ControllersPool;
-using Data;
 
 namespace Controllers.States.GameplayState
 {

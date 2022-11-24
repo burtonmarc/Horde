@@ -6,21 +6,17 @@ namespace Controllers.ModelsFactory
 {
     public class ModelFactory : AModelFactory
     {
-        private readonly DataGateway dataGateway;
-
         private readonly ModelCreator<UserModel, UserUserData> userModelCreator;
         private readonly ModelCreator<EquipmentModel, EquipmentUserData> equipmentModelCreator;
         private readonly ModelCreator<PlayerModel, PlayerUserData> playerModelCreator;
-        private readonly ModelCreator<LevelModel, LevelUserData> levelModelCreator;
+        private readonly ModelCreator<LevelModel, LevelUserData, LevelTitleData> levelModelCreator;
 
         public ModelFactory(DataGateway dataGateway)
         {
-            this.dataGateway = dataGateway;
-
             userModelCreator = new ModelCreator<UserModel, UserUserData>(dataGateway);
             equipmentModelCreator = new ModelCreator<EquipmentModel, EquipmentUserData>(dataGateway);
             playerModelCreator = new ModelCreator<PlayerModel, PlayerUserData>(dataGateway);
-            levelModelCreator = new ModelCreator<LevelModel, LevelUserData>(dataGateway);
+            levelModelCreator = new ModelCreator<LevelModel, LevelUserData, LevelTitleData>(dataGateway);
         }
 
         public override UserModel GetUserModel()

@@ -1,48 +1,70 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Catalogs.Scripts.Entries;
+using Random = UnityEngine.Random;
 
 namespace Data.Models
 {
     [Serializable]
-    public class LevelTitleData : ISerializableData
+    public class LevelTitleData : ITitleData
     {
+        // TODO: Separate the level data (current level you are playing) and the Levels data (maybe MainChapterData?)
+        public float TimeForFirstSpawn;
         public List<Wave> Waves;
     }
     
     [Serializable]
-    public class LevelUserData : ISerializableData
+    public class LevelUserData : IUserData
     {
-        public int CurrentWave;
+        public int CurrentWaveIndex;
     }
     
-    public class LevelModel : SaveableBaseModel, IModel
+    public class LevelModel : ModelWithUserDataAndTitleData<LevelUserData, LevelTitleData>, IModel
     {
-        private LevelUserData levelUserData;
-        
         // References
         
         // Unsaved Data
+        private LevelTitleData levelConfig;
+        public Wave CurrentWave => levelConfig.Waves[UserData.CurrentWaveIndex];
+        //public List<Wave> Waves => levelConfig.Waves;
+        public float TimeForFirstSpawn => levelConfig.TimeForFirstSpawn;
         
         // Saved Data
-        public int CurrentWave
+        public int CurrentWaveIndex
         {
-            get => levelUserData.CurrentWave;
-            set
+            get => UserData.CurrentWaveIndex;
+            private set
             {
-                levelUserData.CurrentWave = value;
-                UserDataUpdater.UpdateUserData(levelUserData);
+                UserData.CurrentWaveIndex = value;
+                UserDataUpdater.UpdateUserData(UserData);
             }
         }
 
         public LevelModel()
         {
-            CurrentWave = 0;
+            
         }
 
-        public override void AddModelData(ISerializableData userData)
+        public void UpdateWaveIndex()
         {
-            levelUserData = userData as LevelUserData;
+            CurrentWaveIndex += 1;
+        }
+
+        public bool WasLastWave()
+        {
+            return CurrentWaveIndex == levelConfig.Waves.Count - 1;
+        }
+
+        public string GetEnemyIdToSpawn()
+        {
+            var totalWeight = CurrentWave.SpawnableEnemies.Sum(enemy => enemy.SpawnProbability);
+
+            var randomWeight = Random.Range(0, totalWeight);
+
+            var selectedEnemy = CurrentWave.SpawnableEnemies.First(enemy => (randomWeight -= enemy.SpawnProbability) < 0);
+
+            return selectedEnemy.EnemyId;
         }
     }
 }

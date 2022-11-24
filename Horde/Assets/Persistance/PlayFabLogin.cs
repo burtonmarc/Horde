@@ -69,19 +69,15 @@ namespace Persistance
         {
             Debug.Log("Adding initial User Data");
 
-            //var updateTasks = new List<Task>
-            //{
-            //    dataGateway.UpdateUserData(new UserInitializedModelData()),
-            //    dataGateway.UpdateUserData(dataGateway.GetTitleData<UserModelData>()),
-            //    dataGateway.UpdateUserData(dataGateway.GetTitleData<EquipmentModelData>())
-            //};
+            var updateTasks = new List<Task>
+            {
+                dataGateway.UpdateUserData(new UserInitializedUserData()),
+                dataGateway.UpdateUserData(new UserUserData(dataGateway.GetTitleData<UserTitleData>())),
+                dataGateway.UpdateUserData(new EquipmentUserData(dataGateway.GetTitleData<EquipmentTitleData>())),
+            };
 
-            //await Task.WhenAll(updateTasks);
+            await Task.WhenAll(updateTasks);
 
-            await dataGateway.UpdateUserData(new UserInitializedUserData());
-            await dataGateway.UpdateUserData(new UserUserData(dataGateway.GetTitleData<UserTitleData>()));
-            await dataGateway.UpdateUserData(new EquipmentUserData(dataGateway.GetTitleData<EquipmentTitleData>()));
-            
             Debug.Log("Initial User Data added successfully");
             
             Debug.Log("Get User Data after adding initial User Data");

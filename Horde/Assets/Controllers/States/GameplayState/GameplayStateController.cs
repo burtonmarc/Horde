@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Catalogs.Scripts;
 using Catalogs.Scripts.Configs;
-using Controllers.States.GameplayState.PlayerWeapons;
 using Controllers.States.MainMenuState;
 using Data;
 using Data.Models;
@@ -66,9 +64,8 @@ namespace Controllers.States.GameplayState
             playerController.AddPlayerWeapon();
 
             var levelModel = Context.ModelFactory.GetLevelModel();
-            var levelConfig = Context.TitleDataRetriever.GetTitleData<LevelTitleData>();
             
-            wavesController.Init(levelModel, levelConfig);
+            wavesController.Init(levelModel);
             
             generalBehaviourControllers.Add(wavesController);
             generalBehaviourControllers.Add(poolController);

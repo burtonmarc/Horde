@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 namespace Data
 {
     [Serializable]
-    public class UserInitializedUserData : ISerializableData
+    public class UserInitializedUserData : IUserData
     {
         [UsedImplicitly]
         public bool UserInitialized;

@@ -7,7 +7,12 @@ namespace Data.Models
         
     }
 
-    public interface ISerializableData
+    public interface IUserData
+    {
+        
+    }
+
+    public interface ITitleData
     {
         
     }

@@ -5,6 +5,6 @@ namespace Data
 {
     public interface IUserDataUpdater
     {
-        Task UpdateUserData<T>(T data) where T : ISerializableData;
+        Task UpdateUserData<T>(T data) where T : IUserData;
     }
 }

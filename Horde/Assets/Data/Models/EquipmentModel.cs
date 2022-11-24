@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Data.Models
 {
     [Serializable]
-    public class EquipmentTitleData : ISerializableData
+    public class EquipmentTitleData : ITitleData
     {
         public ItemData EquippedWeapon;
         public ItemData EquippedNecklace;
@@ -16,7 +16,7 @@ namespace Data.Models
     }
     
     [Serializable]
-    public class EquipmentUserData : ISerializableData
+    public class EquipmentUserData : IUserData
     {
         public ItemData EquippedWeapon;
         public ItemData EquippedNecklace;
@@ -38,10 +38,8 @@ namespace Data.Models
         }
     }
     
-    public class EquipmentModel : SaveableBaseModel, IModel
+    public class EquipmentModel : ModelWithUserData<EquipmentUserData>, IModel
     {
-        private EquipmentUserData equipmentUserData;
-        
         // References
         
         // Unsaved Data
@@ -49,79 +47,67 @@ namespace Data.Models
         // Saved Data
         public ItemData EquippedWeapon
         {
-            get => equipmentUserData.EquippedWeapon;
+            get => UserData.EquippedWeapon;
             set
             {
-                equipmentUserData.EquippedWeapon = value;
-                UserDataUpdater.UpdateUserData(equipmentUserData);
+                UserData.EquippedWeapon = value;
+                UserDataUpdater.UpdateUserData(UserData);
             }
         }
         
         public ItemData EquippedNecklace
         {
-            get => equipmentUserData.EquippedNecklace;
+            get => UserData.EquippedNecklace;
             set
             {
-                equipmentUserData.EquippedNecklace = value;
-                UserDataUpdater.UpdateUserData(equipmentUserData);
+                UserData.EquippedNecklace = value;
+                UserDataUpdater.UpdateUserData(UserData);
             }
         }
         
         public ItemData EquippedGloves
         {
-            get => equipmentUserData.EquippedGloves;
+            get => UserData.EquippedGloves;
             set
             {
-                equipmentUserData.EquippedGloves = value;
-                UserDataUpdater.UpdateUserData(equipmentUserData);
+                UserData.EquippedGloves = value;
+                UserDataUpdater.UpdateUserData(UserData);
             }
         }
         
         public ItemData EquippedArmor
         {
-            get => equipmentUserData.EquippedArmor;
+            get => UserData.EquippedArmor;
             set
             {
-                equipmentUserData.EquippedArmor = value;
-                UserDataUpdater.UpdateUserData(equipmentUserData);
+                UserData.EquippedArmor = value;
+                UserDataUpdater.UpdateUserData(UserData);
             }
         }
         
         public ItemData EquippedBelt
         {
-            get => equipmentUserData.EquippedBelt;
+            get => UserData.EquippedBelt;
             set
             {
-                equipmentUserData.EquippedBelt = value;
-                UserDataUpdater.UpdateUserData(equipmentUserData);
+                UserData.EquippedBelt = value;
+                UserDataUpdater.UpdateUserData(UserData);
             }
         }
         
         public ItemData EquippedShoes
         {
-            get => equipmentUserData.EquippedShoes;
+            get => UserData.EquippedShoes;
             set
             {
-                equipmentUserData.EquippedShoes = value;
-                UserDataUpdater.UpdateUserData(equipmentUserData);
+                UserData.EquippedShoes = value;
+                UserDataUpdater.UpdateUserData(UserData);
             }
         }
 
         public List<ItemData> InventoryItems
         {
-            get => equipmentUserData.InventoryItems;
-        }
-
-        public override void AddModelData(ISerializableData userData)
-        {
-            equipmentUserData = userData as EquipmentUserData;
-        }
-
-        public void AddInventoryItem(ItemData itemData)
-        {
-            equipmentUserData.InventoryItems.Add(itemData);
-            // TODO: Add sort to the inventory items
-            //equipmentModelData.InventoryItems.Sort(item => item.ItemRarity);
+            get => UserData.InventoryItems;
         }
     }
 }

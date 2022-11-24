@@ -12,6 +12,8 @@ namespace Controllers.States.GameplayState
         RemoveEntity,
     }
     
+    // TODO: Separate the init and update to a base class and make this class inherit from it.
+    // This way the controllers that don't have views won't have references to them by inheriting from that new class
     public abstract class GameplayControllerBase
     {
         protected readonly Context Context;
@@ -52,7 +54,7 @@ namespace Controllers.States.GameplayState
         }
 
         // Used for when a Controller is created that DOESN'T have a View
-        public virtual void Init(SaveableBaseModel model, object args = null)
+        public virtual void Init(IModel model, object args = null)
         {
             MarkedToDestroy = false;
         }

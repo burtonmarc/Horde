@@ -17,8 +17,6 @@ namespace Data
 
         public readonly AModelFactory ModelFactory;
 
-        public readonly ITitleDataRetriever TitleDataRetriever;
-
         public readonly UserModel UserModel;
 
         public IControllersPool PoolController;
@@ -27,7 +25,6 @@ namespace Data
             AssetLoaderFactory assetLoaderFactory,
             IScreenMachine screenMachine,
             AModelFactory modelFactory,
-            ITitleDataRetriever titleDataRetriever,
             UserModel userModel
         )
         {
@@ -35,7 +32,6 @@ namespace Data
             AssetLoaderFactory = assetLoaderFactory;
             ScreenMachine = screenMachine;
             ModelFactory = modelFactory;
-            TitleDataRetriever = titleDataRetriever;
             UserModel = userModel;
         }
     }

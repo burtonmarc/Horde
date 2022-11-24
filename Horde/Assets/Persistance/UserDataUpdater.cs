@@ -24,7 +24,7 @@ namespace Persistance
             requesters = new List<Task<UpdateUserDataResult>>();
         }
 
-        public void AddFieldAsDirty<T>(T dirtyField) where T : ISerializableData
+        public void AddFieldAsDirty<T>(T dirtyField) where T : IUserData
         {
             var fieldName = typeof(T).Name;
             var json = JsonUtility.ToJson(dirtyField);
@@ -63,15 +63,15 @@ namespace Persistance
                 requesters.Add(requestTask);
                 fieldsUpdated.Add(dirtyField.Key);
             }
-
-            await Task.WhenAll(requesters);
             
-            requesters.Clear();
-
             foreach (var fieldUpdated in fieldsUpdated)
             {
                 dirtyFields.Remove(fieldUpdated);
             }
+
+            await Task.WhenAll(requesters);
+            
+            requesters.Clear();
         }
     }
 }

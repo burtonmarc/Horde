@@ -3,14 +3,14 @@ using System;
 namespace Data.Models
 {
     [Serializable]
-    public class UserTitleData : ISerializableData
+    public class UserTitleData : ITitleData
     {
         public int Gold;
         public int Gems;
     }
     
     [Serializable]
-    public class UserUserData : ISerializableData
+    public class UserUserData : IUserData
     {
         public int Level;
         public int Gold;
@@ -27,10 +27,8 @@ namespace Data.Models
         }
     }
     
-    public class UserModel : SaveableBaseModel, IModel
+    public class UserModel : ModelWithUserData<UserUserData>, IModel
     {
-        private UserUserData userUserData;
-        
         // References
         public EquipmentModel EquipmentModel;
         
@@ -40,49 +38,44 @@ namespace Data.Models
 
         public int Level
         {
-            get => userUserData.Level;
+            get => UserData.Level;
             set
             {
-                userUserData.Level = value;
-                UserDataUpdater.UpdateUserData(userUserData);
+                UserData.Level = value;
+                UserDataUpdater.UpdateUserData(UserData);
             }
         }
         
         public int Gold
         {
-            get => userUserData.Gold;
+            get => UserData.Gold;
             set
             {
-                userUserData.Gold = value;
-                UserDataUpdater.UpdateUserData(userUserData);
+                UserData.Gold = value;
+                UserDataUpdater.UpdateUserData(UserData);
             }
         }
         
         public int Gems
         {
-            get => userUserData.Gems;
+            get => UserData.Gems;
             set
             {
-                userUserData.Gems = value;
-                UserDataUpdater.UpdateUserData(userUserData);
+                UserData.Gems = value;
+                UserDataUpdater.UpdateUserData(UserData);
             }
         }
 
         public int MainChapterLevel
         {
-            get => userUserData.MainChapterLevel;
+            get => UserData.MainChapterLevel;
             set
             {
-                userUserData.MainChapterLevel = value;
-                UserDataUpdater.UpdateUserData(userUserData);
+                UserData.MainChapterLevel = value;
+                UserDataUpdater.UpdateUserData(UserData);
             }
         }
         
-        public override void AddModelData(ISerializableData userData)
-        {
-            userUserData = userData as UserUserData;
-        }
-
         public void InjectDependencies(EquipmentModel equipmentModel)
         {
             EquipmentModel = equipmentModel;
