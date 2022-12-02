@@ -56,7 +56,7 @@ namespace ScreenMachine
                 return go.GetComponent<T>();
             }
 
-            if (asset is Sprite sprite)
+            if (asset is Sprite)
             {
                 return asset as T;
             }

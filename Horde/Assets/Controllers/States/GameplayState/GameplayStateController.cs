@@ -28,6 +28,8 @@ namespace Controllers.States.GameplayState
         private readonly EntitiesContainerController entitiesContainerController;
 
         private GameplayCameraController gameplayCameraController;
+        
+        private readonly UserModel userModel;
 
         public GameplayStateController(Context context) : base(context)
         {
@@ -42,6 +44,8 @@ namespace Controllers.States.GameplayState
             poolController = new PoolController();
 
             context.PoolController = poolController;
+            
+            userModel = context.UserModel;
 
             ControllerViewFactory.PoolController = poolController;
         }
@@ -200,14 +204,17 @@ namespace Controllers.States.GameplayState
                 Context.CatalogsHolder.PlayerCatalog.GameplayView,
                 
                 // Weapons
-                Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken").WeaponGameplayView,
-                Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken").ProjectileGameplayView,
-                Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken").WeaponConfig,
-                
-                // Enemies
-                Context.CatalogsHolder.EnemiesCatalog.GetCatalogEntry("EnemyTest").EnemyGameplayView,
-                Context.CatalogsHolder.EnemiesCatalog.GetCatalogEntry("EnemyTest").EnemyConfig,
+                Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedWeapon.ItemId).WeaponGameplayView,
+                Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedWeapon.ItemId).ProjectileGameplayView,
+                Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedWeapon.ItemId).WeaponConfig,
             });
+            
+            // Enemies
+            var levelModel = Context.ModelFactory.GetLevelModel();
+            foreach (var enemyId in levelModel.GetCurrentWaveEnemiesIds())
+            {
+                Preloader.AddReference(Context.CatalogsHolder.EnemiesCatalog.GetCatalogEntry(enemyId).EnemyGameplayView);
+            }
 
             var task = Preloader.LoadAsync();
 

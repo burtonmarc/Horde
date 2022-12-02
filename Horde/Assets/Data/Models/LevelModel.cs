@@ -20,15 +20,14 @@ namespace Data.Models
         public int CurrentWaveIndex;
     }
     
-    public class LevelModel : ModelWithUserDataAndTitleData<LevelUserData, LevelTitleData>, IModel
+    public class LevelModel : ModelWithTitleAndUserData<LevelTitleData, LevelUserData>, IModel
     {
         // References
         
         // Unsaved Data
-        private LevelTitleData levelConfig;
-        public Wave CurrentWave => levelConfig.Waves[UserData.CurrentWaveIndex];
+        public Wave CurrentWave => TitleData.Waves[UserData.CurrentWaveIndex];
         //public List<Wave> Waves => levelConfig.Waves;
-        public float TimeForFirstSpawn => levelConfig.TimeForFirstSpawn;
+        public float TimeForFirstSpawn => TitleData.TimeForFirstSpawn;
         
         // Saved Data
         public int CurrentWaveIndex
@@ -41,11 +40,6 @@ namespace Data.Models
             }
         }
 
-        public LevelModel()
-        {
-            
-        }
-
         public void UpdateWaveIndex()
         {
             CurrentWaveIndex += 1;
@@ -53,7 +47,7 @@ namespace Data.Models
 
         public bool WasLastWave()
         {
-            return CurrentWaveIndex == levelConfig.Waves.Count - 1;
+            return CurrentWaveIndex == TitleData.Waves.Count - 1;
         }
 
         public string GetEnemyIdToSpawn()
@@ -65,6 +59,18 @@ namespace Data.Models
             var selectedEnemy = CurrentWave.SpawnableEnemies.First(enemy => (randomWeight -= enemy.SpawnProbability) < 0);
 
             return selectedEnemy.EnemyId;
+        }
+
+        public IEnumerable<string> GetCurrentWaveEnemiesIds()
+        {
+            var enemyIds = new List<string>(CurrentWave.SpawnableEnemies.Count);
+            
+            foreach (var spawnableEnemy in CurrentWave.SpawnableEnemies)
+            {
+                enemyIds.Add(spawnableEnemy.EnemyId);
+            }
+
+            return enemyIds;
         }
     }
 }

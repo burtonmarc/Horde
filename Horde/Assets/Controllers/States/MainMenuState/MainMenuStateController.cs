@@ -19,7 +19,7 @@ namespace Controllers.States.MainMenuState
     {
         protected override string StateId { get; }
 
-        private UserModel userModel;
+        private readonly UserModel userModel;
 
         private GameObject camera;
         
@@ -110,8 +110,6 @@ namespace Controllers.States.MainMenuState
         {
             Preloader = Context.AssetLoaderFactory.CreateLoader(StateId);
             
-            Preloader.AddReference(Context.CatalogsHolder.WeaponsCatalog.GetCatalogEntry("Shuriken").WeaponConfig);
-
             Preloader.AddReference(Context.CatalogsHolder.ItemsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedWeapon.ItemId).ItemIcon);
             Preloader.AddReference(Context.CatalogsHolder.ItemsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedNecklace.ItemId).ItemIcon);
             Preloader.AddReference(Context.CatalogsHolder.ItemsCatalog.GetCatalogEntry(userModel.EquipmentModel.EquippedGloves.ItemId).ItemIcon);

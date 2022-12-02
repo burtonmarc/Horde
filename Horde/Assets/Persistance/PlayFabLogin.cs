@@ -74,6 +74,8 @@ namespace Persistance
                 dataGateway.UpdateUserData(new UserInitializedUserData()),
                 dataGateway.UpdateUserData(new UserUserData(dataGateway.GetTitleData<UserTitleData>())),
                 dataGateway.UpdateUserData(new EquipmentUserData(dataGateway.GetTitleData<EquipmentTitleData>())),
+                dataGateway.UpdateUserData(new LevelUserData()),
+                dataGateway.UpdateUserData(new PlayerUserData(dataGateway.GetTitleData<PlayerTitleData>())),
             };
 
             await Task.WhenAll(updateTasks);
@@ -100,6 +102,8 @@ namespace Persistance
                     nameof(UserInitializedUserData),
                     nameof(UserUserData),
                     nameof(EquipmentUserData),
+                    nameof(LevelUserData),
+                    nameof(PlayerUserData),
                 }
             };
 

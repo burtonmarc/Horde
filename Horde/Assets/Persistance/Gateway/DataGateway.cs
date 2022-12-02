@@ -7,7 +7,6 @@ using UnityEngine;
 namespace Persistance.Gateway
 {
     public class DataGateway : IUserDataUpdater
-
     {
         private TitleDataGateway titleDataGateway;
         private UserDataGateway userDataGateway;

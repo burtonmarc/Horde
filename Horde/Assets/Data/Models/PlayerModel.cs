@@ -13,10 +13,15 @@ namespace Data.Models
     public class PlayerUserData : IUserData
     {
         public int HealthPoints;
+
+        public PlayerUserData(PlayerTitleData playerTitleData)
+        {
+            HealthPoints = playerTitleData.BaseHealthPoints;
+        }
     }
     
     [Serializable]
-    public class PlayerModel : ModelWithUserDataAndTitleData<PlayerUserData, PlayerTitleData>, IModel
+    public class PlayerModel : ModelWithTitleAndUserData<PlayerTitleData, PlayerUserData>, IModel
     {
         // References
         
@@ -32,11 +37,6 @@ namespace Data.Models
                 UserData.HealthPoints = value;
                 UserDataUpdater.UpdateUserData(UserData);
             }
-        }
-
-        public PlayerModel()
-        {
-            
         }
     }
 }

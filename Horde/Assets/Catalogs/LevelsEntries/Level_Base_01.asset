@@ -15,27 +15,37 @@ MonoBehaviour:
   Id: Level_Base_01
   Waves:
   - SpawnableEnemies:
-    - EnemyEntry: {fileID: 11400000, guid: 95ebd4d21c3154b0b9653da52451854d, type: 2}
-      SpawnProbability: 100
+    - EnemyId: Enemy1
+      SpawnProbability: 50
+    - EnemyId: Enemy2
+      SpawnProbability: 50
     EnemiesSpawnedPerSecond: 5
     WaveTimeInSeconds: 30
   - SpawnableEnemies:
-    - EnemyEntry: {fileID: 11400000, guid: 95ebd4d21c3154b0b9653da52451854d, type: 2}
-      SpawnProbability: 100
+    - EnemyId: Enemy1
+      SpawnProbability: 50
+    - EnemyId: Enemy2
+      SpawnProbability: 50
     EnemiesSpawnedPerSecond: 10
     WaveTimeInSeconds: 30
   - SpawnableEnemies:
-    - EnemyEntry: {fileID: 11400000, guid: 95ebd4d21c3154b0b9653da52451854d, type: 2}
-      SpawnProbability: 100
+    - EnemyId: Enemy1
+      SpawnProbability: 50
+    - EnemyId: Enemy2
+      SpawnProbability: 50
     EnemiesSpawnedPerSecond: 15
     WaveTimeInSeconds: 30
   - SpawnableEnemies:
-    - EnemyEntry: {fileID: 11400000, guid: 95ebd4d21c3154b0b9653da52451854d, type: 2}
-      SpawnProbability: 100
+    - EnemyId: Enemy1
+      SpawnProbability: 50
+    - EnemyId: Enemy2
+      SpawnProbability: 50
     EnemiesSpawnedPerSecond: 20
     WaveTimeInSeconds: 30
   - SpawnableEnemies:
-    - EnemyEntry: {fileID: 11400000, guid: 95ebd4d21c3154b0b9653da52451854d, type: 2}
-      SpawnProbability: 100
+    - EnemyId: Enemy1
+      SpawnProbability: 50
+    - EnemyId: Enemy2
+      SpawnProbability: 50
     EnemiesSpawnedPerSecond: 30
     WaveTimeInSeconds: 30

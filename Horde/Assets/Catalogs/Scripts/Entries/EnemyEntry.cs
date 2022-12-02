@@ -7,7 +7,5 @@ namespace Catalogs.Scripts.Entries
     public class EnemyEntry : CatalogEntryId
     {
         public AssetReference EnemyGameplayView;
-
-        public AssetReference EnemyConfig;
     }
 }

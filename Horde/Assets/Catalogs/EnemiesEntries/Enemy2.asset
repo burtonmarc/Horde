@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a28c05dbb17491cab3d03ea1a8b4b67, type: 3}
-  m_Name: EnemyTestConfig
+  m_Script: {fileID: 11500000, guid: 9f91d04c8c7f4e4e97ab18ef3144a427, type: 3}
+  m_Name: Enemy2
   m_EditorClassIdentifier: 
-  HitPoints: 2
-  MovementSpeed: 1
-  HitDamage: 1
+  Id: Enemy2
+  EnemyGameplayView:
+    m_AssetGUID: f433dffb69e15447abb69508de63654a
+    m_SubObjectName: 
+    m_SubObjectType: 

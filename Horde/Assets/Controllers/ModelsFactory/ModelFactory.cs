@@ -1,45 +1,55 @@
+using System;
+using System.Linq;
 using Data;
 using Data.Models;
 using Persistance.Gateway;
 
 namespace Controllers.ModelsFactory
 {
-    public class ModelFactory : AModelFactory
+    public class ModelFactory : IModelFactory
     {
-        private readonly ModelCreator<UserModel, UserUserData> userModelCreator;
-        private readonly ModelCreator<EquipmentModel, EquipmentUserData> equipmentModelCreator;
-        private readonly ModelCreator<PlayerModel, PlayerUserData> playerModelCreator;
-        private readonly ModelCreator<LevelModel, LevelUserData, LevelTitleData> levelModelCreator;
+        private readonly DataGateway dataGateway;
+        
+        private readonly ModelCreatorWithUserData<UserModel, UserUserData> userModelCreator;
+        private readonly ModelCreatorWithUserData<EquipmentModel, EquipmentUserData> equipmentModelCreator;
+        private readonly ModelCreatorWithTitleAndUserData<PlayerModel, PlayerTitleData, PlayerUserData> playerModelCreator;
+        private readonly ModelCreatorWithTitleData<EnemyModel, EnemiesTitleData> enemyModelCreator;
+        private readonly ModelCreatorWithTitleAndUserData<LevelModel, LevelTitleData, LevelUserData> levelModelCreator;
 
         public ModelFactory(DataGateway dataGateway)
         {
-            userModelCreator = new ModelCreator<UserModel, UserUserData>(dataGateway);
-            equipmentModelCreator = new ModelCreator<EquipmentModel, EquipmentUserData>(dataGateway);
-            playerModelCreator = new ModelCreator<PlayerModel, PlayerUserData>(dataGateway);
-            levelModelCreator = new ModelCreator<LevelModel, LevelUserData, LevelTitleData>(dataGateway);
+            this.dataGateway = dataGateway;
+            
+            userModelCreator = new ModelCreatorWithUserData<UserModel, UserUserData>(dataGateway);
+            equipmentModelCreator = new ModelCreatorWithUserData<EquipmentModel, EquipmentUserData>(dataGateway);
+            playerModelCreator = new ModelCreatorWithTitleAndUserData<PlayerModel, PlayerTitleData, PlayerUserData>(dataGateway);
+            enemyModelCreator = new ModelCreatorWithTitleData<EnemyModel, EnemiesTitleData>(dataGateway);
+            levelModelCreator = new ModelCreatorWithTitleAndUserData<LevelModel, LevelTitleData, LevelUserData>(dataGateway);
         }
 
-        public override UserModel GetUserModel()
+        public UserModel GetUserModel()
         {
             return userModelCreator.GetModel();
         }
 
-        public override EquipmentModel GetEquipmentModel()
+        public EquipmentModel GetEquipmentModel()
         {
             return equipmentModelCreator.GetModel();
         }
 
-        public override PlayerModel GetPlayerModel()
+        public PlayerModel GetPlayerModel()
         {
             return playerModelCreator.GetModel();
         }
 
-        public override EnemyModel GetEnemyModel()
+        public EnemyModel GetEnemyModel(string enemyId)
         {
-            return new EnemyModel();
+            var enemyModel = enemyModelCreator.GetModel();
+            enemyModel.Init(enemyId);
+            return enemyModel;
         }
 
-        public override LevelModel GetLevelModel()
+        public LevelModel GetLevelModel()
         {
             return levelModelCreator.GetModel();
         }
